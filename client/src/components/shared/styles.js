@@ -53,5 +53,10 @@ export const GlobalButton = styled.button`
                     return(`${props.buttonColor} 0% 0% no-repeat padding-box`);                
             }
         }}
-    }   
+    } 
+    
+    &:focus {
+        border: none; 
+        outline: none;
+    }
 `

@@ -4,9 +4,9 @@ import {
   CampaignContainer,
   CampaignCard,
   CustomField,
-} from "./styled-components/styles";
-import { GlobalButton } from "./shared/styles";
-import { ReactComponent as Copy } from "../assets/copy.svg";
+} from "../shared/PublisherWizard/styles";
+import { GlobalButton } from "../shared/styles";
+import { ReactComponent as Copy } from "../../assets/copy.svg";
 
 const step_headings = [
   "Place URL link & Reward per sale",
@@ -22,7 +22,7 @@ const empty_initial_values = {
 
 const address = "0xf66c19541c961d875597Cec23Fc35fd223101993";
 
-export const PublisherWizardContainer = () => {
+export const PublisherWizardPayPerClickContainer = () => {
   const [step, setStep] = useState(1);
 
   return (
@@ -93,6 +93,14 @@ export const PublisherWizardCreateReferralCampaign_step1 = ({ step }) => {
 };
 
 export const PublisherWizardDeposit_step2 = ({ step }) => {
+  const copyToClipboard = (txt) => {
+    const temporaryInput = document.createElement('input')
+    document.body.appendChild(temporaryInput)
+    temporaryInput.setAttribute('value', txt)
+    temporaryInput.select()
+    document.execCommand('copy')
+    document.body.removeChild(temporaryInput)
+  }
   if (step !== 2) {
     return null;
   } else {
@@ -102,7 +110,7 @@ export const PublisherWizardDeposit_step2 = ({ step }) => {
         <p>Send USDT into smart contract address:</p>
         <div>
           <span>{address}</span> {/* currently hardcoded address. will be dynamically imported from truffle deployments */}
-          <button><Copy /></button>
+          <button onClick={() => copyToClipboard(address)}><Copy /></button>
         </div>
 
         <GlobalButton
