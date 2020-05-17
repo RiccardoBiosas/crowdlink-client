@@ -1,17 +1,19 @@
 import React from "react";
-import {useHistory} from 'react-router-dom'
+import { useHistory } from "react-router-dom";
 import { ParagraphButton, CustomParagraph } from "../shared/GeneralCard";
 import {
   CampaignContainerLayout,
   CampaignContainer,
   CampaignContainerComponent,
   CampaignContainerDataContainer,
-  ToTheLeftFlexContainer
+  ToTheLeftFlexContainer,
 } from "../shared/feed/styles";
-import { PUBLISHER_WITHDRAW_ROUTE } from "../../routes-config";
+import { PUBLISHER_WITHDRAW_ROUTE_WITH_PARAM } from "../../routes-config";
 
 export const PublisherFeedContainer = () => {
-  const history = useHistory()
+  const history = useHistory();
+  let website = "twitter"; //hardcoded for testing
+
   return (
     <CampaignContainerLayout>
       <ToTheLeftFlexContainer>
@@ -71,7 +73,9 @@ export const PublisherFeedContainer = () => {
             buttonColor={"#7838D5"}
             buttonFontSize={20}
             buttonFontWeight={600}
-            onClick={() => history.push(PUBLISHER_WITHDRAW_ROUTE)}
+            onClick={() =>
+              history.push(`${PUBLISHER_WITHDRAW_ROUTE_WITH_PARAM}/${website}`)
+            }
           >
             withdraw >
           </ParagraphButton>

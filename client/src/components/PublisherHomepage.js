@@ -1,6 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { PUBLISHER_WORKFLOW_ROUTE } from "../routes-config";
+import { PUBLISHER_WORKFLOW_ROUTE, PUBLISHER_FEED_ROUTE } from "../routes-config";
 import {
   CardContainerLayout,
   CardLayout,
@@ -31,6 +31,10 @@ export const PublisherHomepage = () => {
           >
             Get Started
           </ParagraphButton>
+
+          <div>
+            <button onClick={() => history.push(PUBLISHER_FEED_ROUTE)}>go to dashboard feed</button>
+          </div>
 
           <ParagraphButton
             buttonColor={"#959090"}

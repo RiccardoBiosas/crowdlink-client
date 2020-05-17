@@ -8,6 +8,8 @@ import * as serviceWorker from "./serviceWorker";
 const GlobalStyle = createGlobalStyle`
 ${normalize}
 
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap');
+
 html {
   box-sizing: border-box;
 }
@@ -16,7 +18,7 @@ html {
 *::before,
 *::after {
   box-sizing: inherit;
-  font-family: 'Open Sans';
+  font-family: 'Open Sans', sans-serif;;
 
 }
 

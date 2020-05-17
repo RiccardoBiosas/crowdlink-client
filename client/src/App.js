@@ -15,17 +15,16 @@ import {
   PUBLISHER_WORKFLOW_ROUTE,
   PUBLISHER_DASHBOARD_PAY_PER_SALE_ROUTE,
   PUBLISHER_DASHBOARD_PER_PER_CLICK_ROUTE,
-  PUBLISHER_GA_CONNECT,
-  PUBLISHER_FEED_ROUTE,
-  PUBLISHER_WITHDRAW_ROUTE,
+  PUBLISHER_GA_CONNECT_ROUTE,
+  PUBLISHER_FEED_ROUTE,  
   MARKETER_SIGN_UP_ROUTE,
   MARKETER_FEED_ROUTE,
   PUBLISHER_DASHBOARD_ROUTE_WITH_PARAM,
   SIGN_UP_FALLBACK_ROUTE,
+  PUBLISHER_WITHDRAW_ROUTE_WITH_PARAM,
 } from "./routes-config";
 import { PublisherConnectGA } from "./components/PublisherConnectGA.js/PublisherConnectGA";
 import { ConnectorsInstance } from "./connectors/connectorsInstance";
-import { PublisherCampaignHistory } from "./components/PublisherCampaignHistory/PublisherCampaignHistory";
 import { PublisherWorkflow } from "./components/PublisherWorkflow/PublisherWorkflow";
 import { PublisherWizardPayPerSaleContainer } from "./components/PublisherWizardPayPerSale/PublisherWizardPayPerSaleContainer";
 // import { PublisherWizardPayPerClickContainer } from "./components/PublisherWizardPayPerClick/PublisherWizardPayPerClickContainer";
@@ -80,28 +79,24 @@ const App = () => {
         />
         <Route exact path="/test" component={ContractTest} />
         <Route exact path="/connection" component={ConnectorsInstance} />
-        {/* <Route exact path={PUBLISHER_WITHDRAW_ROUTE} component={() => WithContextActive(PublisherCampaignWithdraw)} /> */}
+        {/* <Route exact path={`PUBLISHER_WITHDRAW_ROUTE_WITH_PARAM/:campaign`} component={() => WithContextActive(PublisherCampaignWithdraw)} /> */}
         <Route
-          exact
-          path={PUBLISHER_WITHDRAW_ROUTE}
-          component={PublisherCampaignWithdraw}
+          exact 
+          path={`${PUBLISHER_WITHDRAW_ROUTE_WITH_PARAM}/:campaign`}
+          component={() => WithContextActive(PublisherCampaignWithdraw)}
         />
 
         <Route
           exact
           path={PUBLISHER_FEED_ROUTE}
-          component={PublisherFeedContainer}
+          component={() => WithContextActive(PublisherFeedContainer)}
         />
         <Route
           exact
-          path={PUBLISHER_GA_CONNECT}
+          path={PUBLISHER_GA_CONNECT_ROUTE}
           component={() => WithContextActive(PublisherConnectGA)}
         />
-        <Route
-          exact
-          path={PUBLISHER_CAMPAIGNS_HISTORY_ROUTE}
-          component={PublisherCampaignHistory}
-        />
+    
         <Route
           exact
           path={PUBLISHER_WORKFLOW_ROUTE}

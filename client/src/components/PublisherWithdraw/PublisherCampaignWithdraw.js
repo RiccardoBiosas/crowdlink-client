@@ -13,12 +13,14 @@ import { ReactComponent as Copy } from "../../assets/copy.svg";
 import { PUBLISHER_FEED_ROUTE } from "../../routes-config";
 import { RowContainer } from "../shared/PublisherWizard/styles";
 
-const address = "fakeaddressfakeaddressfake";
 
 export const PublisherCampaignWithdraw = ({ contractInstance }) => {
   const history = useHistory();
+  const crowdlinkAddress = contractInstance.address;
   const { campaign } = useParams();
   console.log(campaign);
+
+  console.log('withdraw route: ', contractInstance)
 
   const copyToClipboard = (txt) => {
     const temporaryInput = document.createElement("input");
@@ -28,6 +30,12 @@ export const PublisherCampaignWithdraw = ({ contractInstance }) => {
     document.execCommand("copy");
     document.body.removeChild(temporaryInput);
   };
+
+  const withdraw = async(website) => {
+    const receipt = await contractInstance.functions.withdrawFromCampaign(website, {gasLimit: 1200000})
+
+    console.log(receipt)
+  }
 
   return (
     <CardContainerLayout>
@@ -62,10 +70,10 @@ export const PublisherCampaignWithdraw = ({ contractInstance }) => {
               paragraphPadding={"10px"}
               paragraphColor={"#696868"}
             >
-              {address}
+              {crowdlinkAddress}
             </CustomParagraph>
             {/* currently hardcoded address. will be dynamically imported from truffle deployments */}
-            <ParagraphButton onClick={() => copyToClipboard(address)}>
+            <ParagraphButton onClick={() => copyToClipboard(crowdlinkAddress)}>
               <Copy />
             </ParagraphButton>
           </RowContainer>
@@ -86,6 +94,7 @@ export const PublisherCampaignWithdraw = ({ contractInstance }) => {
             buttonColor={"#7838D5"}
             buttonFontSize={20}
             buttonFontWeight={600}
+            onClick={(website) => withdraw(campaign)}
           >
             withdraw >
           </ParagraphButton>

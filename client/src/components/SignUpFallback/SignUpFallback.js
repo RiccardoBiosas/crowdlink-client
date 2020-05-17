@@ -7,7 +7,7 @@ import {
 } from "../shared/GeneralCard";
 import { PortisInstance } from "../../portis/PortisInstance";
 import { Web3Consumer } from "web3-react";
-import { PUBLISHER_DASHBOARD_ROUTE_WITH_PARAM } from "../../routes-config";
+import { PUBLISHER_DASHBOARD_ROUTE_WITH_PARAM, PUBLISHER_GA_CONNECT_ROUTE } from "../../routes-config";
 import {
   ParagraphButton,
   CardLayoutWithBorder,
@@ -47,7 +47,7 @@ export const SignUpFallback = () => {
                       buttonColor={"#7838D5"}
                       buttonFontWeight={900}
                       buttonFontSize={24}
-                      onClick={() => history.push(`${PUBLISHER_DASHBOARD_ROUTE_WITH_PARAM}/sales`)}
+                      onClick={() => history.push(PUBLISHER_GA_CONNECT_ROUTE)}
                     >
                       Create +
                     </ParagraphButton>

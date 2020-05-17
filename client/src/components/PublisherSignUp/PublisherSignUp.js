@@ -1,9 +1,7 @@
 import React, { Fragment } from "react";
 import { Web3Consumer } from "web3-react";
 import { useHistory, useLocation } from "react-router-dom";
-import {
-  SignUpCard,
-} from "../shared/PublisherWizard/styles";
+import { SignUpCard } from "../shared/PublisherWizard/styles";
 import { PortisInstance } from "../../portis/PortisInstance";
 import { GlobalButton } from "../shared/styles";
 import {
@@ -15,10 +13,11 @@ import {
 // import {
 //   PUBLISHER_DASHBOARD_PAY_PER_SALE_ROUTE,
 //   PUBLISHER_DASHBOARD_PER_PER_CLICK_ROUTE,
-//   PUBLISHER_GA_CONNECT,
+//   PUBLISHER_GA_CONNECT_ROUTE,
 // } from "../../routes-config";
 import {
-  PUBLISHER_GA_CONNECT, PUBLISHER_DASHBOARD_ROUTE_WITH_PARAM,
+  PUBLISHER_GA_CONNECT_ROUTE,
+  PUBLISHER_DASHBOARD_ROUTE_WITH_PARAM,
 } from "../../routes-config";
 import { REWARD_PER_SALE_WORKFLOW } from "../PublisherWorkflow/PublisherWorkflow";
 import ArrowDown from "../../assets/arrow-down.png";
@@ -92,7 +91,7 @@ export const PublisherSignUp = () => {
                   onClick={() =>
                     history.push(
                       workflow === REWARD_PER_SALE_WORKFLOW
-                        ? PUBLISHER_GA_CONNECT
+                        ? PUBLISHER_GA_CONNECT_ROUTE
                         : `${PUBLISHER_DASHBOARD_ROUTE_WITH_PARAM}/clicks`
                     )
                   }
