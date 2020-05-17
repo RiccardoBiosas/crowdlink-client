@@ -6,11 +6,13 @@ import {
   CampaignCard,
   CustomField,
   CustomForm,
-  CustomLabel
+  CustomLabel,
+  CustomHTMLinput
 } from "../shared/PublisherWizard/styles";
 
 
-export const PublisherWizardCreateReferralCampaign = ({ step }) => {
+export const PublisherWizardCreateReferralCampaign = ({ step, budget, setBudget  }) => {
+  console.log('setbudget', setBudget)
     if (step !== 1) {
       return null;
     } else {
@@ -32,7 +34,8 @@ export const PublisherWizardCreateReferralCampaign = ({ step }) => {
           <div>
             <CustomLabel labelColor={'#696868'} labelFontSize={18} labelMargin={'0 0 12px 0'} htmlFor="budget">Your budget</CustomLabel>
             <div>
-              <CustomField id="budget" name="budget" type="number" />
+              <CustomHTMLinput id='budget' name='budget' type='number' value={budget} onChange={(e) => setBudget(e.target.value)} />
+              {/* <CustomField id="budget" name="budget" type="number" /> */}
             </div>
           </div>
         </Fragment>

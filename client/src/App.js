@@ -3,7 +3,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 import Web3Provider, { useWeb3Context, Web3Consumer } from "web3-react";
 import { ethers } from "ethers";
 import connectors from "./portis/index";
-import { TasksContainer } from "./components/Tasks/TasksContainer";
+import { MarketerFeedContainer } from "./components/MarketerFeed/MarketerFeedContainer";
 import { ContractTest } from "./ContractTest/test";
 import { useHistory } from "react-router-dom";
 import { PublisherHomepage } from "./components/PublisherHomepage";
@@ -17,14 +17,23 @@ import {
   PUBLISHER_DASHBOARD_PER_PER_CLICK_ROUTE,
   PUBLISHER_GA_CONNECT,
   PUBLISHER_FEED_ROUTE,
+  PUBLISHER_WITHDRAW_ROUTE,
+  MARKETER_SIGN_UP_ROUTE,
+  MARKETER_FEED_ROUTE,
+  PUBLISHER_DASHBOARD_ROUTE_WITH_PARAM,
+  SIGN_UP_FALLBACK_ROUTE,
 } from "./routes-config";
 import { PublisherConnectGA } from "./components/PublisherConnectGA.js/PublisherConnectGA";
 import { ConnectorsInstance } from "./connectors/connectorsInstance";
 import { PublisherCampaignHistory } from "./components/PublisherCampaignHistory/PublisherCampaignHistory";
 import { PublisherWorkflow } from "./components/PublisherWorkflow/PublisherWorkflow";
 import { PublisherWizardPayPerSaleContainer } from "./components/PublisherWizardPayPerSale/PublisherWizardPayPerSaleContainer";
-import { PublisherWizardPayPerClickContainer } from "./components/PublisherWizardPayPerClick/PublisherWizardPayPerClickContainer";
+// import { PublisherWizardPayPerClickContainer } from "./components/PublisherWizardPayPerClick/PublisherWizardPayPerClickContainer";
 import { PublisherFeedContainer } from "./components/PublisherFeed/PublisherFeedContainer";
+import { PublisherCampaignWithdraw } from "./components/PublisherWithdraw/PublisherCampaignWithdraw";
+import { WithContextActive } from "./hocs/WithContextActive";
+import { MarketerSignUp } from "./components/MarketerSignUp/MarketerSIgnUp";
+import { SignUpFallback } from "./components/SignUpFallback/SignUpFallback";
 
 const App = () => {
   console.log("test");
@@ -40,19 +49,53 @@ const App = () => {
           path={PUBLISHER_SIGN_UP_ROUTE}
           component={PublisherSignUp}
         />
-        <Route
+        {/* <Route
           exact
           path={PUBLISHER_DASHBOARD_PAY_PER_SALE_ROUTE}
-          component={PublisherWizardPayPerSaleContainer}
+          component={() =>
+            WithContextActive(PublisherWizardPayPerSaleContainer)
+          }
         />
-        <Route exact path="/marketer/feed" component={TasksContainer} />
+
+        <Route
+          exact
+          path={PUBLISHER_DASHBOARD_PER_PER_CLICK_ROUTE}
+          component={() =>
+            WithContextActive(PublisherWizardPayPerClickContainer)
+          }
+        /> */}
+
+        <Route exact path={SIGN_UP_FALLBACK_ROUTE} component={SignUpFallback} />
+
+        <Route
+          exact
+          path={`${PUBLISHER_DASHBOARD_ROUTE_WITH_PARAM}/:workflow`}
+          component={() => WithContextActive(PublisherWizardPayPerSaleContainer)}
+        />
+
+        <Route
+          exact
+          path={MARKETER_FEED_ROUTE}
+          component={MarketerFeedContainer}
+        />
         <Route exact path="/test" component={ContractTest} />
         <Route exact path="/connection" component={ConnectorsInstance} />
-        <Route exact path={PUBLISHER_FEED_ROUTE} component={PublisherFeedContainer} />
+        {/* <Route exact path={PUBLISHER_WITHDRAW_ROUTE} component={() => WithContextActive(PublisherCampaignWithdraw)} /> */}
+        <Route
+          exact
+          path={PUBLISHER_WITHDRAW_ROUTE}
+          component={PublisherCampaignWithdraw}
+        />
+
+        <Route
+          exact
+          path={PUBLISHER_FEED_ROUTE}
+          component={PublisherFeedContainer}
+        />
         <Route
           exact
           path={PUBLISHER_GA_CONNECT}
-          component={PublisherConnectGA}
+          component={() => WithContextActive(PublisherConnectGA)}
         />
         <Route
           exact
@@ -64,11 +107,8 @@ const App = () => {
           path={PUBLISHER_WORKFLOW_ROUTE}
           component={PublisherWorkflow}
         />
-        <Route
-          exact
-          path={PUBLISHER_DASHBOARD_PER_PER_CLICK_ROUTE}
-          component={PublisherWizardPayPerClickContainer}
-        />
+
+        <Route exact path={MARKETER_SIGN_UP_ROUTE} component={MarketerSignUp} />
       </Web3Provider>
     </BrowserRouter>
   );

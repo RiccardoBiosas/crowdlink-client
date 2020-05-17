@@ -1,26 +1,37 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
-// import { Drizzle } from "@drizzle/store";
-// import { DrizzleContext } from "@drizzle/react-plugin";
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+import { normalize } from "styled-normalize";
+import { createGlobalStyle } from "styled-components";
+import * as serviceWorker from "./serviceWorker";
 
-// const drizzle = new Drizzle(options);
+const GlobalStyle = createGlobalStyle`
+${normalize}
 
-// ReactDOM.render(
-//   <React.StrictMode>
-//     <DrizzleContext.Provider drizzle={drizzle}>
-//       <App />
-//     </DrizzleContext.Provider>
-//   </React.StrictMode>,
-//   document.getElementById("root")
-// );
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  font-family: 'Open Sans';
+
+}
+
+button {
+  padding: 0;
+}
+
+`;
 
 ReactDOM.render(
   <React.StrictMode>
+    <GlobalStyle />
     <App />
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change

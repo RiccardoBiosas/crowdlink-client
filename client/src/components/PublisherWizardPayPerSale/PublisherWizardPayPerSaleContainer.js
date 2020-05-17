@@ -1,11 +1,10 @@
 import React, { useState, Fragment } from "react";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
-import Web3Provider, { useWeb3Context, Web3Consumer } from "web3-react";
+import { useHistory, useParams } from "react-router-dom";
+import { useWeb3Context } from "web3-react";
 import CrowdlinkReferral from "../../contracts/CrowdlinkReferral";
 import { ethers } from "ethers";
-
-import { Formik, Form, Field } from "formik";
+import { Formik } from "formik";
 import { PublisherWizardDeposit } from "./PublisherWizardDeposit";
 import { PublisherWizardCreateReferralCampaign } from "./PublisherWizardCreateReferralCampaign";
 import { PublisherWizardCampaignCreationOutcome } from "./PublisherWizardCampaignCreationOutcome";
@@ -18,14 +17,19 @@ import {
   CustomForm,
   CloseAndBackButtonContainer,
   NextButtonContainer,
-  HeadingContainer
+  HeadingContainer,
 } from "../shared/PublisherWizard/styles";
 import { ParagraphButton, CustomH1 } from "../shared/GeneralCard";
 import { GlobalButton } from "../shared/styles";
-import { ReactComponent as Copy } from "../../assets/copy.svg";
 
-const step_headings = [
-  "Place url link and commission per sale ",
+const pay_per_sale_step_headings = [
+  "Place url link and commission per sale",
+  "Preview",
+  "Deposit funds into contract",
+];
+
+const pay_per_click_step_headings = [
+  "Place url link and reward per click",
   "Preview",
   "Deposit funds into contract",
 ];
@@ -33,48 +37,58 @@ const step_headings = [
 const empty_initial_values = {
   url: "",
   reward: "",
-  budget: "",
+  // budget: "",
 };
 
-export const PublisherWizardPayPerSaleContainer = () => {
+export const PublisherWizardPayPerSaleContainer = ({ contractInstance }) => {
   const [step, setStep] = useState(1);
   const [resp, setResp] = useState();
 
+  const [budget, setBudget] = useState();
+
   const history = useHistory();
-  const context = useWeb3Context();
-  console.log("context inside pay per sale container", context);
+  const { workflow } = useParams();
+  console.log("route workflow param ", workflow);
 
-  const { library, account } = useWeb3Context(); //use context.active to check whether there's an active web3 provider
+  console.log("contract instance", contractInstance);
 
-  const openReferralCampaign = async (budget, reward, url) => {
-    const contract = new ethers.Contract(
-      "0xF0EE3abb4eB18a1Fd5B6f5b88fd5503ABe97B152",
-      CrowdlinkReferral.abi,
-      library.getSigner()
-    ); //or implement a context.active higher order component and initialize a new contract only one time at the top of the component
-    console.log("contract inside openreferralcampaign", contract);
-    console.log("library", library.getSigner());
+  const { library, account, networkId } = useWeb3Context(); //use context.active to check whether there's an active web3 provider
+  const crowdlinkAddress = networkId
+    ? CrowdlinkReferral.networks[networkId].address
+    : null;
 
-    await contract.functions.openReferralCampaign(budget, reward, url);
-  };
+  console.log("budget state ", budget);
 
   return (
     <Formik
       initialValues={empty_initial_values}
       onSubmit={async (values) => {
-        const { url, reward, budget } = values;
+        // const { url, reward, budget } = values;
+        const { url, reward } = values;
 
-        const receipt = await openReferralCampaign(budget, reward, url);
+        console.log("budget ", typeof budget);
+        console.log("budget ", budget);
+        const bigNumberifyBudget = ethers.utils.bigNumberify(budget);
+
+        const receipt = await contractInstance.functions.openReferralCampaign(
+          bigNumberifyBudget,
+          reward,
+          url,
+          { value: bigNumberifyBudget }
+        );
         console.log("receipt", receipt);
         console.log(
           "transaction was completed -- workflow. send axios post request"
         );
 
-        const resp = await axios.post(
-          "http://localhost:8000/test",
-          { url, reward, budget }
-        );
-        console.log("axios resp", resp);
+        if (receipt) {
+          const resp = await axios.post("http://localhost:8000/test", {
+            url,
+            reward,
+            budget,
+          });
+          console.log("axios resp", resp);
+        }
       }}
       render={({ values }) => {
         return (
@@ -111,16 +125,32 @@ export const PublisherWizardPayPerSaleContainer = () => {
                 </ParagraphButton>
               </CloseAndBackButtonContainer>
 
-              <CustomForm customFormHeight={step < 3 ? "60%" : "90%"}>
-                <HeadingContainer headingMargin={'0 0 14px 0'}>
-                  <CustomH1 h1Color={'#444444'} h1FontSize={26} h1FontWeight={500} >{step_headings[step - 1]}</CustomH1>
+              <CustomForm customformheight={step < 3 ? "60%" : "90%"}>
+                <HeadingContainer headingMargin={"0 0 14px 0"}>
+                  <CustomH1
+                    h1Color={"#444444"}
+                    h1FontSize={26}
+                    h1FontWeight={500}
+                  >
+                    {workflow === "sales"
+                      ? pay_per_sale_step_headings[step - 1]
+                      : pay_per_click_step_headings[step - 1]}
+                  </CustomH1>
                 </HeadingContainer>
                 <PublisherWizardCreateReferralCampaign
+                  workflow={workflow}
                   step={step}
                   values={values}
+                  budget={budget}
+                  setBudget={setBudget}
                 />
                 <PublisherWizardPayPerSalePreview step={step} />
-                <PublisherWizardDeposit step={step} values={values} />
+                <PublisherWizardDeposit
+                  step={step}
+                  values={values}
+                 
+                  address={crowdlinkAddress}
+                />
                 <PublisherWizardCampaignCreationOutcome step={step} />
               </CustomForm>
               {step < 3 && (

@@ -13,12 +13,14 @@ import {
 import { useHistory } from "react-router-dom";
 import { SignUpCard } from "../shared/PublisherWizard/styles";
 import { ImageContainer, BottomContainer } from "./styles";
-import { PUBLISHER_DASHBOARD_PAY_PER_SALE_ROUTE } from "../../routes-config";
+import { PUBLISHER_DASHBOARD_ROUTE_WITH_PARAM } from "../../routes-config";
+// import { PUBLISHER_DASHBOARD_PAY_PER_SALE_ROUTE } from "../../routes-config";
 
-export const PublisherConnectGA = () => {
+export const PublisherConnectGA = (props) => {
   const context = useWeb3Context();
   const history = useHistory();
   console.log("PUBLISHER CONNECT GA context useweb3", context);
+  console.log('publisher connect GA props', props)
   return (
     <CardContainerLayout>
       <SignUpCard>
@@ -47,7 +49,7 @@ export const PublisherConnectGA = () => {
             Analytics. Learn how here
           </CustomParagraph>
 
-          <GlobalButton buttonWidth={200} buttonColor={'#4C83D4'} buttonTextColor={'#ffff'} onClick={() =>history.push(PUBLISHER_DASHBOARD_PAY_PER_SALE_ROUTE)}>Connect</GlobalButton>
+          <GlobalButton buttonWidth={200} buttonColor={'#4C83D4'} buttonTextColor={'#ffff'} onClick={() =>history.push(`${PUBLISHER_DASHBOARD_ROUTE_WITH_PARAM}/sales`)}>Connect</GlobalButton>
         </BottomContainer>
       </SignUpCard>
     </CardContainerLayout>

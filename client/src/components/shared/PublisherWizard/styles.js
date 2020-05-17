@@ -28,7 +28,7 @@ export const CampaignCard = styled.div`
 `;
 
 export const CustomForm = styled(Form)`
-  height: ${(props) => props.customFormHeight};
+  height: ${(props) => props.customformheight};
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -71,13 +71,35 @@ export const CloseAndBackButtonContainer = styled(CloseButtonContainer)`
   }
 `;
 
-export const AddressContainer = styled.div`
+export const RowContainer = styled.div`
   width: ${(props) => props.containerWidth};
   display: flex;
   justify-content: space-between;
 `;
 
 export const CustomField = styled(Field)`
+  background: #ffffff 0% 0% no-repeat padding-box;
+  border: 1px solid #e2e5ed;
+  border-radius: 4px;
+  width: 360px;
+  height: 40px;
+  padding-left: 8px;
+  box-sizing: border-box;
+  ::-webkit-outer-spin-button,
+  ::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  ::[type='number'] {
+    -moz-appearance: textfield;
+  }
+  &::placeholder {
+    color: #3e3f42;
+    font-weight: 400;
+  }
+`;
+
+export const CustomHTMLinput = styled.input`
   background: #ffffff 0% 0% no-repeat padding-box;
   border: 1px solid #e2e5ed;
   border-radius: 4px;

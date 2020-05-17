@@ -3,6 +3,14 @@ import styled from "styled-components";
 export const CampaignContainerLayout = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
+  margin-top: 4rem;
+`;
+
+export const ToTheLeftFlexContainer = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  width: 80vw;
 `;
 
 export const CampaignContainer = styled.div`
@@ -21,10 +29,10 @@ export const CampaignContainerComponent = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: ${props => props.containerMargin};
+  margin: ${(props) => props.containerMargin};
 `;
 
 export const CampaignContainerDataContainer = styled.div`
-display: flex;
-width: 100%;
-`
+  display: flex;
+  width: 100%;
+`;

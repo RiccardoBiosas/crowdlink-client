@@ -1,3 +1,4 @@
+ 
 const CrowdlinkReferral = artifacts.require('CrowdlinkReferral')
 
 module.exports = function(deployer) {

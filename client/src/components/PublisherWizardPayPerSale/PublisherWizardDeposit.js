@@ -1,21 +1,15 @@
 import React, { useState, Fragment } from "react";
 
-import { Formik, Form, Field } from "formik";
 import {
-  CampaignContainer,
-  CampaignCard,
-  CustomField,
   DepositButtonContainer,
   DepositInfoContainer,
-  AddressContainer
+  RowContainer,
 } from "../shared/PublisherWizard/styles";
 import { GlobalButton } from "../shared/styles";
 import { ReactComponent as Copy } from "../../assets/copy.svg";
 import { CustomParagraph, ParagraphButton } from "../shared/GeneralCard";
 
-const address = "0xf66c19541c961d875597Cec23Fc35fd223101993";
-
-export const PublisherWizardDeposit = ({ step, values }) => {
+export const PublisherWizardDeposit = ({ step, values, address }) => {
   console.log("values in publisher wizard deposit", values);
 
   const copyToClipboard = (txt) => {
@@ -32,14 +26,23 @@ export const PublisherWizardDeposit = ({ step, values }) => {
     return (
       <Fragment>
         <DepositInfoContainer>
-          <CustomParagraph paragraphColor={'#696868'} paragraphFontSize={18}>Send ETH to the smart contract address:</CustomParagraph>
-          <AddressContainer>
-            <CustomParagraph paragraphBorder={'0.6px solid #206DFF'} paragraphPadding={'10px'} paragraphColor={'#696868'}>{address}</CustomParagraph>
+          <CustomParagraph paragraphColor={"#696868"} paragraphFontSize={18}>
+            Send ETH to the smart contract address:
+          </CustomParagraph>
+          <RowContainer>
+            <CustomParagraph
+              paragraphBorder={"0.6px solid #206DFF"}
+              paragraphPadding={"10px"}
+              paragraphColor={"#696868"}
+              paragraphMargin={"0 10px 0 0"}
+            >
+              {address}
+            </CustomParagraph>
             {/* currently hardcoded address. will be dynamically imported from truffle deployments */}
             <ParagraphButton onClick={() => copyToClipboard(address)}>
               <Copy />
             </ParagraphButton>
-          </AddressContainer>
+          </RowContainer>
         </DepositInfoContainer>
 
         <DepositButtonContainer>

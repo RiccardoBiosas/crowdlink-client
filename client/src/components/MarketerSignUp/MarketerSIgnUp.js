@@ -1,9 +1,7 @@
 import React, { Fragment } from "react";
 import { Web3Consumer } from "web3-react";
-import { useHistory, useLocation } from "react-router-dom";
-import {
-  SignUpCard,
-} from "../shared/PublisherWizard/styles";
+import { useHistory } from "react-router-dom";
+import { SignUpCard } from "../shared/PublisherWizard/styles";
 import { PortisInstance } from "../../portis/PortisInstance";
 import { GlobalButton } from "../shared/styles";
 import {
@@ -12,25 +10,11 @@ import {
   CloseButtonContainer,
   ParagraphButton,
 } from "../shared/GeneralCard";
-// import {
-//   PUBLISHER_DASHBOARD_PAY_PER_SALE_ROUTE,
-//   PUBLISHER_DASHBOARD_PER_PER_CLICK_ROUTE,
-//   PUBLISHER_GA_CONNECT,
-// } from "../../routes-config";
-import {
-  PUBLISHER_GA_CONNECT, PUBLISHER_DASHBOARD_ROUTE_WITH_PARAM,
-} from "../../routes-config";
-import { REWARD_PER_SALE_WORKFLOW } from "../PublisherWorkflow/PublisherWorkflow";
+import { MARKETER_FEED_ROUTE } from "../../routes-config";
 import ArrowDown from "../../assets/arrow-down.png";
 
-export const PublisherSignUp = () => {
-  // const context = useWeb3Context();
+export const MarketerSignUp = () => {
   const history = useHistory();
-  const location = useLocation();
-
-  const { workflow } = location;
-
-  console.log(workflow);
 
   return (
     <CardContainerLayout>
@@ -89,13 +73,7 @@ export const PublisherSignUp = () => {
                 </div>
                 <GlobalButton
                   buttonWidth={200}
-                  onClick={() =>
-                    history.push(
-                      workflow === REWARD_PER_SALE_WORKFLOW
-                        ? PUBLISHER_GA_CONNECT
-                        : `${PUBLISHER_DASHBOARD_ROUTE_WITH_PARAM}/clicks`
-                    )
-                  }
+                  onClick={() => history.push(MARKETER_FEED_ROUTE)}
                 >
                   Go To Dashboard
                 </GlobalButton>
@@ -114,56 +92,31 @@ export const PublisherSignUp = () => {
                 <div>
                   <img src={ArrowDown} />
                 </div>
-                {workflow === REWARD_PER_SALE_WORKFLOW ? (
-                  <Fragment>
-                    <div>
-                      <CustomParagraph
-                        paragraphColor={"#959090"}
-                        paragraphFontSize={22}
-                        paragraphFontWeight={600}
-                      >
-                        Connect Google Analytics
-                      </CustomParagraph>
-                    </div>
-                    <div>
-                      <img src={ArrowDown} />
-                    </div>
-                    <div>
-                      <CustomParagraph
-                        paragraphColor={"#959090"}
-                        paragraphFontSize={22}
-                        paragraphFontWeight={600}
-                      >
-                        Place URL and % of commission per sale{" "}
-                      </CustomParagraph>
-                    </div>
-                    <div>
-                      <img src={ArrowDown} />
-                    </div>
-                  </Fragment>
-                ) : (
-                  <Fragment>
-                    <div>
-                      <CustomParagraph
-                        paragraphColor={"#959090"}
-                        paragraphFontSize={22}
-                        paragraphFontWeight={600}
-                      >
-                        Place URL and % reward per click
-                      </CustomParagraph>
-                    </div>
-                    <div>
-                      <img src={ArrowDown} />
-                    </div>
-                  </Fragment>
-                )}
-                <CustomParagraph
-                  paragraphColor={"#959090"}
-                  paragraphFontSize={22}
-                  paragraphFontWeight={600}
-                >
-                  Deposit commission payout. Withdraw any time.
-                </CustomParagraph>
+                <div>
+                  <CustomParagraph
+                    paragraphColor={"#959090"}
+                    paragraphFontSize={22}
+                    paragraphFontWeight={600}
+                  >
+                    You will receive funds via Portis Wallet
+                  </CustomParagraph>
+                </div>
+                <div>
+                  <img src={ArrowDown} />
+                </div>
+                <div>
+                  <CustomParagraph
+                    paragraphColor={"#959090"}
+                    paragraphFontSize={22}
+                    paragraphFontWeight={600}
+                  >
+                    Referral links connected instantly to your account{" "}
+                  </CustomParagraph>
+                </div>
+                <div>
+                  <img src={ArrowDown} />
+                </div>
+
                 <PortisInstance />
               </Fragment>
             );

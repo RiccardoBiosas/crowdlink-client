@@ -9,6 +9,7 @@ import {
   ParagraphButton,
   CustomH1,
 } from "./shared/GeneralCard";
+import { MARKETER_SIGN_UP_ROUTE } from "../routes-config";
 
 export const MarketerHomepage = () => {
   const history = useHistory();
@@ -31,7 +32,7 @@ export const MarketerHomepage = () => {
             buttonColor={"#4C83D4"}
             buttonFontWeight={900}
             buttonFontSize={24}
-            onClick={() => history.push("/marketer/feed")}
+            onClick={() => history.push(MARKETER_SIGN_UP_ROUTE)}
           >
             Get Started
           </ParagraphButton>

@@ -34,16 +34,14 @@ export const CustomH1 = styled.h1`
   font-size: ${(props) => props.h1FontSize}px;
   width: ${(props) => props.h1Width}vw;
   font-weight: ${(props) => props.h1FontWeight};
-
 `;
 
 export const CustomH2 = styled.h2`
-color: ${(props) => props.h2Color};
-font-size: ${(props) => props.h2FontSize}px;
-width: ${(props) => props.h2Width}vw;
-font-weight: ${(props) => props.h2FontWeight};
+  color: ${(props) => props.h2Color};
+  font-size: ${(props) => props.h2FontSize}px;
+  width: ${(props) => props.h2Width}vw;
+  font-weight: ${(props) => props.h2FontWeight};
 `;
-
 
 export const ParagraphButton = styled.button`
   background: none;
@@ -69,7 +67,7 @@ export const CustomParagraph = styled.p`
   font-weight: ${(props) => props.paragraphFontWeight};
   width: ${(props) => `${props.paragraphWidth}`};
   line-height ${(props) => `${props.paragraphLineHeight}`};
-  border: ${props => `${props.paragraphBorder}`};
+  border: ${(props) => `${props.paragraphBorder}`};
   padding: ${(props) => props.paragraphPadding};
 
 `;
@@ -81,6 +79,17 @@ export const CardLayoutWithBorder = styled(CardLayout)`
   border-radius: 10px;
 `;
 
+export const CardLayoutWithBorderSpaceAround = styled(CardLayout)`
+  align-items: center;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.85);
+  border-radius: 10px;
+
+  && {
+    justify-content: space-around;
+  }
+`;
+
 export const DoubleButtonsContainerFilledHeight = styled(
   DoubleButtonsContainer
 )`
@@ -89,9 +98,18 @@ export const DoubleButtonsContainerFilledHeight = styled(
 `;
 
 export const CloseButtonContainer = styled.div`
-width: 100%;
-display: flex;
-align-self: flex-start;
-justify-content: flex-end;
+  height: ${(props) => props.closeButtonContainerHeight};
+  width: 100%;
+  display: flex;
+  align-self: flex-start;
+  justify-content: flex-end;
+`;
 
-`
+export const CardSubContainer = styled.div`
+  height: ${(props) => props.subContainerHeight};
+  margin: ${(props) => props.subContainerMargin};
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+`;
