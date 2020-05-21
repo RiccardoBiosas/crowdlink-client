@@ -19,6 +19,7 @@ export const Ptokens = () => {
   console.log("context", context);
 
   const [transactionState, setTransactionState] = useState();
+  const [isDepositDone, setIsDepositDone] = useState(false);
   const [pBtcAddress, setPBtcAddress] = useState();
   const [pTokensBalance, setPTokensBalance] = useState();
 
@@ -45,6 +46,7 @@ export const Ptokens = () => {
         .once("onEthTxConfirmed", (tx) => {
           console.log("onEthTxConfirmed", tx);
           setTransactionState(tx);
+          setIsDepositDone(true);
         })
         .then((res) => {
           console.log(res);
