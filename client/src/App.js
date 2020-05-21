@@ -11,12 +11,9 @@ import { MarketerHomepage } from "./components/MarketerHomepage";
 import { PublisherSignUp } from "./components/PublisherSignUp/PublisherSignUp";
 import {
   PUBLISHER_SIGN_UP_ROUTE,
-  PUBLISHER_CAMPAIGNS_HISTORY_ROUTE,
   PUBLISHER_WORKFLOW_ROUTE,
-  PUBLISHER_DASHBOARD_PAY_PER_SALE_ROUTE,
-  PUBLISHER_DASHBOARD_PER_PER_CLICK_ROUTE,
   PUBLISHER_GA_CONNECT_ROUTE,
-  PUBLISHER_FEED_ROUTE,  
+  PUBLISHER_FEED_ROUTE,
   MARKETER_SIGN_UP_ROUTE,
   MARKETER_FEED_ROUTE,
   PUBLISHER_DASHBOARD_ROUTE_WITH_PARAM,
@@ -26,13 +23,14 @@ import {
 import { PublisherConnectGA } from "./components/PublisherConnectGA.js/PublisherConnectGA";
 import { ConnectorsInstance } from "./connectors/connectorsInstance";
 import { PublisherWorkflow } from "./components/PublisherWorkflow/PublisherWorkflow";
-import { PublisherWizardPayPerSaleContainer } from "./components/PublisherWizardPayPerSale/PublisherWizardPayPerSaleContainer";
+import { PublisherWizardContainer } from "./components/PublisherWizard/PublisherWizardContainer";
 // import { PublisherWizardPayPerClickContainer } from "./components/PublisherWizardPayPerClick/PublisherWizardPayPerClickContainer";
 import { PublisherFeedContainer } from "./components/PublisherFeed/PublisherFeedContainer";
 import { PublisherCampaignWithdraw } from "./components/PublisherWithdraw/PublisherCampaignWithdraw";
 import { WithContextActive } from "./hocs/WithContextActive";
 import { MarketerSignUp } from "./components/MarketerSignUp/MarketerSIgnUp";
 import { SignUpFallback } from "./components/SignUpFallback/SignUpFallback";
+import {Ptokens} from './Ptokens'
 
 const App = () => {
   console.log("test");
@@ -52,7 +50,7 @@ const App = () => {
           exact
           path={PUBLISHER_DASHBOARD_PAY_PER_SALE_ROUTE}
           component={() =>
-            WithContextActive(PublisherWizardPayPerSaleContainer)
+            WithContextActive(PublisherWizardContainer)
           }
         />
 
@@ -63,13 +61,19 @@ const App = () => {
             WithContextActive(PublisherWizardPayPerClickContainer)
           }
         /> */}
+        <Route exact path='/ptokens' component={Ptokens} />
 
         <Route exact path={SIGN_UP_FALLBACK_ROUTE} component={SignUpFallback} />
 
+        {/* <Route
+          exact
+          path={`${PUBLISHER_DASHBOARD_ROUTE_WITH_PARAM}/:workflow`}
+          component={() => WithContextActive(PublisherWizardContainer)}
+        /> */}
         <Route
           exact
           path={`${PUBLISHER_DASHBOARD_ROUTE_WITH_PARAM}/:workflow`}
-          component={() => WithContextActive(PublisherWizardPayPerSaleContainer)}
+          component={PublisherWizardContainer}
         />
 
         <Route
@@ -79,24 +83,39 @@ const App = () => {
         />
         <Route exact path="/test" component={ContractTest} />
         <Route exact path="/connection" component={ConnectorsInstance} />
-        {/* <Route exact path={`PUBLISHER_WITHDRAW_ROUTE_WITH_PARAM/:campaign`} component={() => WithContextActive(PublisherCampaignWithdraw)} /> */}
-        <Route
-          exact 
+        {/* <Route
+          exact
           path={`${PUBLISHER_WITHDRAW_ROUTE_WITH_PARAM}/:campaign`}
           component={() => WithContextActive(PublisherCampaignWithdraw)}
+        /> */}
+        <Route
+          exact
+          path={`${PUBLISHER_WITHDRAW_ROUTE_WITH_PARAM}/:campaign`}
+          component={PublisherCampaignWithdraw}
         />
 
         <Route
           exact
           path={PUBLISHER_FEED_ROUTE}
-          component={() => WithContextActive(PublisherFeedContainer)}
+          component={PublisherFeedContainer}
         />
+        {/* 
         <Route
+          exact
+          path={PUBLISHER_FEED_ROUTE}
+          component={() => WithContextActive(PublisherFeedContainer)}
+        /> */}
+        {/* <Route
           exact
           path={PUBLISHER_GA_CONNECT_ROUTE}
           component={() => WithContextActive(PublisherConnectGA)}
+        /> */}
+        <Route
+          exact
+          path={PUBLISHER_GA_CONNECT_ROUTE}
+          component={PublisherConnectGA}
         />
-    
+
         <Route
           exact
           path={PUBLISHER_WORKFLOW_ROUTE}

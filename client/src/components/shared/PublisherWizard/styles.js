@@ -11,7 +11,7 @@ export const CampaignContainer = styled.div`
 export const SignUpCard = styled(CardLayoutWithBorder)`
   && {
     justify-content: space-around;
-    height: 70vh;
+    height: 60vh;
   }
 `;
 
@@ -75,6 +75,7 @@ export const RowContainer = styled.div`
   width: ${(props) => props.containerWidth};
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `;
 
 export const CustomField = styled(Field)`

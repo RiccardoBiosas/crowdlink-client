@@ -26,8 +26,9 @@ export const PublisherConnectGA = (props) => {
   console.log("publisher connect GA props", props);
 
   const GAoauth = async () => {
-    const resp = await axios.get(`${host}${GA_OAUTH_ENDPOINT}`);
+    const resp = await axios.get(`${host}${GA_OAUTH_ENDPOINT}`);   
     console.log(resp)
+ 
   };
   return (
     <CardContainerLayout>

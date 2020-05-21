@@ -20,8 +20,15 @@ export const CampaignContainer = styled.div`
   height: 22vh;
   background: #ffffff 0% 0% no-repeat padding-box;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 10px;
+  border-radius: ${props => props.dropdownOpen ? '10px 10px 0px 0px' : '10px'};
 `;
+
+export const DropdownCampaignContainer = styled(CampaignContainer)`
+&& {
+  border-radius: 0px 0px 10px 10px;
+  border-top: none;
+}
+`
 
 export const CampaignContainerComponent = styled.div`
   height: 100%;
@@ -35,4 +42,8 @@ export const CampaignContainerComponent = styled.div`
 export const CampaignContainerDataContainer = styled.div`
   display: flex;
   width: 100%;
+`;
+
+export const BasicContainer = styled.div`
+  width: ${(props) => props.containerWidth};
 `;

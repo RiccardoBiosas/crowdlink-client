@@ -80,8 +80,8 @@ export const ContractTest = () => {
       account,
       inp
     );
-    campaign_data[1] = campaign_data[1].toNumber()
-    campaign_data[2] = campaign_data[2].toNumber()
+    campaign_data[1] = campaign_data[1].toString()
+    campaign_data[2] = campaign_data[2].toString()
     setResp(campaign_data)
     console.log(campaign_data);
   };
@@ -99,6 +99,23 @@ export const ContractTest = () => {
     setLen(campaign_length)
     console.log("length", campaign_length);
   };
+
+  const addInfluencer = async() => {
+    const contract = new ethers.Contract(
+      crowdlinkAddress,
+      CrowdlinkReferral.abi,
+      library.getSigner()
+    );
+    const resp = await contract.functions.addInfluencer(
+      'thegreatcrowdlink',
+      'crowdlinkreferral',
+      '0x16dA4fa78A91cb8F51f157F693E69AE6841b5E2D'
+    );
+    console.log(resp)
+
+    // string memory _website, string memory _referral_link, address _owner
+
+  }
 
 
   return (
@@ -161,6 +178,9 @@ export const ContractTest = () => {
           look up campaign length
         </button>
           <p>{len}</p>
+      </div>
+      <div>
+        <button onClick={addInfluencer}>add influencer</button>
       </div>
     </div>
   );

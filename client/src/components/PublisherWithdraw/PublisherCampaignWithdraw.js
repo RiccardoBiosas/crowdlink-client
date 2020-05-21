@@ -12,15 +12,18 @@ import {
 import { ReactComponent as Copy } from "../../assets/copy.svg";
 import { PUBLISHER_FEED_ROUTE } from "../../routes-config";
 import { RowContainer } from "../shared/PublisherWizard/styles";
-
+import copy from "../../assets/clipboard-copy.png";
+import { BasicContainer } from "../shared/feed/styles";
 
 export const PublisherCampaignWithdraw = ({ contractInstance }) => {
   const history = useHistory();
-  const crowdlinkAddress = contractInstance.address;
+  const crowdlinkAddress = contractInstance
+    ? contractInstance.address
+    : "myfakeaddressmyfakeaddress";
   const { campaign } = useParams();
   console.log(campaign);
 
-  console.log('withdraw route: ', contractInstance)
+  console.log("withdraw route: ", contractInstance);
 
   const copyToClipboard = (txt) => {
     const temporaryInput = document.createElement("input");
@@ -31,11 +34,14 @@ export const PublisherCampaignWithdraw = ({ contractInstance }) => {
     document.body.removeChild(temporaryInput);
   };
 
-  const withdraw = async(website) => {
-    const receipt = await contractInstance.functions.withdrawFromCampaign(website, {gasLimit: 1200000})
+  const withdraw = async (website) => {
+    const receipt = await contractInstance.functions.withdrawFromCampaign(
+      website,
+      { gasLimit: 1200000 }
+    );
 
-    console.log(receipt)
-  }
+    console.log(receipt);
+  };
 
   return (
     <CardContainerLayout>
@@ -62,8 +68,25 @@ export const PublisherCampaignWithdraw = ({ contractInstance }) => {
           >
             Withdrawing will end the campaign.
           </CustomParagraph>
-          <CustomParagraph>Money will be sent to: :</CustomParagraph>
+          <BasicContainer containerWidth={"100%"}>
+            <CustomParagraph paragraphColor={"#696868"} paragraphFontSize={20}>
+              Money will be sent to:
+            </CustomParagraph>
+          </BasicContainer>
 
+          <RowContainer containerWidth={"100%"}>
+            <CustomParagraph
+              paragraphColor={"#696868"}
+              paragraphMargin={"0 10px 0 0"}
+            >
+              'crowdlinkmylink'
+            </CustomParagraph>
+
+            <ParagraphButton>
+              <img src={copy} />
+            </ParagraphButton>
+          </RowContainer>
+          {/* 
           <RowContainer containerWidth={"80%"}>
             <CustomParagraph
               paragraphBorder={"0.6px solid #206DFF"}
@@ -72,13 +95,13 @@ export const PublisherCampaignWithdraw = ({ contractInstance }) => {
             >
               {crowdlinkAddress}
             </CustomParagraph>
-            {/* currently hardcoded address. will be dynamically imported from truffle deployments */}
+
             <ParagraphButton onClick={() => copyToClipboard(crowdlinkAddress)}>
               <Copy />
             </ParagraphButton>
-          </RowContainer>
-          <RowContainer containerWidth={"80%"}>
-            <CustomParagraph paragraphFontSize={20}>
+          </RowContainer> */}
+          <RowContainer containerWidth={"100%"}>
+            <CustomParagraph paragraphColor={"#696868"} paragraphFontSize={20}>
               Total amount:
             </CustomParagraph>
             <CustomParagraph

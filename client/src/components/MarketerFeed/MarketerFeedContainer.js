@@ -1,18 +1,34 @@
-import React from "react";
-import {useHistory} from 'react-router-dom'
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import { useTransition, animated } from "react-spring";
 import { ParagraphButton, CustomParagraph } from "../shared/GeneralCard";
 import {
   CampaignContainerLayout,
   CampaignContainer,
   CampaignContainerComponent,
   CampaignContainerDataContainer,
+  DropdownCampaignContainer,
 } from "../shared/feed/styles";
+import { RowContainer } from "../shared/PublisherWizard/styles";
+
+import copy from "../../assets/clipboard-copy.png";
 
 export const MarketerFeedContainer = () => {
-  const history = useHistory()
+  const [referralLink, setReferralLink] = useState();
+  // const [showStats, setShowStats] = useState(false)
+
+  // const transitions = useTransition(showStats, null, {
+  //   from: {opacitiy: 0, transform: 'translateY(-20%)'},
+  //   enter: {opacity: 1, transform: 'translateY(0%)'},
+  //   leave: {opacity: 0, transform: 'translateY(-20%)'},
+  //   config: {
+  //     duration: 400
+  //   }
+  // })
+
+  const history = useHistory();
   return (
     <CampaignContainerLayout>
-
       <CampaignContainer>
         <CampaignContainerComponent
           containerMargin={"0 0 0 18px"}
@@ -42,7 +58,28 @@ export const MarketerFeedContainer = () => {
               reward$$
             </CustomParagraph>
           </CampaignContainerDataContainer>
-          <CampaignContainerDataContainer>
+          <CampaignContainerDataContainer style={{ alignItems: "center" }}>
+            <CustomParagraph
+              paragraphFontSize={18}
+              paragraphColor={"#1E1E1E"}
+              paragraphWidth={"32%"}
+            >
+              Your unique referral link:
+            </CustomParagraph>
+            <RowContainer>
+              <CustomParagraph
+                paragraphColor={"#696868"}
+                paragraphMargin={"0 10px 0 0"}
+              >
+                {referralLink ? referralLink : "not generated"}
+              </CustomParagraph>
+
+              <ParagraphButton>
+                <img src={copy} />
+              </ParagraphButton>
+            </RowContainer>
+          </CampaignContainerDataContainer>
+          {/* <CampaignContainerDataContainer>
           <CustomParagraph
               paragraphColor={"#1E1E1E"}
               paragraphFontSize={18}
@@ -53,16 +90,28 @@ export const MarketerFeedContainer = () => {
             <CustomParagraph paragraphColor={"#959090"} paragraphFontSize={18}>
               ...
             </CustomParagraph>
-          </CampaignContainerDataContainer>
+          </CampaignContainerDataContainer> */}
         </CampaignContainerComponent>
         <CampaignContainerComponent componentFlex={1}>
-          <ParagraphButton
-            buttonColor={"#4C83D4"}
-            buttonFontSize={20}
-            buttonFontWeight={600}
-          >
-            Create Link +
-          </ParagraphButton>
+          {!referralLink ? (
+            <ParagraphButton
+              buttonColor={"#4C83D4"}
+              buttonFontSize={20}
+              buttonFontWeight={600}
+              onClick={() => setReferralLink("crdly")}
+            >
+              Create Link +
+            </ParagraphButton>
+          ) : (
+            <ParagraphButton
+              buttonColor={"#7838D5"}
+              buttonFontSize={20}
+              buttonFontWeight={600}
+              onClick={() => setReferralLink("crdly")}
+            >
+              Withdraw >
+            </ParagraphButton>
+          )}
         </CampaignContainerComponent>
       </CampaignContainer>
     </CampaignContainerLayout>

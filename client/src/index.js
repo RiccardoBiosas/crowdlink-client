@@ -4,6 +4,7 @@ import App from "./App";
 import { normalize } from "styled-normalize";
 import { createGlobalStyle } from "styled-components";
 import * as serviceWorker from "./serviceWorker";
+require('dotenv').config()
 
 const GlobalStyle = createGlobalStyle`
 ${normalize}

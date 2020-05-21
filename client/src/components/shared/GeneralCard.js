@@ -6,6 +6,7 @@ export const CardContainerLayout = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: ${props => props.cardContainerBackgroundColor};
 `;
 
 export const CardLayout = styled.div`
@@ -34,6 +35,7 @@ export const CustomH1 = styled.h1`
   font-size: ${(props) => props.h1FontSize}px;
   width: ${(props) => props.h1Width}vw;
   font-weight: ${(props) => props.h1FontWeight};
+  line-height: ${(props) => props.h1LineHeight};
 `;
 
 export const CustomH2 = styled.h2`
@@ -75,14 +77,14 @@ export const CustomParagraph = styled.p`
 export const CardLayoutWithBorder = styled(CardLayout)`
   align-items: center;
   background: #ffffff 0% 0% no-repeat padding-box;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.85);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
 `;
 
 export const CardLayoutWithBorderSpaceAround = styled(CardLayout)`
   align-items: center;
   background: #ffffff 0% 0% no-repeat padding-box;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.85);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
 
   && {
@@ -110,6 +112,14 @@ export const CardSubContainer = styled.div`
   margin: ${(props) => props.subContainerMargin};
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
+  justify-content: ${props => props.justify ? props.justify : 'space-around'};
+  align-items: ${props => props.align ? props.align : 'center'};
 `;
+
+export const CardLayoutWithHorizontalContainers = styled.div`
+  display: flex;
+  justify-content: space-around;
+  width: ${props => props.cardLayoutWidth};
+`;
+
+
