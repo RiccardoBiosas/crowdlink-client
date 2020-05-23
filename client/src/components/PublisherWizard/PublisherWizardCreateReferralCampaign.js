@@ -12,7 +12,6 @@ import {
 } from "../shared/PublisherWizard/styles";
 import { COINGECKO_API } from "../../api-config";
 
-
 export const PublisherWizardCreateReferralCampaign = ({
   step,
   budget,
@@ -21,12 +20,21 @@ export const PublisherWizardCreateReferralCampaign = ({
   if (step !== 1) {
     return null;
   } else {
-
-
-
-
     return (
       <Fragment>
+        <div>
+          <CustomLabel
+            labelColor={"#696868"}
+            labelFontSize={18}
+            labelMargin={"0 0 12px 0"}
+            htmlFor="name"
+          >
+            Your campaign name
+          </CustomLabel>
+          <div>
+            <CustomField id="name" name="name" type="text" />
+          </div>
+        </div>
         <div>
           <CustomLabel
             labelColor={"#696868"}

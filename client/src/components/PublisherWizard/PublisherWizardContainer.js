@@ -9,7 +9,11 @@ import { PublisherWizardDeposit } from "./PublisherWizardDeposit";
 import { PublisherWizardCreateReferralCampaign } from "./PublisherWizardCreateReferralCampaign";
 import { PublisherWizardCampaignCreationOutcome } from "./PublisherWizardCampaignCreationOutcome";
 import { PublisherWizardPreview } from "./PublisherWizardPreview";
-import { COINGECKO_API } from "../../api-config";
+import host from "../../api-config";
+import {
+  COINGECKO_API,
+  CAMPAIGNS_ENDPOINT_CLICK_CAMPAIGN,
+} from "../../api-config";
 
 import {
   CampaignContainer,
@@ -40,6 +44,7 @@ const pay_per_click_step_headings = [
 ];
 
 const empty_initial_values = {
+  name: "",
   url: "",
   reward: "",
   budget: "",
@@ -63,14 +68,15 @@ export const PublisherWizardContainer = ({ contractInstance }) => {
     : null;
 
   console.log("budget state ", budget);
-  console.log('publisher wizard network id', networkId)
+  console.log("publisher wizard network id", networkId);
+  console.log("account length #####", account.length);
 
   return (
     <CardContainerLayout>
       <Formik
         initialValues={empty_initial_values}
         onSubmit={async (values) => {
-          const { url, reward, budget } = values;
+          const { name, url, reward, budget } = values;
           // const { url, reward } = values;
           console.log(
             "contract instance inside the onsubmit function",
@@ -99,7 +105,7 @@ export const PublisherWizardContainer = ({ contractInstance }) => {
           ); //parseEther only accepts strings
           console.log("budget to wei", bigNumberifyBudget);
 
-          const campaign_type = 'click'
+          const campaign_type = "click";
 
           const receipt = await contractInstance.functions.openPayPerClickReferralCampaign(
             bigNumberifyBudget,
@@ -114,10 +120,12 @@ export const PublisherWizardContainer = ({ contractInstance }) => {
           );
 
           if (receipt) {
-            const resp = await axios.post("http://localhost:8000/test", {
+            const resp = await axios.post(CAMPAIGNS_ENDPOINT_CLICK_CAMPAIGN, {
+              name,
+              user_public_key: account,
               url,
               reward,
-              budget,
+              // budget,
             });
             console.log("axios resp", resp);
           }
