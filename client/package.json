@@ -27,6 +27,8 @@
     "react-spring": "^8.0.27",
     "styled-components": "^5.1.0",
     "styled-normalize": "^8.0.7",
+    "three": "^0.116.1",
+    "vanta": "^0.5.15",
     "web3": "^1.2.7",
     "web3-react": "^5.0.5",
     "yup": "^0.28.5"

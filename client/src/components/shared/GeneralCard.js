@@ -1,6 +1,10 @@
 import styled from "styled-components";
+import React, {useState, useLayoutEffect, useRef} from 'react'
+import * as THREE from 'three'
+import BIRDS from 'vanta/dist/vanta.globe.min.js'
 
-export const CardContainerLayout = styled.div`
+
+export const StyledCardContainerLayout = styled.div`
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -8,6 +12,34 @@ export const CardContainerLayout = styled.div`
   justify-content: center;
   background-color: ${props => props.cardContainerBackgroundColor};
 `;
+
+export const CardContainerLayout = (props) => {
+  const [vantaEffect, setVantaEffect] = useState(0)
+  const myRef = useRef(null)
+
+
+
+  useLayoutEffect(() => {
+    if(!vantaEffect) {
+      setVantaEffect(BIRDS({
+        el: myRef.current,
+        THREE: THREE
+      }))
+    }
+
+    return () => {
+      if(vantaEffect) {
+        vantaEffect.destroy()
+      }
+    }
+  }, [vantaEffect])
+
+  return(
+    <StyledCardContainerLayout ref={myRef}>
+      {props.children}
+    </StyledCardContainerLayout>
+  )
+}
 
 export const CardLayout = styled.div`
   height: 60vh;
