@@ -21,7 +21,7 @@ export const PublisherFeedContainer = () => {
   const [showStats, setShowStats] = useState(false);
 
   const history = useHistory();
-  let website = "twitter"; //hardcoded for testing
+  let website = "myfirstwebsite"; //hardcoded for testing
 
   const transitions = useTransition(showStats, null, {
     from: { opacitiy: 0, transform: "translateY(-20%)" },

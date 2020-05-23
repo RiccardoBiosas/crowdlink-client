@@ -74,7 +74,7 @@ export const CloseAndBackButtonContainer = styled(CloseButtonContainer)`
 export const RowContainer = styled.div`
   width: ${(props) => props.containerWidth};
   display: flex;
-  justify-content: space-between;
+  justify-content: ${props => props.containerJustify === 'around' ? 'space-around' : 'space-between'};
   align-items: center;
 `;
 

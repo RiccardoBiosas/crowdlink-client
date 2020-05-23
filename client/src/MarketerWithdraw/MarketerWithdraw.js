@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import {
   CardContainerLayout,
@@ -15,13 +15,28 @@ import { RowContainer } from "../shared/PublisherWizard/styles";
 import copy from "../../assets/clipboard-copy.png";
 import { BasicContainer } from "../shared/feed/styles";
 
-export const PublisherCampaignWithdraw = ({ contractInstance, account }) => {
+export const MarketerWithdraw = ({ contractInstance, account }) => {
+  const [balance, setBalance] = useState();
   const history = useHistory();
   const crowdlinkAddress = contractInstance.address;
-  const { campaign } = useParams();
-  console.log(campaign);
 
-  console.log("withdraw route: ", contractInstance);
+  console.log("marketer withdraw route: ", contractInstance);
+
+  const withdraw = async () => {
+    const resp = await contractInstance.functions.influencerWithdraw();
+    console.log("influencer withdrawal", resp);
+  };
+
+  const checkBalance = async () => {
+    const resp = await contractInstance.functions.account.influencer_account_balance(
+      account
+    );
+    console.log("influencer balance", resp);
+  };
+
+  useEffect(() => {
+    checkBalance();
+  }, []);
 
   const copyToClipboard = (txt) => {
     const temporaryInput = document.createElement("input");
@@ -59,13 +74,18 @@ export const PublisherCampaignWithdraw = ({ contractInstance, account }) => {
           <CustomH1 h1Color={"#444444"} h1FontWeight={500}>
             Are you sure?
           </CustomH1>
-          <CustomParagraph
-            paragraphColor={"#696868"}
-            paragraphFontSize={20}
-            paragraphMargin={"0 0 8px 0"}
-          >
-            Withdrawing will end the campaign.
-          </CustomParagraph>
+          <RowContainer containerWidth={"100%"}>
+            <CustomParagraph paragraphColor={"#696868"} paragraphFontSize={20}>
+              Your balance:
+            </CustomParagraph>
+            <CustomParagraph
+              paragraphColor={"#696868"}
+              paragraphFontSize={20}
+              paragraphFontWeight={600}
+            >
+              {balance ? balance : ""}
+            </CustomParagraph>
+          </RowContainer>
           <BasicContainer containerWidth={"100%"}>
             <CustomParagraph paragraphColor={"#696868"} paragraphFontSize={20}>
               Money will be sent to:
@@ -85,24 +105,11 @@ export const PublisherCampaignWithdraw = ({ contractInstance, account }) => {
             </ParagraphButton>
           </RowContainer>
 
-          <RowContainer containerWidth={"100%"}>
-            <CustomParagraph paragraphColor={"#696868"} paragraphFontSize={20}>
-              Total amount:
-            </CustomParagraph>
-            <CustomParagraph
-              paragraphColor={"#696868"}
-              paragraphFontSize={20}
-              paragraphFontWeight={600}
-            >
-              $$$
-            </CustomParagraph>
-          </RowContainer>
-
           <ParagraphButton
             buttonColor={"#7838D5"}
             buttonFontSize={20}
             buttonFontWeight={600}
-            onClick={(website) => withdraw(website)}
+            onClick={withdraw}
           >
             withdraw >
           </ParagraphButton>

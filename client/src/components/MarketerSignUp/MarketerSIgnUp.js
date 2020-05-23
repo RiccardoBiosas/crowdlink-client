@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { Web3Consumer } from "web3-react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 import { SignUpCard } from "../shared/PublisherWizard/styles";
 import { PortisInstance } from "../../portis/PortisInstance";
 import { GlobalButton } from "../shared/styles";
@@ -12,6 +12,7 @@ import {
 } from "../shared/GeneralCard";
 import { MARKETER_FEED_ROUTE } from "../../routes-config";
 import ArrowDown from "../../assets/arrow-down.png";
+
 
 export const MarketerSignUp = () => {
   const history = useHistory();
@@ -34,50 +35,51 @@ export const MarketerSignUp = () => {
           {(context) => {
             const { active, connectorName, account, networkId } = context;
             return active ? (
-              <Fragment>
-                <div>
-                  <CustomParagraph
-                    paragraphColor={"#959090"}
-                    paragraphFontSize={24}
-                    paragraphFontWeight={900}
-                  >
-                    Welcome!
-                  </CustomParagraph>
-                </div>
-                <div>
-                  <CustomParagraph
-                    paragraphColor={"#959090"}
-                    paragraphFontSize={22}
-                    paragraphFontWeight={600}
-                  >
-                    your web3 connector: {connectorName}
-                  </CustomParagraph>
-                </div>
-                <div>
-                  <CustomParagraph
-                    paragraphColor={"#959090"}
-                    paragraphFontSize={22}
-                    paragraphFontWeight={600}
-                  >
-                    your public key: {account}
-                  </CustomParagraph>
-                </div>
-                <div>
-                  <CustomParagraph
-                    paragraphColor={"#959090"}
-                    paragraphFontSize={22}
-                    paragraphFontWeight={600}
-                  >
-                    the network id: {networkId}
-                  </CustomParagraph>
-                </div>
-                <GlobalButton
-                  buttonWidth={200}
-                  onClick={() => history.push(MARKETER_FEED_ROUTE)}
-                >
-                  Go To Dashboard
-                </GlobalButton>
-              </Fragment>
+              <Redirect to={MARKETER_FEED_ROUTE} />
+              // <Fragment>
+              //   <div>
+              //     <CustomParagraph
+              //       paragraphColor={"#959090"}
+              //       paragraphFontSize={24}
+              //       paragraphFontWeight={900}
+              //     >
+              //       Welcome!
+              //     </CustomParagraph>
+              //   </div>
+              //   <div>
+              //     <CustomParagraph
+              //       paragraphColor={"#959090"}
+              //       paragraphFontSize={22}
+              //       paragraphFontWeight={600}
+              //     >
+              //       your web3 connector: {connectorName}
+              //     </CustomParagraph>
+              //   </div>
+              //   <div>
+              //     <CustomParagraph
+              //       paragraphColor={"#959090"}
+              //       paragraphFontSize={22}
+              //       paragraphFontWeight={600}
+              //     >
+              //       your public key: {account}
+              //     </CustomParagraph>
+              //   </div>
+              //   <div>
+              //     <CustomParagraph
+              //       paragraphColor={"#959090"}
+              //       paragraphFontSize={22}
+              //       paragraphFontWeight={600}
+              //     >
+              //       the network id: {networkId}
+              //     </CustomParagraph>
+              //   </div>
+              //   <GlobalButton
+              //     buttonWidth={200}
+              //     onClick={() => history.push(MARKETER_FEED_ROUTE)}
+              //   >
+              //     Go To Dashboard
+              //   </GlobalButton>
+              // </Fragment>
             ) : (
               <Fragment>
                 <div>

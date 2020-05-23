@@ -23,6 +23,8 @@ import { GlobalButton } from "../shared/styles";
 import { ReactComponent as Copy } from "../../assets/copy.svg";
 import { PUBLISHER_FEED_ROUTE } from "../../routes-config";
 
+
+//DISPLAY ETHERSCAN TRANSACTION
 export const PublisherWizardCampaignCreationOutcome = ({ step }) => {
   const history = useHistory()
   if (step !== 4) {

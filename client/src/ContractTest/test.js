@@ -67,7 +67,7 @@ export const ContractTest = () => {
     console.log(parseInt(budget, 10))
     const bigNumberifyBudget = ethers.utils.bigNumberify(budget)
 
-    await contract.functions.openReferralCampaign(bigNumberifyBudget, parseInt(reward, 10), website, {value: bigNumberifyBudget});
+    await contract.functions.openPayPerClickReferralCampaign(bigNumberifyBudget, parseInt(reward, 10), website, 'click', {value: bigNumberifyBudget});
   };
 
   const checkOpenCampaigns = async () => {
@@ -95,7 +95,7 @@ export const ContractTest = () => {
     const campaign_data = await contract.functions.lookupCampaignReferralsCollectionLength(
       account
     );
-    const campaign_length = campaign_data.toNumber();
+    const campaign_length = campaign_data ? campaign_data.toNumber() ? campaign_data.toNumber() : '0' : '0';
     setLen(campaign_length)
     console.log("length", campaign_length);
   };

@@ -5,7 +5,7 @@ import {
   CardContainerLayout,
   CustomParagraph,
   CardSubContainer,
-  DoubleButtonsContainer,
+  ColumnContainer,
   ParagraphButton,
   CustomH1,
   CardLayoutWithHorizontalContainers
@@ -18,7 +18,7 @@ export const MarketerHomepage = () => {
 
   return (
     <CardContainerLayout cardContainerBackgroundColor={"#E5E5E5"}>
-      <CardLayoutWithHorizontalContainers cardLayoutWidth={"90vw"}>
+      <CardLayoutWithHorizontalContainers cardLayoutHeight={'60vh'} cardLayoutWidth={"90vw"}>
         <CardSubContainer justify={"space-between"} align={"flex-start"}>
           <div>
             <CustomH1 h1FontSize={40} h1LineHeight={'54px'}>             
@@ -33,7 +33,7 @@ export const MarketerHomepage = () => {
               earn commission for every sale <br /> coming from your referral link
             </CustomParagraph>
           </div>
-          <DoubleButtonsContainer>
+          <ColumnContainer>
             <ParagraphButton
                 buttonColor={"#7838D5"}
                 buttonFontWeight={900}
@@ -51,7 +51,7 @@ export const MarketerHomepage = () => {
             >
               I am a creator >
             </ParagraphButton>
-          </DoubleButtonsContainer>
+          </ColumnContainer>
         </CardSubContainer>
         <div>
           <CrowdLinkHomepageMarketer />

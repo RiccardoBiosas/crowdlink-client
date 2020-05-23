@@ -65,7 +65,7 @@ export const PublisherConnectGA = (props) => {
             Make sure you’re tracking aquisitions of your sales via Google
             Analytics. Learn how here
           </CustomParagraph>
-          {/* 
+          
           <GlobalButton
             buttonWidth={200}
             buttonColor={"#4C83D4"}
@@ -75,16 +75,16 @@ export const PublisherConnectGA = (props) => {
             }
           >
             Connect
-          </GlobalButton> */}
+          </GlobalButton>
 
-          <GlobalButton
+          {/* <GlobalButton
             buttonWidth={200}
             buttonColor={"#4C83D4"}
             buttonTextColor={"#ffff"}
             onClick={GAoauth}
           >
             Connect
-          </GlobalButton>
+          </GlobalButton> */}
         </BottomContainer>
       </SignUpCard>
     </CardContainerLayout>

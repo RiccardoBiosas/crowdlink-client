@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useTransition, animated } from "react-spring";
 import { ParagraphButton, CustomParagraph } from "../shared/GeneralCard";
@@ -13,9 +13,10 @@ import { RowContainer } from "../shared/PublisherWizard/styles";
 
 import copy from "../../assets/clipboard-copy.png";
 
-export const MarketerFeedContainer = () => {
+export const MarketerFeedContainer = ({ contractInstance }) => {
   const [referralLink, setReferralLink] = useState();
   // const [showStats, setShowStats] = useState(false)
+  console.log("marketer feed contractinstance", contractInstance);
 
   // const transitions = useTransition(showStats, null, {
   //   from: {opacitiy: 0, transform: 'translateY(-20%)'},
@@ -25,6 +26,22 @@ export const MarketerFeedContainer = () => {
   //     duration: 400
   //   }
   // })
+
+  useEffect(() => {
+    if(referralLink) {
+      addInfluencer()
+
+    }
+
+  }, [referralLink])
+
+  const addInfluencer = async () => {
+    // const resp = await contractInstance.functions.influencerWithdraw()
+    // console.log('influencer withdrawal', resp)
+
+    const resp = await contractInstance.functions.addInfluencer('greatwebsite', referralLink, '0xC18abDa7ca50736ee93f1F7Ba712a4EE08649D16') //all hardcoded
+    console.log('add influencer resp', resp)
+  };
 
   const history = useHistory();
   return (
@@ -98,7 +115,7 @@ export const MarketerFeedContainer = () => {
               buttonColor={"#4C83D4"}
               buttonFontSize={20}
               buttonFontWeight={600}
-              onClick={() => setReferralLink("crdly")}
+              onClick={() => setReferralLink("crowdly")}
             >
               Create Link +
             </ParagraphButton>

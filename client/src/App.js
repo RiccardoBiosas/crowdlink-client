@@ -30,7 +30,7 @@ import { PublisherCampaignWithdraw } from "./components/PublisherWithdraw/Publis
 import { WithContextActive } from "./hocs/WithContextActive";
 import { MarketerSignUp } from "./components/MarketerSignUp/MarketerSIgnUp";
 import { SignUpFallback } from "./components/SignUpFallback/SignUpFallback";
-import {Ptokens} from './Ptokens'
+import { Ptokens } from "./Ptokens";
 
 const App = () => {
   console.log("test");
@@ -46,74 +46,39 @@ const App = () => {
           path={PUBLISHER_SIGN_UP_ROUTE}
           component={PublisherSignUp}
         />
-        {/* <Route
-          exact
-          path={PUBLISHER_DASHBOARD_PAY_PER_SALE_ROUTE}
-          component={() =>
-            WithContextActive(PublisherWizardContainer)
-          }
-        />
 
-        <Route
-          exact
-          path={PUBLISHER_DASHBOARD_PER_PER_CLICK_ROUTE}
-          component={() =>
-            WithContextActive(PublisherWizardPayPerClickContainer)
-          }
-        /> */}
-        <Route exact path='/ptokens' component={Ptokens} />
+        <Route exact path="/ptokens" component={Ptokens} />
 
         <Route exact path={SIGN_UP_FALLBACK_ROUTE} component={SignUpFallback} />
 
-        {/* <Route
-          exact
-          path={`${PUBLISHER_DASHBOARD_ROUTE_WITH_PARAM}/:workflow`}
-          component={() => WithContextActive(PublisherWizardContainer)}
-        /> */}
         <Route
           exact
           path={`${PUBLISHER_DASHBOARD_ROUTE_WITH_PARAM}/:workflow`}
-          component={PublisherWizardContainer}
+          component={() => WithContextActive(PublisherWizardContainer)}
         />
 
         <Route
           exact
           path={MARKETER_FEED_ROUTE}
-          component={MarketerFeedContainer}
+          component={() => WithContextActive(MarketerFeedContainer)}
         />
         <Route exact path="/test" component={ContractTest} />
         <Route exact path="/connection" component={ConnectorsInstance} />
-        {/* <Route
-          exact
-          path={`${PUBLISHER_WITHDRAW_ROUTE_WITH_PARAM}/:campaign`}
-          component={() => WithContextActive(PublisherCampaignWithdraw)}
-        /> */}
         <Route
           exact
           path={`${PUBLISHER_WITHDRAW_ROUTE_WITH_PARAM}/:campaign`}
-          component={PublisherCampaignWithdraw}
+          component={() => WithContextActive(PublisherCampaignWithdraw)}
         />
 
         <Route
           exact
           path={PUBLISHER_FEED_ROUTE}
-          component={PublisherFeedContainer}
-        />
-        {/* 
-        <Route
-          exact
-          path={PUBLISHER_FEED_ROUTE}
           component={() => WithContextActive(PublisherFeedContainer)}
-        /> */}
-        {/* <Route
+        />
+        <Route
           exact
           path={PUBLISHER_GA_CONNECT_ROUTE}
           component={() => WithContextActive(PublisherConnectGA)}
-        /> */}
-        <Route
-          exact
-          path={PUBLISHER_GA_CONNECT_ROUTE}
-          component={PublisherConnectGA}
         />
 
         <Route
@@ -123,6 +88,34 @@ const App = () => {
         />
 
         <Route exact path={MARKETER_SIGN_UP_ROUTE} component={MarketerSignUp} />
+
+        {/* ############### WITHOUT CONTEXT ACTIVE. ONLY FOR QUICK TESTING */}
+        {/* <Route
+          exact
+          path={PUBLISHER_GA_CONNECT_ROUTE}
+          component={PublisherConnectGA}
+        /> */}
+        {/* <Route
+        exact
+        path={`${PUBLISHER_WITHDRAW_ROUTE_WITH_PARAM}/:campaign`}
+        component={PublisherCampaignWithdraw}
+      /> */}
+        {/* <Route
+          exact
+          path={PUBLISHER_FEED_ROUTE}
+          component={PublisherFeedContainer}
+        /> */}
+        {/* <Route
+          exact
+          path={`${PUBLISHER_DASHBOARD_ROUTE_WITH_PARAM}/:workflow`}
+          component={PublisherWizardContainer}
+        /> */}
+        {/* <Route
+        exact
+        path={MARKETER_FEED_ROUTE}
+        component={MarketerFeedContainer}
+      /> */}
+        {/* ############### WITHOUT CONTEXT ACTIVE. ONLY FOR QUICK TESTING */}
       </Web3Provider>
     </BrowserRouter>
   );

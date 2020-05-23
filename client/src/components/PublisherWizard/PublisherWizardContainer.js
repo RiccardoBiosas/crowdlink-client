@@ -63,6 +63,7 @@ export const PublisherWizardContainer = ({ contractInstance }) => {
     : null;
 
   console.log("budget state ", budget);
+  console.log('publisher wizard network id', networkId)
 
   return (
     <CardContainerLayout>
@@ -98,10 +99,13 @@ export const PublisherWizardContainer = ({ contractInstance }) => {
           ); //parseEther only accepts strings
           console.log("budget to wei", bigNumberifyBudget);
 
-          const receipt = await contractInstance.functions.openReferralCampaign(
+          const campaign_type = 'click'
+
+          const receipt = await contractInstance.functions.openPayPerClickReferralCampaign(
             bigNumberifyBudget,
             bigNumberifyReward,
             url,
+            campaign_type,
             { value: bigNumberifyBudget, gasLimit: 2200000 }
           );
           console.log("receipt", receipt);

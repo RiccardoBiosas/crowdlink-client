@@ -17,11 +17,11 @@ export const CardLayout = styled.div`
   justify-content: space-between;
 `;
 
-export const DoubleButtonsContainer = styled.div`
+export const ColumnContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 30vw;
-  margin: ${(props) => props.paragraphMargin};
+  width: ${props => props.columnContainerWidth ? props.columnContainerWidth : '30vw'};
+  margin: ${(props) => props.columnContainerMargin};
   align-items: ${(props) =>
     props.horizontalAlign === "center"
       ? "center"
@@ -92,8 +92,8 @@ export const CardLayoutWithBorderSpaceAround = styled(CardLayout)`
   }
 `;
 
-export const DoubleButtonsContainerFilledHeight = styled(
-  DoubleButtonsContainer
+export const ColumnContainerFilledHeight = styled(
+  ColumnContainer
 )`
   flex: 1;
   justify-content: space-around;
@@ -109,6 +109,7 @@ export const CloseButtonContainer = styled.div`
 
 export const CardSubContainer = styled.div`
   height: ${(props) => props.subContainerHeight};
+  width: ${(props) => props.subContainerWidth};
   margin: ${(props) => props.subContainerMargin};
   display: flex;
   flex-direction: column;
@@ -120,6 +121,7 @@ export const CardLayoutWithHorizontalContainers = styled.div`
   display: flex;
   justify-content: space-around;
   width: ${props => props.cardLayoutWidth};
+  height: ${props => props.cardLayoutHeight};
 `;
 
 
