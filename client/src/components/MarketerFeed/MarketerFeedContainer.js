@@ -179,13 +179,22 @@ export const LogicRowContainer = ({
     const resp = await axios.get(`${CAMPAIGNS_ENDPOINT_CLICK_CAMPAIGN}?user_public_key=${user_public_key}
     `);
     setFetchedReferralLink(resp.data);
+    console.log('CALLBACK REFERRAL LINK')
+    console.log(resp.data.results[indx])
+    if(resp.data.results[indx].links && resp.data.results[indx].links.length > 0) {
+      console.log('resp just links[0]', resp.data.results[indx].links)
+      console.log(resp.data.results[indx].links[0].url_code)
+
+      setReferralLinkCB(resp.data.results[indx].links[0].url_code);
+
+    }
+
   }, [isFetched]);
 
   useEffect(() => {
     if (campaignsAreFetched > 0 && user_public_key) {
       const resp = fetchData();
       console.log("### FETCH REFERRAL LINK IF IT EXISTS", resp.data);
-      setReferralLinkCB(resp.data);
     }
   }, [campaignsAreFetched, user_public_key]);
 
@@ -217,7 +226,7 @@ export const LogicRowContainer = ({
           paragraphColor={"#696868"}
           paragraphMargin={"0 10px 0 0"}
         >
-          {fetchedReferralLink && fetchedReferralLink.results[indx].links && fetchedReferralLink.results[indx].links.length > 0 && fetchedReferralLink.results[indx].url === website_url  ? `${host}/${fetchedReferralLink.results[indx].links[0].url_code}` : "not generated"}
+          {fetchedReferralLink && fetchedReferralLink.results[indx].links && fetchedReferralLink.results[indx].links.length > 0 && fetchedReferralLink.results[indx].url === website_url  ? `${host}/cl/${fetchedReferralLink.results[indx].links[0].url_code}` : "not generated"}
         </CustomParagraph>
 
         <ParagraphButton onClick={copyToClipboard}>
