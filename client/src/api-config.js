@@ -3,7 +3,8 @@
 export const COINGECKO_API = "https://api.coingecko.com/api/v3/";
 
 // #### back-end API
-let host = "http://localhost:8000";
+// let host = "https://crowdlink.me";
+let host = 'http://localhost:8000'
 
 export const CAMPAIGNS_ENDPOINT_CLICK_CAMPAIGN = `${host}/api/click/campaigns/`;
 export const CAMPAIGNS_CLICK_ENDPOINT = "/api/click/campaigns/";

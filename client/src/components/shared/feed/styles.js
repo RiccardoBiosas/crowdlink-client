@@ -4,7 +4,8 @@ export const CampaignContainerLayout = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 4rem;
+  padding-top: 4rem;
+  background-color: ${(props) => props.cardContainerBackgroundColor ? props.cardContainerBackgroundColor : '#23153C'};
 `;
 
 export const ToTheLeftFlexContainer = styled.div`
@@ -17,7 +18,7 @@ export const CampaignContainer = styled.div`
   display: flex;
   align-items: center;
   width: 80vw;
-  height: 22vh;
+  height: 230px;
   background: #ffffff 0% 0% no-repeat padding-box;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: ${props => props.dropdownOpen ? '10px 10px 0px 0px' : '10px'};

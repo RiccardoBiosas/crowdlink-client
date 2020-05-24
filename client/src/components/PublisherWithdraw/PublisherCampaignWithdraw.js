@@ -1,5 +1,6 @@
-import React from "react";
-import { useParams, useHistory } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { ethers } from "ethers";
+import { useHistory, useLocation } from "react-router-dom";
 import {
   CardContainerLayout,
   CardLayoutWithBorder,
@@ -9,7 +10,6 @@ import {
   ParagraphButton,
   CardSubContainer,
 } from "../shared/GeneralCard";
-import { ReactComponent as Copy } from "../../assets/copy.svg";
 import { PUBLISHER_FEED_ROUTE } from "../../routes-config";
 import { RowContainer } from "../shared/PublisherWizard/styles";
 import copy from "../../assets/clipboard-copy.png";
@@ -17,11 +17,8 @@ import { BasicContainer } from "../shared/feed/styles";
 
 export const PublisherCampaignWithdraw = ({ contractInstance, account }) => {
   const history = useHistory();
-  const crowdlinkAddress = contractInstance.address;
-  const { campaign } = useParams();
-  console.log(campaign);
-
-  console.log("withdraw route: ", contractInstance);
+  const [balance, setBalance] = useState();
+  const location = useLocation();
 
   const copyToClipboard = (txt) => {
     const temporaryInput = document.createElement("input");
@@ -32,13 +29,23 @@ export const PublisherCampaignWithdraw = ({ contractInstance, account }) => {
     document.body.removeChild(temporaryInput);
   };
 
-  const withdraw = async (website) => {
+  const checkCampaignOwnerTotalBalance = async () => {
+    const bal = await contractInstance.functions.campaign_owner_account_balance(
+      account
+    );
+    const converted_bal = ethers.utils.formatEther(bal);
+    setBalance(converted_bal);
+  };
+
+  useEffect(() => {
+    checkCampaignOwnerTotalBalance();
+  });
+
+  const withdraw = async () => {
     const receipt = await contractInstance.functions.withdrawFromCampaign(
-      website,
+      location.url,
       { gasLimit: 1200000 }
     );
-
-    console.log(receipt);
   };
 
   return (
@@ -94,7 +101,7 @@ export const PublisherCampaignWithdraw = ({ contractInstance, account }) => {
               paragraphFontSize={20}
               paragraphFontWeight={600}
             >
-              $$$
+              {balance ? balance : ""} eth
             </CustomParagraph>
           </RowContainer>
 
@@ -102,7 +109,7 @@ export const PublisherCampaignWithdraw = ({ contractInstance, account }) => {
             buttonColor={"#7838D5"}
             buttonFontSize={20}
             buttonFontWeight={600}
-            onClick={(website) => withdraw(website)}
+            onClick={withdraw}
           >
             withdraw >
           </ParagraphButton>

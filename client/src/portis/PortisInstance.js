@@ -1,12 +1,11 @@
 import React, { Fragment } from "react";
-import Web3Provider, { useWeb3Context, Web3Consumer } from "web3-react";
-import connectors from "./index";
+import { useWeb3Context } from "web3-react";
 import { GlobalButton } from "../components/shared/styles";
 
 export const PortisInstance = () => {
   const context = useWeb3Context();
   const PORTIS = "portis";
-  const portisConnector = connectors.portis;
+  // const portisConnector = connectors.portis;
 
 
   if (context.error) {

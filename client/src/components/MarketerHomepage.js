@@ -9,6 +9,7 @@ import {
   ParagraphButton,
   CustomH1,
   CardLayoutWithHorizontalContainers,
+  HomepageCardContainerLayout,
 } from "./shared/GeneralCard";
 import { MARKETER_SIGN_UP_ROUTE } from "../routes-config";
 import { ReactComponent as CrowdLinkHomepageMarketer } from "../assets/crowdlink-homepage-marketer.svg";
@@ -17,17 +18,17 @@ export const MarketerHomepage = () => {
   const history = useHistory();
 
   return (
-    <CardContainerLayout cardContainerBackgroundColor={"#E5E5E5"}>
+    <CardContainerLayout cardContainerBackgroundColor={'#23153C'}>
       <CardLayoutWithHorizontalContainers
         cardLayoutHeight={"60vh"}
         cardLayoutWidth={"90vw"}
       >
         <CardSubContainer justify={"space-between"} align={"flex-start"}>
           <div>
-          <CustomH1 h1FontSize={40} h1LineHeight={"54px"} h1Color={'#F8F8F8'}>
+            <CustomH1 h1FontSize={40} h1LineHeight={"54px"} h1Color={"#F8F8F8"}>
               Join a referral a campaign <br /> today
             </CustomH1>
-            <CustomParagraph            
+            <CustomParagraph
               paragraphFontSize={26}
               paragraphMargin={"32px 0 0 0"}
               paragraphColor={"#E2E2E2"}
@@ -60,9 +61,7 @@ export const MarketerHomepage = () => {
             </ParagraphButton>
           </ColumnContainer>
         </CardSubContainer>
-        <div>
-          {/* <CrowdLinkHomepageMarketer /> */}
-        </div>
+       <CrowdLinkHomepageMarketer />
       </CardLayoutWithHorizontalContainers>
     </CardContainerLayout>
   );

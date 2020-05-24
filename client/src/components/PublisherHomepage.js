@@ -2,11 +2,11 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import {
   PUBLISHER_WORKFLOW_ROUTE,
-  PUBLISHER_FEED_ROUTE,
+  // PUBLISHER_FEED_ROUTE,
   PTOKENS_SWAP_ROUTE,
 } from "../routes-config";
 import {
-  CardContainerLayout,
+  HomepageCardContainerLayout,
   CardLayout,
   ColumnContainer,
   ParagraphButton,
@@ -14,19 +14,23 @@ import {
   CustomH1,
   CardLayoutWithHorizontalContainers,
   CardSubContainer,
+  CardContainerLayout
 } from "./shared/GeneralCard";
-import {GlobalButton} from './shared/styles'
+import { GlobalButton } from "./shared/styles";
 import { ReactComponent as CrowdLinkHomepagePublisher } from "../assets/crowdlink-homepage-creator.svg";
 
 export const PublisherHomepage = () => {
   const history = useHistory();
 
   return (
-    <CardContainerLayout cardContainerBackgroundColor={"#E5E5E5"}>
-      <CardLayoutWithHorizontalContainers cardLayoutHeight={'60vh'} cardLayoutWidth={"90vw"}>
+    <CardContainerLayout cardContainerBackgroundColor={'#23153C'}>
+      <CardLayoutWithHorizontalContainers
+        cardLayoutHeight={"60vh"}
+        cardLayoutWidth={"90vw"}
+      >
         <CardSubContainer justify={"space-between"} align={"flex-start"}>
           <div>
-            <CustomH1 h1FontSize={40} h1LineHeight={"54px"} h1Color={'#F8F8F8'}>
+            <CustomH1 h1FontSize={40} h1LineHeight={"54px"} h1Color={"#F8F8F8"}>
               Create a referral campaign <br /> within minutes
             </CustomH1>
             <CustomParagraph
@@ -39,7 +43,7 @@ export const PublisherHomepage = () => {
               history
             </CustomParagraph>
           </div>
-
+          {/*
           <div>
             <CustomParagraph paragraphColor={"#4C83D4"}>
               Have bitcoin but not ethereum? <br /> Swap it for pTokens and then
@@ -52,15 +56,15 @@ export const PublisherHomepage = () => {
             >
               Swap
             </ParagraphButton>
-          </div>
+          </div> */}
           <ColumnContainer>
             <GlobalButton
-              buttonRadius={'50px'}
+              buttonRadius={"50px"}
               buttonTextColor={"#4C83D4"}
               buttonFontWeight={900}
               buttonFontSize={26}
-              buttonColor={'#F8F8F8'}
-              buttonWidth={'220'}
+              buttonColor={"#F8F8F8"}
+              buttonWidth={"220"}
               onClick={() => history.push(PUBLISHER_WORKFLOW_ROUTE)}
             >
               Get Started
@@ -77,9 +81,7 @@ export const PublisherHomepage = () => {
           </ColumnContainer>
         </CardSubContainer>
 
-        <div>
-          {/* <CrowdLinkHomepagePublisher /> */}
-        </div>
+      <CrowdLinkHomepagePublisher />
       </CardLayoutWithHorizontalContainers>
     </CardContainerLayout>
   );

@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import { CardLayoutWithBorder, CloseButtonContainer } from "../GeneralCard";
-import { Field, Form } from "formik";
+import styled from 'styled-components';
+import { Field, Form } from 'formik';
+import { CardLayoutWithBorder, CloseButtonContainer } from '../GeneralCard';
 
 export const CampaignContainer = styled.div`
   display: flex;
@@ -47,6 +47,8 @@ export const NextButtonContainer = styled.div`
 
 export const DepositInfoContainer = styled.div`
   height: 50%;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const DepositButtonContainer = styled.div`
@@ -74,7 +76,8 @@ export const CloseAndBackButtonContainer = styled(CloseButtonContainer)`
 export const RowContainer = styled.div`
   width: ${(props) => props.containerWidth};
   display: flex;
-  justify-content: ${props => props.containerJustify === 'around' ? 'space-around' : 'space-between'};
+  justify-content: ${(props) =>
+    props.containerJustify === 'around' ? 'space-around' : 'space-between'};
   align-items: center;
 `;
 

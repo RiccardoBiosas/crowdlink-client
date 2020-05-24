@@ -10,28 +10,37 @@ import {
   CardSubContainer,
 } from "../shared/GeneralCard";
 import { ReactComponent as Copy } from "../../assets/copy.svg";
-import { MARKETER_FEED_ROUTE, MARKETER_WITHDRAW_ROUTE } from "../../routes-config";
+import {
+  MARKETER_FEED_ROUTE,
+  MARKETER_WITHDRAW_ROUTE,
+} from "../../routes-config";
 import { RowContainer } from "../shared/PublisherWizard/styles";
 import copy from "../../assets/clipboard-copy.png";
 import { BasicContainer } from "../shared/feed/styles";
+import { ethers } from "ethers";
+
 
 export const MarketerWithdraw = ({ contractInstance, account }) => {
   const [balance, setBalance] = useState();
+  const [receipt, setReceipt] = useState();
   const history = useHistory();
   const crowdlinkAddress = contractInstance.address;
 
-  console.log("marketer withdraw route: ", contractInstance);
-
   const withdraw = async () => {
-    const resp = await contractInstance.functions.influencerWithdraw();
-    console.log("influencer withdrawal", resp);
+    const receipt = await contractInstance.functions.influencerWithdraw();
+    console.log("influencer withdrawal", receipt);
+
+    if (receipt) {
+      setReceipt(receipt);
+    }
   };
 
   const checkBalance = async () => {
     const resp = await contractInstance.functions.influencer_account_balance(
       account
     );
-    console.log("influencer balance", resp.data);
+    const converted_bal = ethers.utils.formatEther(resp);
+    setBalance(converted_bal);
   };
 
   useEffect(() => {
@@ -47,8 +56,6 @@ export const MarketerWithdraw = ({ contractInstance, account }) => {
     document.body.removeChild(temporaryInput);
   };
 
-
-
   return (
     <CardContainerLayout>
       <CardLayoutWithBorder>
@@ -63,50 +70,64 @@ export const MarketerWithdraw = ({ contractInstance, account }) => {
             x
           </ParagraphButton>
         </CloseButtonContainer>
-        <CardSubContainer subContainerHeight={"100%"}>
-          <CustomH1 h1Color={"#444444"} h1FontWeight={500}>
-            Are you sure?
-          </CustomH1>
-          <RowContainer containerWidth={"100%"}>
-            <CustomParagraph paragraphColor={"#696868"} paragraphFontSize={20}>
-              Your balance:
-            </CustomParagraph>
-            <CustomParagraph
-              paragraphColor={"#696868"}
-              paragraphFontSize={20}
-              paragraphFontWeight={600}
-            >
-              {balance ? balance : ""}
-            </CustomParagraph>
-          </RowContainer>
-          <BasicContainer containerWidth={"100%"}>
-            <CustomParagraph paragraphColor={"#696868"} paragraphFontSize={20}>
-              Money will be sent to:
-            </CustomParagraph>
-          </BasicContainer>
+        {!receipt ? (
+          <CardSubContainer subContainerHeight={"100%"}>
+            <CustomH1 h1Color={"#444444"} h1FontWeight={500}>
+              Are you sure?
+            </CustomH1>
+            <RowContainer containerWidth={"100%"}>
+              <CustomParagraph
+                paragraphColor={"#696868"}
+                paragraphFontSize={20}
+              >
+                Your balance:
+              </CustomParagraph>
+              <CustomParagraph
+                paragraphColor={"#696868"}
+                paragraphFontSize={20}
+                paragraphFontWeight={600}
+              >
+                {balance ? balance : ""} eth
+              </CustomParagraph>
+            </RowContainer>
+            <BasicContainer containerWidth={"100%"}>
+              <CustomParagraph
+                paragraphColor={"#696868"}
+                paragraphFontSize={20}
+              >
+                Money will be sent to:
+              </CustomParagraph>
+            </BasicContainer>
 
-          <RowContainer containerWidth={"100%"}>
-            <CustomParagraph
-              paragraphColor={"#696868"}
-              paragraphMargin={"0 10px 0 0"}
-            >
-              {crowdlinkAddress}
-            </CustomParagraph>
+            <RowContainer containerWidth={"100%"}>
+              <CustomParagraph
+                paragraphColor={"#696868"}
+                paragraphMargin={"0 10px 0 0"}
+              >
+                {crowdlinkAddress}
+              </CustomParagraph>
 
-            <ParagraphButton>
-              <img src={copy} onClick={() => copyToClipboard(account)} />
+              <ParagraphButton>
+                <img src={copy} onClick={() => copyToClipboard(account)} />
+              </ParagraphButton>
+            </RowContainer>
+
+            <ParagraphButton
+              buttonColor={"#7838D5"}
+              buttonFontSize={20}
+              buttonFontWeight={600}
+              onClick={withdraw}
+            >
+              withdraw >
             </ParagraphButton>
-          </RowContainer>
-
-          <ParagraphButton
-            buttonColor={"#7838D5"}
-            buttonFontSize={20}
-            buttonFontWeight={600}
-            onClick={withdraw}
-          >
-            withdraw >
-          </ParagraphButton>
-        </CardSubContainer>
+          </CardSubContainer>
+        ) : (
+          <div>
+            <CustomH1 h1Color={"#444444"} h1FontWeight={500}>
+              withdrawal successful!
+            </CustomH1>
+          </div>
+        )}
       </CardLayoutWithBorder>
     </CardContainerLayout>
   );

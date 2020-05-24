@@ -1,8 +1,7 @@
-import React, { Fragment } from "react";
+import React from "react";
 import axios from "axios";
 import { GlobalButton } from "../shared/styles";
 import { ReactComponent as GoogleAnalyticsSVG } from "../../assets/google-analytics.svg";
-import { useWeb3Context } from "web3-react";
 import {
   CustomParagraph,
   CardContainerLayout,
@@ -14,21 +13,17 @@ import {
 import { useHistory } from "react-router-dom";
 import { SignUpCard } from "../shared/PublisherWizard/styles";
 import { ImageContainer, BottomContainer } from "./styles";
-import { PUBLISHER_DASHBOARD_ROUTE_WITH_PARAM } from "../../routes-config";
 import host from "../../api-config";
 import { GA_OAUTH_ENDPOINT } from "../../api-config";
-// import { PUBLISHER_DASHBOARD_PAY_PER_SALE_ROUTE } from "../../routes-config";
+// import { PUBLISHER_DASHBOARD_ROUTE_WITH_PARAM } from "../../routes-config";
 
 export const PublisherConnectGA = (props) => {
-  const context = useWeb3Context();
   const history = useHistory();
-  console.log("PUBLISHER CONNECT GA context useweb3", context);
-  console.log("publisher connect GA props", props);
+
 
   const GAoauth = async () => {
-    const resp = await axios.get(`${host}${GA_OAUTH_ENDPOINT}`);   
-    console.log(resp)
- 
+    const resp = await axios.get(`${host}${GA_OAUTH_ENDPOINT}`);
+    console.log('oauth', resp);
   };
   return (
     <CardContainerLayout>
@@ -65,14 +60,22 @@ export const PublisherConnectGA = (props) => {
             Make sure you’re tracking aquisitions of your sales via Google
             Analytics. Learn how here
           </CustomParagraph>
-          
-          <GlobalButton
+
+          {/* <GlobalButton
             buttonWidth={200}
             buttonColor={"#4C83D4"}
             buttonTextColor={"#ffff"}
             onClick={() =>
               history.push(`${PUBLISHER_DASHBOARD_ROUTE_WITH_PARAM}/sales`)
             }
+          >
+            Connect
+          </GlobalButton> */}
+          <GlobalButton
+            buttonWidth={200}
+            buttonColor={"#4C83D4"}
+            buttonTextColor={"#ffff"}
+            onClick={GAoauth}
           >
             Connect
           </GlobalButton>

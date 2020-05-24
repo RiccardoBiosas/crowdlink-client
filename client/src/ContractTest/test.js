@@ -1,44 +1,26 @@
-import React, { useEffect, useState } from "react";
-import {
-  Web3ReactProvider,
-  useWeb3React,
-  UnsupportedChainIdError,
-} from "@web3-react/core";
+import React, { useState } from "react";
 import Web3Provider, { useWeb3Context, Web3Consumer } from "web3-react";
-import Web3 from "web3";
 import { ethers } from "ethers";
-
-import {
-  AccountData,
-  ContractData,
-  ContractForm,
-} from "@drizzle/react-components";
 import CrowdlinkReferral from "../contracts/CrowdlinkReferral";
-
 import "@portis/web3";
 import { ConnectorsInstance } from "../connectors/connectorsInstance";
 
-//use context.active
-
-
 export const ContractTest = () => {
-  const [inp, setInp] = useState()
-  const [resp, setResp] = useState()
-  const [len, setLen] = useState()
-  const [website, setWebsite] = useState()
-  const [reward, setReward] = useState()
-  const [budget, setBudget] = useState()
-  const [balance, setBalance] = useState("")
-  const [ownerMappingBal, setOwnerMappingBal] = useState()
-  const [influencerMapBal, setInfluencerMapBal] = useState()
+  const [inp, setInp] = useState();
+  const [resp, setResp] = useState();
+  const [len, setLen] = useState();
+  const [website, setWebsite] = useState();
+  const [reward, setReward] = useState();
+  const [budget, setBudget] = useState();
+  const [balance, setBalance] = useState("");
+  const [ownerMappingBal, setOwnerMappingBal] = useState();
+  const [influencerMapBal, setInfluencerMapBal] = useState();
 
-
-
-  const { library, account, networkId, active, provider } = useWeb3Context(); //use context.active to check whether there's an active web3 provider
+  const { library, account, networkId, active, provider } = useWeb3Context(); // use context.active to check whether there's an active web3 provider
   console.log("current network id", networkId);
-  console.log('provider', provider)
-  console.log('library', library)
-  console.log('is ACTIVE?', active)
+  console.log("provider", provider);
+  console.log("library", library);
+  console.log("is ACTIVE?", active);
   const crowdlinkAddress = networkId
     ? CrowdlinkReferral.networks[networkId].address
     : null;
@@ -54,23 +36,27 @@ export const ContractTest = () => {
 
   console.log("account", account);
 
- 
-
   const openReferralCampaign = async () => {
     const contract = new ethers.Contract(
       crowdlinkAddress,
       CrowdlinkReferral.abi,
       library.getSigner()
-    ); //or implement a context.active higher order component and initialize a new contract only one time at the top of the component
+    ); // or implement a context.active higher order component and initialize a new contract only one time at the top of the component
     console.log("contract inside openreferralcampaign", contract);
     console.log("library", library.getSigner());
-    console.log('budget', budget, typeof budget)
-    console.log('reward', reward, typeof reward)
-    console.log('website', website, typeof website)
-    console.log(parseInt(budget, 10))
-    const bigNumberifyBudget = ethers.utils.bigNumberify(budget)
+    console.log("budget", budget, typeof budget);
+    console.log("reward", reward, typeof reward);
+    console.log("website", website, typeof website);
+    console.log(parseInt(budget, 10));
+    const bigNumberifyBudget = ethers.utils.bigNumberify(budget);
 
-    await contract.functions.openPayPerClickReferralCampaign(bigNumberifyBudget, parseInt(reward, 10), website, 'click', {value: bigNumberifyBudget});
+    await contract.functions.openPayPerClickReferralCampaign(
+      bigNumberifyBudget,
+      parseInt(reward, 10),
+      website,
+      "click",
+      { value: bigNumberifyBudget }
+    );
   };
 
   const checkOpenCampaigns = async () => {
@@ -79,13 +65,13 @@ export const ContractTest = () => {
       CrowdlinkReferral.abi,
       library.getSigner()
     );
-    let campaign_data = await contract.functions.lookUpCampaignReferral(
+    const campaign_data = await contract.functions.lookUpCampaignReferral(
       account,
       inp
     );
-    campaign_data[1] = campaign_data[1].toString()
-    campaign_data[2] = campaign_data[2].toString()
-    setResp(campaign_data)
+    campaign_data[1] = campaign_data[1].toString();
+    campaign_data[2] = campaign_data[2].toString();
+    setResp(campaign_data);
     console.log(campaign_data);
   };
 
@@ -98,8 +84,12 @@ export const ContractTest = () => {
     const campaign_data = await contract.functions.lookupCampaignReferralsCollectionLength(
       account
     );
-    const campaign_length = campaign_data ? campaign_data.toNumber() ? campaign_data.toNumber() : '0' : '0';
-    setLen(campaign_length)
+    const campaign_length = campaign_data
+      ? campaign_data.toNumber()
+        ? campaign_data.toNumber()
+        : "0"
+      : "0";
+    setLen(campaign_length);
     console.log("length", campaign_length);
   };
 
@@ -112,12 +102,11 @@ export const ContractTest = () => {
     const bal = await contract.functions.campaign_owner_account_balance(
       account
     );
-    const balance = ethers.utils.formatEther(bal)
+    const balance = ethers.utils.formatEther(bal);
 
-    console.log('mapping bal', bal)
-    console.log('mapping balance converted', balance)
-    setOwnerMappingBal(balance)
-    
+    console.log("mapping bal", bal);
+    console.log("mapping balance converted", balance);
+    setOwnerMappingBal(balance);
   };
 
   const checkCampaignInfluencerBal = async () => {
@@ -126,39 +115,34 @@ export const ContractTest = () => {
       CrowdlinkReferral.abi,
       library.getSigner()
     );
-    const bal = await contract.functions.influencer_account_balance(
-      account
-    );
-    const balance = ethers.utils.formatEther(bal)
+    const bal = await contract.functions.influencer_account_balance(account);
+    const balance = ethers.utils.formatEther(bal);
 
-    console.log('mapping influencer bal', bal)
-    console.log('mapping influencer balance converted', balance)
-    setInfluencerMapBal(balance)
-    
+    console.log("mapping influencer bal", bal);
+    console.log("mapping influencer balance converted", balance);
+    setInfluencerMapBal(balance);
   };
 
-  console.log('mapping bal ', ownerMappingBal)
+  console.log("mapping bal ", ownerMappingBal);
 
-  const addInfluencer = async() => {
+  const addInfluencer = async () => {
     const contract = new ethers.Contract(
       crowdlinkAddress,
       CrowdlinkReferral.abi,
       library.getSigner()
     );
     const resp = await contract.functions.addInfluencer(
-      'https://github.com/RiccardoBiosas/crowdlink-client',
-      'greatreferral',
-      '0x16dA4fa78A91cb8F51f157F693E69AE6841b5E2D'
+      "https://github.com/RiccardoBiosas/crowdlink-client",
+      "greatreferral",
+      "0x16dA4fa78A91cb8F51f157F693E69AE6841b5E2D"
     );
-    console.log(resp)
+    console.log(resp);
 
     // string memory _website, string memory _referral_link, address _owner
-
-  }
-
+  };
 
   return (
-    <div style={{marginLeft: '30px'}}>
+    <div style={{ marginLeft: "30px" }}>
       <div>
         <h2>web3 instance</h2>
         <ConnectorsInstance />
@@ -167,37 +151,63 @@ export const ContractTest = () => {
 
             </ContractForm> */}
       <h1>contract test</h1>
-          <p>smart contract address: {crowdlinkAddress}</p>
-          <p>my current accoutn address: {account}</p>
-          <p>current network id: {networkId}</p>
-          <div>
-            <button onClick={async() => {
-              const bal = await library.getBalance(account)
-              console.log(bal)
+      <p>
+        smart contract address:
+        {crowdlinkAddress}
+      </p>
+      <p>
+        my current accoutn address:
+        {account}
+      </p>
+      <p>
+        current network id:
+        {networkId}
+      </p>
+      <div>
+        <button
+          onClick={async () => {
+            const bal = await library.getBalance(account);
+            console.log(bal);
 
-              const balance = ethers.utils.formatEther(bal)
-              console.log('bal ', balance)
-              setBalance(balance)
-            } }>get balance</button>
-            <p>my current account balance: {balance} </p>
-          </div>
+            const balance = ethers.utils.formatEther(bal);
+            console.log("bal ", balance);
+            setBalance(balance);
+          }}
+        >
+          get balance
+        </button>
+        <p>
+          my current account balance:
+          {balance}
+{" "}
+        </p>
+      </div>
 
       <div>
         <h1>open referral campaign</h1>
         <div>
           <p>reward</p>
-        <input type='number' value={reward} onChange={(e) => setReward(e.target.value)} />
- 
+          <input
+            type="number"
+            value={reward}
+            onChange={(e) => setReward(e.target.value)}
+          />
         </div>
         <div>
           <p>budget</p>
-          <input type='number' value={budget} onChange={(e) => setBudget(e.target.value)} />
-
+          <input
+            type="number"
+            value={budget}
+            onChange={(e) => setBudget(e.target.value)}
+          />
         </div>
         <div>
           <p>website</p>
-          <input type='text' value={website} onChange={(e) => setWebsite(e.target.value)} />
-
+          <input
+            type="text"
+            value={website}
+            onChange={(e) => setWebsite(e.target.value)}
+          />
         </div>
         <button onClick={() => openReferralCampaign()}>
           open referral campaign
@@ -206,9 +216,16 @@ export const ContractTest = () => {
 
       <div>
         <h1>look up campaign campaign data</h1>
-        <input type='number' value={inp} onChange={(e) => setInp(e.target.value)} />
+        <input
+          type="number"
+          value={inp}
+          onChange={(e) => setInp(e.target.value)}
+        />
         <button onClick={() => checkOpenCampaigns()}>look up campaign</button>
-          {resp && resp.map(x => <p>{typeof x === 'string' || typeof x === 'number' ? x : 'null'}</p>)}
+        {resp &&
+          resp.map((x) => (
+            <p>{typeof x === "string" || typeof x === "number" ? x : "null"}</p>
+          ))}
       </div>
 
       <div>
@@ -216,20 +233,28 @@ export const ContractTest = () => {
         <button onClick={() => checkOpenCampaignsLength()}>
           look up campaign length
         </button>
-          <p>{len}</p>
+        <p>{len}</p>
       </div>
       <div>
         <button onClick={addInfluencer}>add influencer</button>
       </div>
       <div>
-        <button onClick={checkCampaignOwnerBal}>campaign owner mapping balance get</button>
-        <div>{ ownerMappingBal ? ownerMappingBal : 'null'} </div>
-
+        <button onClick={checkCampaignOwnerBal}>
+          campaign owner mapping balance get
+        </button>
+        <div>
+{ownerMappingBal ? ownerMappingBal : "null"}
+{' '}
+ </div>
       </div>
       <div>
-        <button onClick={checkCampaignInfluencerBal}>campaign owner mapping balance get</button>
-        <div>{ influencerMapBal ? influencerMapBal : 'null'} </div>
-
+        <button onClick={checkCampaignInfluencerBal}>
+          campaign owner mapping balance get
+        </button>
+        <div>
+{influencerMapBal ? influencerMapBal : "null"}
+{' '}
+ </div>
       </div>
     </div>
   );

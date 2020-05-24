@@ -1,8 +1,17 @@
-import styled from "styled-components";
-import React, {useState, useLayoutEffect, useRef} from 'react'
-import * as THREE from 'three'
-import BIRDS from 'vanta/dist/vanta.globe.min.js'
+import styled from 'styled-components';
+import React, { useState, useLayoutEffect, useRef } from 'react';
+import * as THREE from 'three';
+import GLOBE from 'vanta/dist/vanta.globe.min.js';
 
+export const CardContainerLayout = styled.div`
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: ${(props) =>
+    props.cardContainerBackgroundColor ? props.cardContainerBackgroundColor : '#23153C'};
+`;
 
 export const StyledCardContainerLayout = styled.div`
   height: 100vh;
@@ -10,36 +19,62 @@ export const StyledCardContainerLayout = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: ${props => props.cardContainerBackgroundColor};
 `;
 
-export const CardContainerLayout = (props) => {
-  const [vantaEffect, setVantaEffect] = useState(0)
-  const myRef = useRef(null)
+// export const HomepageCardContainerLayout = (props) => {
+//   // const [vantaEffect, setVantaEffect] = useState(0)
+//   // const myRef = useRef(null)
 
+//   // useLayoutEffect(() => {
+//   //   if(!vantaEffect) {
+//   //     setVantaEffect(GLOBE({
+//   //       el: myRef.current,
+//   //       THREE: THREE
+//   //     }))
+//   //   }
 
+//   //   return () => {
+//   //     if(vantaEffect) {
+//   //       // console.log('unmounting')
+//   //       vantaEffect.destroy()
+//   //     }
+//   //   }
+//   // }, [vantaEffect])
 
-  useLayoutEffect(() => {
-    if(!vantaEffect) {
-      setVantaEffect(BIRDS({
-        el: myRef.current,
-        THREE: THREE
-      }))
-    }
+//   return (
+//     <div>{props.children}</div>
+//     // <StyledCardContainerLayout ref={myRef}>
+//     //   {props.children}
+//     // </StyledCardContainerLayout>
+//   );
+// };
 
-    return () => {
-      if(vantaEffect) {
-        vantaEffect.destroy()
-      }
-    }
-  }, [vantaEffect])
+// export const HomepageCardContainerLayout = (props) => {
+//   const [vantaEffect, setVantaEffect] = useState(0)
+//   const myRef = useRef(null)
 
-  return(
-    <StyledCardContainerLayout ref={myRef}>
-      {props.children}
-    </StyledCardContainerLayout>
-  )
-}
+//   useLayoutEffect(() => {
+//     if(!vantaEffect) {
+//       setVantaEffect(GLOBE({
+//         el: myRef.current,
+//         THREE: THREE
+//       }))
+//     }
+
+//     return () => {
+//       if(vantaEffect) {
+//         // console.log('unmounting')
+//         vantaEffect.destroy()
+//       }
+//     }
+//   }, [vantaEffect])
+
+//   return(
+//     <StyledCardContainerLayout ref={myRef}>
+//       {props.children}
+//     </StyledCardContainerLayout>
+//   )
+// }
 
 export const CardLayout = styled.div`
   height: 60vh;
@@ -52,14 +87,14 @@ export const CardLayout = styled.div`
 export const ColumnContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: ${props => props.columnContainerWidth ? props.columnContainerWidth : '30vw'};
+  width: ${(props) => (props.columnContainerWidth ? props.columnContainerWidth : '30vw')};
   margin: ${(props) => props.columnContainerMargin};
   align-items: ${(props) =>
-    props.horizontalAlign === "center"
-      ? "center"
-      : props.horizontalAlign === "right"
-      ? "flex-end"
-      : "flex-start"};
+    props.horizontalAlign === 'center'
+      ? 'center'
+      : props.horizontalAlign === 'right'
+      ? 'flex-end'
+      : 'flex-start'};
 `;
 
 export const CustomH1 = styled.h1`
@@ -124,9 +159,7 @@ export const CardLayoutWithBorderSpaceAround = styled(CardLayout)`
   }
 `;
 
-export const ColumnContainerFilledHeight = styled(
-  ColumnContainer
-)`
+export const ColumnContainerFilledHeight = styled(ColumnContainer)`
   flex: 1;
   justify-content: space-around;
 `;
@@ -145,15 +178,13 @@ export const CardSubContainer = styled.div`
   margin: ${(props) => props.subContainerMargin};
   display: flex;
   flex-direction: column;
-  justify-content: ${props => props.justify ? props.justify : 'space-around'};
-  align-items: ${props => props.align ? props.align : 'center'};
+  justify-content: ${(props) => (props.justify ? props.justify : 'space-around')};
+  align-items: ${(props) => (props.align ? props.align : 'center')};
 `;
 
 export const CardLayoutWithHorizontalContainers = styled.div`
   display: flex;
   justify-content: space-around;
-  width: ${props => props.cardLayoutWidth};
-  height: ${props => props.cardLayoutHeight};
+  width: ${(props) => props.cardLayoutWidth};
+  height: ${(props) => props.cardLayoutHeight};
 `;
-
-

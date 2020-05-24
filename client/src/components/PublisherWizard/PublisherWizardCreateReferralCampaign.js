@@ -1,16 +1,8 @@
-import React, { useState, Fragment } from "react";
-import axios from "axios";
-import { Formik, Form, Field } from "formik";
-import { PublisherWizardDeposit } from "./PublisherWizardDeposit";
-import {
-  CampaignContainer,
-  CampaignCard,
+import React, { Fragment } from "react";import {
+ 
   CustomField,
-  CustomForm,
   CustomLabel,
-  CustomHTMLinput,
 } from "../shared/PublisherWizard/styles";
-import { COINGECKO_API } from "../../api-config";
 
 export const PublisherWizardCreateReferralCampaign = ({
   step,
