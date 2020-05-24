@@ -10,7 +10,7 @@ import {
   CardSubContainer,
 } from "../shared/GeneralCard";
 import { ReactComponent as Copy } from "../../assets/copy.svg";
-import { PUBLISHER_FEED_ROUTE } from "../../routes-config";
+import { MARKETER_FEED_ROUTE, MARKETER_WITHDRAW_ROUTE } from "../../routes-config";
 import { RowContainer } from "../shared/PublisherWizard/styles";
 import copy from "../../assets/clipboard-copy.png";
 import { BasicContainer } from "../shared/feed/styles";
@@ -28,10 +28,10 @@ export const MarketerWithdraw = ({ contractInstance, account }) => {
   };
 
   const checkBalance = async () => {
-    const resp = await contractInstance.functions.account.influencer_account_balance(
+    const resp = await contractInstance.functions.influencer_account_balance(
       account
     );
-    console.log("influencer balance", resp);
+    console.log("influencer balance", resp.data);
   };
 
   useEffect(() => {
@@ -47,14 +47,7 @@ export const MarketerWithdraw = ({ contractInstance, account }) => {
     document.body.removeChild(temporaryInput);
   };
 
-  const withdraw = async (website) => {
-    const receipt = await contractInstance.functions.withdrawFromCampaign(
-      website,
-      { gasLimit: 1200000 }
-    );
 
-    console.log(receipt);
-  };
 
   return (
     <CardContainerLayout>
@@ -65,7 +58,7 @@ export const MarketerWithdraw = ({ contractInstance, account }) => {
             buttonFontSize={20}
             buttonFontWeight={900}
             buttonColor={"#959090"}
-            onClick={() => history.push(PUBLISHER_FEED_ROUTE)}
+            onClick={() => history.push(MARKETER_FEED_ROUTE)}
           >
             x
           </ParagraphButton>
@@ -97,7 +90,7 @@ export const MarketerWithdraw = ({ contractInstance, account }) => {
               paragraphColor={"#696868"}
               paragraphMargin={"0 10px 0 0"}
             >
-              {account}
+              {crowdlinkAddress}
             </CustomParagraph>
 
             <ParagraphButton>

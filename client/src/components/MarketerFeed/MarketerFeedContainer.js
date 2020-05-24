@@ -24,15 +24,20 @@ import {
   CAMPAIGNS_ENDPOINT_CLICK_CAMPAIGN,
   CAMPAIGNS_CLICK_CREATE_LINK_ENDPOINT,
 } from "../../api-config";
+import { MARKETER_WITHDRAW_ROUTE } from "../../routes-config";
 import { useFetch } from "../../hooks/useFetch";
 // /api/click/campaigns/{id}/create_link/
 
-export const LogicCampaignContainer = ({ x, contractInstance, account, indx }) => {
+export const LogicCampaignContainer = ({
+  x,
+  contractInstance,
+  account,
+  indx,
+}) => {
   const [referralLink, setReferralLink] = useState();
   const [selectedCampaign, setSelectedCampaign] = useState();
 
   const history = useHistory();
-
 
   useEffect(() => {
     if (referralLink && selectedCampaign) {
@@ -123,7 +128,7 @@ export const LogicCampaignContainer = ({ x, contractInstance, account, indx }) =
             buttonColor={"#7838D5"}
             buttonFontSize={20}
             buttonFontWeight={600}
-            onClick={() => setReferralLink("crdly")}
+            onClick={() => history.push(MARKETER_WITHDRAW_ROUTE)}
           >
             Withdraw >
           </ParagraphButton>
@@ -171,7 +176,7 @@ export const LogicRowContainer = ({
   user_public_key,
   setReferralLinkCB,
   website_url,
-  indx
+  indx,
 }) => {
   const [isFetched, setIsFetched] = useState(true);
   const [fetchedReferralLink, setFetchedReferralLink] = useState();
@@ -179,16 +184,17 @@ export const LogicRowContainer = ({
     const resp = await axios.get(`${CAMPAIGNS_ENDPOINT_CLICK_CAMPAIGN}?user_public_key=${user_public_key}
     `);
     setFetchedReferralLink(resp.data);
-    console.log('CALLBACK REFERRAL LINK')
-    console.log(resp.data.results[indx])
-    if(resp.data.results[indx].links && resp.data.results[indx].links.length > 0) {
-      console.log('resp just links[0]', resp.data.results[indx].links)
-      console.log(resp.data.results[indx].links[0].url_code)
+    console.log("CALLBACK REFERRAL LINK");
+    console.log(resp.data.results[indx]);
+    if (
+      resp.data.results[indx].links &&
+      resp.data.results[indx].links.length > 0
+    ) {
+      console.log("resp just links[0]", resp.data.results[indx].links);
+      console.log(resp.data.results[indx].links[0].url_code);
 
       setReferralLinkCB(resp.data.results[indx].links[0].url_code);
-
     }
-
   }, [isFetched]);
 
   useEffect(() => {
@@ -207,16 +213,23 @@ export const LogicRowContainer = ({
   // console.log('## are they equal ', fetched_web===website_url)
 
   const copyToClipboard = () => {
-    if(fetchedReferralLink && fetchedReferralLink.results && fetchedReferralLink.results.length > 0) {
+    if (
+      fetchedReferralLink &&
+      fetchedReferralLink.results &&
+      fetchedReferralLink.results.length > 0
+    ) {
       const temporaryInput = document.createElement("input");
       document.body.appendChild(temporaryInput);
-      temporaryInput.setAttribute("value", fetchedReferralLink.results[indx].links.length > 0 ? `${host}/${fetchedReferralLink.results[indx].links[0].url_code}` : '');
+      temporaryInput.setAttribute(
+        "value",
+        fetchedReferralLink.results[indx].links.length > 0
+          ? `${host}/${fetchedReferralLink.results[indx].links[0].url_code}`
+          : ""
+      );
       temporaryInput.select();
       document.execCommand("copy");
       document.body.removeChild(temporaryInput);
-
     }
-   
   };
 
   if (campaignsAreFetched > 0) {
@@ -226,7 +239,12 @@ export const LogicRowContainer = ({
           paragraphColor={"#696868"}
           paragraphMargin={"0 10px 0 0"}
         >
-          {fetchedReferralLink && fetchedReferralLink.results[indx].links && fetchedReferralLink.results[indx].links.length > 0 && fetchedReferralLink.results[indx].url === website_url  ? `${host}/cl/${fetchedReferralLink.results[indx].links[0].url_code}` : "not generated"}
+          {fetchedReferralLink &&
+          fetchedReferralLink.results[indx].links &&
+          fetchedReferralLink.results[indx].links.length > 0 &&
+          fetchedReferralLink.results[indx].url === website_url
+            ? `${host}/cl/${fetchedReferralLink.results[indx].links[0].url_code}`
+            : "not generated"}
         </CustomParagraph>
 
         <ParagraphButton onClick={copyToClipboard}>
@@ -289,7 +307,7 @@ export const MarketerFeedContainer = ({ contractInstance, account }) => {
         campaignsList.results.map((x, i) => (
           <LogicCampaignContainer
             x={x}
-            indx={i}            
+            indx={i}
             contractInstance={contractInstance}
             account={account}
           />

@@ -19,6 +19,7 @@ import {
   PUBLISHER_DASHBOARD_ROUTE_WITH_PARAM,
   SIGN_UP_FALLBACK_ROUTE,
   PUBLISHER_WITHDRAW_ROUTE_WITH_PARAM,
+  MARKETER_WITHDRAW_ROUTE,
 } from "./routes-config";
 import { PublisherConnectGA } from "./components/PublisherConnectGA.js/PublisherConnectGA";
 import { ConnectorsInstance } from "./connectors/connectorsInstance";
@@ -31,6 +32,7 @@ import { WithContextActive } from "./hocs/WithContextActive";
 import { MarketerSignUp } from "./components/MarketerSignUp/MarketerSIgnUp";
 import { SignUpFallback } from "./components/SignUpFallback/SignUpFallback";
 import { Ptokens } from "./Ptokens";
+import { MarketerWithdraw } from "./components/MarketerWithdraw/MarketerWithdraw";
 
 const App = () => {
   console.log("test");
@@ -62,6 +64,13 @@ const App = () => {
           path={MARKETER_FEED_ROUTE}
           component={() => WithContextActive(MarketerFeedContainer)}
         />
+
+        <Route
+          exact
+          path={MARKETER_WITHDRAW_ROUTE}
+          component={() => WithContextActive(MarketerWithdraw)}
+        />
+
         <Route exact path="/test" component={ContractTest} />
         <Route exact path="/connection" component={ConnectorsInstance} />
         <Route
