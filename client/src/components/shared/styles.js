@@ -3,11 +3,11 @@ import styled from 'styled-components'
 export const GlobalButton = styled.button`
     width: ${props => props.buttonWidth}px;
     height: 48px;
-    border-radius: 8px;
+    border-radius: ${props => props.buttonRadius ? `${props.buttonRadius}` : '8px'};
     border-style: none;
     text-align: center;
     font-weight: 900;
-    font-size: 16px;
+    font-size: ${props => props.buttonFontWeight ? `${props.buttonFontWeight}` : '16px'};
     letter-spacing: 0;
     color: ${props => props.buttonTextColor};   
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;

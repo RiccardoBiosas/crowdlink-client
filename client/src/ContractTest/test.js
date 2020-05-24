@@ -29,6 +29,9 @@ export const ContractTest = () => {
   const [reward, setReward] = useState()
   const [budget, setBudget] = useState()
   const [balance, setBalance] = useState("")
+  const [ownerMappingBal, setOwnerMappingBal] = useState()
+  const [influencerMapBal, setInfluencerMapBal] = useState()
+
 
 
   const { library, account, networkId, active, provider } = useWeb3Context(); //use context.active to check whether there's an active web3 provider
@@ -100,6 +103,42 @@ export const ContractTest = () => {
     console.log("length", campaign_length);
   };
 
+  const checkCampaignOwnerBal = async () => {
+    const contract = new ethers.Contract(
+      crowdlinkAddress,
+      CrowdlinkReferral.abi,
+      library.getSigner()
+    );
+    const bal = await contract.functions.campaign_owner_account_balance(
+      account
+    );
+    const balance = ethers.utils.formatEther(bal)
+
+    console.log('mapping bal', bal)
+    console.log('mapping balance converted', balance)
+    setOwnerMappingBal(balance)
+    
+  };
+
+  const checkCampaignInfluencerBal = async () => {
+    const contract = new ethers.Contract(
+      crowdlinkAddress,
+      CrowdlinkReferral.abi,
+      library.getSigner()
+    );
+    const bal = await contract.functions.influencer_account_balance(
+      account
+    );
+    const balance = ethers.utils.formatEther(bal)
+
+    console.log('mapping influencer bal', bal)
+    console.log('mapping influencer balance converted', balance)
+    setInfluencerMapBal(balance)
+    
+  };
+
+  console.log('mapping bal ', ownerMappingBal)
+
   const addInfluencer = async() => {
     const contract = new ethers.Contract(
       crowdlinkAddress,
@@ -107,8 +146,8 @@ export const ContractTest = () => {
       library.getSigner()
     );
     const resp = await contract.functions.addInfluencer(
-      'thegreatcrowdlink',
-      'crowdlinkreferral',
+      'https://github.com/RiccardoBiosas/crowdlink-client',
+      'greatreferral',
       '0x16dA4fa78A91cb8F51f157F693E69AE6841b5E2D'
     );
     console.log(resp)
@@ -181,6 +220,16 @@ export const ContractTest = () => {
       </div>
       <div>
         <button onClick={addInfluencer}>add influencer</button>
+      </div>
+      <div>
+        <button onClick={checkCampaignOwnerBal}>campaign owner mapping balance get</button>
+        <div>{ ownerMappingBal ? ownerMappingBal : 'null'} </div>
+
+      </div>
+      <div>
+        <button onClick={checkCampaignInfluencerBal}>campaign owner mapping balance get</button>
+        <div>{ influencerMapBal ? influencerMapBal : 'null'} </div>
+
       </div>
     </div>
   );

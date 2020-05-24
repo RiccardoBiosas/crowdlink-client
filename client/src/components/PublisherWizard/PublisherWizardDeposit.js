@@ -1,4 +1,5 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, useEffect, Fragment } from "react";
+import { useWeb3Context } from "web3-react";
 
 import {
   DepositButtonContainer,
@@ -8,9 +9,28 @@ import {
 import { GlobalButton } from "../shared/styles";
 import { ReactComponent as Copy } from "../../assets/copy.svg";
 import { CustomParagraph, ParagraphButton } from "../shared/GeneralCard";
+import { ethers } from "ethers";
 
 export const PublisherWizardDeposit = ({ step, values, address }) => {
   console.log("values in publisher wizard deposit", values);
+  const context = useWeb3Context();
+  const [resolvedAddress, setResolvedAddress] = useState();
+
+  console.log("provider in the wizard deposit", context);
+
+  const resolveENS = async () => {
+    const provider = ethers.getDefaultProvider("ropsten");
+    // const provider = await new ethers.providers.InfuraProvider('process.env.REACT_APP_INFURA_ROPSTEN' )
+
+    console.log("deposit provider", provider);
+    const resolved = await provider.resolveName("crowdlink.eth");
+    console.log(resolved);
+    setResolvedAddress(resolved);
+  };
+
+  useEffect(() => {
+    resolveENS();
+  }, []);
 
   const copyToClipboard = (txt) => {
     const temporaryInput = document.createElement("input");
@@ -27,7 +47,7 @@ export const PublisherWizardDeposit = ({ step, values, address }) => {
       <Fragment>
         <DepositInfoContainer>
           <CustomParagraph paragraphColor={"#696868"} paragraphFontSize={18}>
-            Send ETH to the smart contract address:
+            Your ethereum will be deposited here:
           </CustomParagraph>
           <RowContainer>
             <CustomParagraph
@@ -35,8 +55,10 @@ export const PublisherWizardDeposit = ({ step, values, address }) => {
               paragraphPadding={"10px"}
               paragraphColor={"#696868"}
               paragraphMargin={"0 10px 0 0"}
+              paragraphWidth={"240px"}
+              style={{ textAlign: "center" }}
             >
-              {address}
+              {"crowdlink.eth"}
             </CustomParagraph>
             {/* currently hardcoded address. will be dynamically imported from truffle deployments */}
             <ParagraphButton onClick={() => copyToClipboard(address)}>

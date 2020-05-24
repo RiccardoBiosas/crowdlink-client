@@ -15,6 +15,7 @@ import {
   CardLayoutWithHorizontalContainers,
   CardSubContainer,
 } from "./shared/GeneralCard";
+import {GlobalButton} from './shared/styles'
 import { ReactComponent as CrowdLinkHomepagePublisher } from "../assets/crowdlink-homepage-creator.svg";
 
 export const PublisherHomepage = () => {
@@ -25,13 +26,13 @@ export const PublisherHomepage = () => {
       <CardLayoutWithHorizontalContainers cardLayoutHeight={'60vh'} cardLayoutWidth={"90vw"}>
         <CardSubContainer justify={"space-between"} align={"flex-start"}>
           <div>
-            <CustomH1 h1FontSize={40} h1LineHeight={"54px"}>
+            <CustomH1 h1FontSize={40} h1LineHeight={"54px"} h1Color={'#F8F8F8'}>
               Create a referral campaign <br /> within minutes
             </CustomH1>
             <CustomParagraph
               paragraphFontSize={26}
               paragraphMargin={"32px 0 0 0"}
-              paragraphColor={"#959090"}
+              paragraphColor={"#E2E2E2"}
               paragraphLineHeight={"34px"}
             >
               set a commission per sale from links <br /> and let the rest be
@@ -53,19 +54,22 @@ export const PublisherHomepage = () => {
             </ParagraphButton>
           </div>
           <ColumnContainer>
-            <ParagraphButton
-              buttonColor={"#4C83D4"}
+            <GlobalButton
+              buttonRadius={'50px'}
+              buttonTextColor={"#4C83D4"}
               buttonFontWeight={900}
               buttonFontSize={26}
+              buttonColor={'#F8F8F8'}
+              buttonWidth={'220'}
               onClick={() => history.push(PUBLISHER_WORKFLOW_ROUTE)}
             >
               Get Started
-            </ParagraphButton>
+            </GlobalButton>
 
             <ParagraphButton
-              buttonColor={"#959090"}
-              paragraphFontSize={24}
-              buttonMargin={"10px 0 0 0"}
+              buttonColor={"#F8F8F8"}
+              paragraphFontSize={26}
+              buttonMargin={"10px 0 0 6px"}
               onClick={() => history.push("/marketer")}
             >
               I am a marketer >
@@ -74,7 +78,7 @@ export const PublisherHomepage = () => {
         </CardSubContainer>
 
         <div>
-          <CrowdLinkHomepagePublisher />
+          {/* <CrowdLinkHomepagePublisher /> */}
         </div>
       </CardLayoutWithHorizontalContainers>
     </CardContainerLayout>
