@@ -1,9 +1,9 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Web3Consumer } from 'web3-react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { SignUpCard } from '../shared/PublisherWizard/styles';
-import { PortisInstance } from '../../portis/PortisInstance';
-import { GlobalButton } from '../shared/styles';
+import PortisInstance from '../../portis/PortisInstance';
+import GlobalButton from '../shared/styles';
 import {
   CustomParagraph,
   CardContainerLayout,
@@ -22,7 +22,7 @@ import {
 import { REWARD_PER_SALE_WORKFLOW } from '../PublisherWorkflow/PublisherWorkflow';
 import ArrowDown from '../../assets/arrow-down.png';
 
-export const PublisherSignUp = () => {
+const PublisherSignUp = () => {
   // const context = useWeb3Context();
   const history = useHistory();
   const location = useLocation();
@@ -64,8 +64,7 @@ export const PublisherSignUp = () => {
                     paragraphFontWeight={600}
                   >
                     your web3 connector:
-{' '}
-{connectorName}
+                    {connectorName}
                   </CustomParagraph>
                 </div>
                 <div>
@@ -75,8 +74,7 @@ export const PublisherSignUp = () => {
                     paragraphFontWeight={600}
                   >
                     your public key:
-{' '}
-{account}
+                    {account}
                   </CustomParagraph>
                 </div>
                 <div>
@@ -86,8 +84,7 @@ export const PublisherSignUp = () => {
                     paragraphFontWeight={600}
                   >
                     the network id:
-{' '}
-{networkId}
+                    {networkId}
                   </CustomParagraph>
                 </div>
                 <GlobalButton
@@ -114,7 +111,7 @@ export const PublisherSignUp = () => {
                   </CustomParagraph>
                 </div>
                 <div>
-                  <img src={ArrowDown} />
+                  <img src={ArrowDown} alt="scroll down" />
                 </div>
                 {workflow === REWARD_PER_SALE_WORKFLOW ? (
                   <>
@@ -128,7 +125,7 @@ export const PublisherSignUp = () => {
                       </CustomParagraph>
                     </div>
                     <div>
-                      <img src={ArrowDown} />
+                      <img src={ArrowDown} alt="scroll down" />
                     </div>
                     <div>
                       <CustomParagraph
@@ -137,11 +134,10 @@ export const PublisherSignUp = () => {
                         paragraphFontWeight={600}
                       >
                         Place URL and % of commission per sale
-{' '}
                       </CustomParagraph>
                     </div>
                     <div>
-                      <img src={ArrowDown} />
+                      <img src={ArrowDown} alt="scroll down" />
                     </div>
                   </>
                 ) : (
@@ -156,7 +152,7 @@ export const PublisherSignUp = () => {
                       </CustomParagraph>
                     </div>
                     <div>
-                      <img src={ArrowDown} />
+                      <img src={ArrowDown} alt="scroll down" />
                     </div>
                   </>
                 )}
@@ -176,3 +172,5 @@ export const PublisherSignUp = () => {
     </CardContainerLayout>
   );
 };
+
+export default PublisherSignUp;

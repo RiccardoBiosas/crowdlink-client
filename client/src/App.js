@@ -2,11 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { ethers } from 'ethers';
 import { useWeb3Context } from 'web3-react';
-import MarketerFeedContainer from './components/MarketerFeed/containers/MarketerFeedContainer';
-import { ContractTest } from './ContractTest/test';
-import { PublisherHomepage } from './components/PublisherHomepage';
-import { MarketerHomepage } from './components/MarketerHomepage';
-import { PublisherSignUp } from './components/PublisherSignUp/PublisherSignUp';
 import {
   PUBLISHER_SIGN_UP_ROUTE,
   PUBLISHER_WORKFLOW_ROUTE,
@@ -19,52 +14,39 @@ import {
   PUBLISHER_WITHDRAW_ROUTE_WITH_PARAM,
   MARKETER_WITHDRAW_ROUTE,
 } from './routes-config';
-import { PublisherConnectGA } from './components/PublisherConnectGA.js/PublisherConnectGA';
-import { ConnectorsInstance } from './connectors/connectorsInstance';
-import { PublisherWorkflow } from './components/PublisherWorkflow/PublisherWorkflow';
+import PublisherHomepage from './components/PublisherHomepage';
+import MarketerHomepage from './components/MarketerHomepage';
+import PublisherSignUp from './components/PublisherSignUp/PublisherSignUp';
+import PublisherConnectGA from './components/PublisherConnectGA.js/PublisherConnectGA';
+import ConnectorsInstance from './connectors/connectorsInstance';
+import PublisherWorkflow from './components/PublisherWorkflow/PublisherWorkflow';
 import PublisherWizardContainer from './components/PublisherWizard/PublisherWizardContainer';
-import { PublisherFeedContainer } from './components/PublisherFeed/PublisherFeedContainer';
-import { PublisherCampaignWithdraw } from './components/PublisherWithdraw/PublisherCampaignWithdraw';
-import { WithContextActive } from './hocs/WithContextActive';
-import { MarketerSignUp } from './components/MarketerSignUp/MarketerSIgnUp';
-import { SignUpFallback } from './components/SignUpFallback/SignUpFallback';
-import { Ptokens } from './Ptokens';
-import { MarketerWithdraw } from './components/MarketerWithdraw/MarketerWithdraw';
+import PublisherFeedContainer from './components/PublisherFeed/PublisherFeedContainer';
+import PublisherCampaignWithdraw from './components/PublisherWithdraw/PublisherCampaignWithdraw';
+import WithContextActive from './hocs/WithContextActive';
+import MarketerSignUp from './components/MarketerSignUp/MarketerSignUp';
+import SignUpFallback from './components/SignUpFallback/SignUpFallback';
+import MarketerFeedListContainer from './components/MarketerFeed/containers/MarketerFeedListContainer';
+import MarketerWithdraw from './components/MarketerWithdraw/MarketerWithdraw';
+
+// move to constant.js
+const networks = {
+  1: 'mainnet',
+  3: 'ropsten',
+};
 
 const Navbar = () => {
-  const { active, account, networkId, library } = useWeb3Context();
+  const { active, account, networkId } = useWeb3Context();
   const [balance, setBalance] = useState();
-  const [receipt, setReceipt] = useState();
-  // const crowdlinkAddress = networkId
-  //   ? CrowdlinkReferral.networks[networkId].address
-  //   : null;
-  // const contract = crowdlinkAddress ? new ethers.Contract(
-  //   crowdlinkAddress,
-  //   CrowdlinkReferral.abi,
-  //   library.getSigner()
-  // ) : null;
 
   const getBalance = async () => {
-    const provider = ethers.getDefaultProvider('ropsten');
+    const provider = ethers.getDefaultProvider(networkId);
     const balance = await provider.getBalance(account);
     // console.log("balance", balance);
     const balanceToEth = ethers.utils.formatEther(balance);
     // console.log("balance to int", balanceToEth);
     setBalance(parseFloat(balanceToEth).toFixed(4));
   };
-
-  // const eventListener = async() => {
-  //   contract.on('NewPayPerClickCampaignOpen', (date,
-  //     website,
-  //     owner,
-  //     budget,
-  //     reward,
-  //     campaignType) => {
-  //       console.log('website event', website)
-  //       console.log('owner ', owner)
-  //     })
-
-  // }
 
   useEffect(() => {
     if (active) {
@@ -74,8 +56,52 @@ const Navbar = () => {
   });
 
   return (
-    <div style={{ backgroundColor: '#23153C', height: '10vh' }}>
-      <h1 style={{ margin: '0' }}>{balance || 'not connected'}</h1>
+    <div
+      style={{
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'flex-end',
+        backgroundColor: '#23153C',
+      }}
+    >
+      <div
+        style={{
+          width: '40%',
+          height: '10vh',
+          display: 'flex',
+          justifyContent: 'space-around',
+          alignItems: 'center',
+        }}
+      >
+        <p style={{ margin: '0', color: '#FFFFFF', fontSize: '16px', fontWeight: '900' }}>
+          {balance || 'not connected'}
+        </p>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div
+            style={{
+              backgroundColor: '#F3F3F3',
+              borderRadius: '5px',
+              width: '140px',
+              fontSize: '16px',
+              height: '40px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <p style={{ color: '#2A4365' }}>{active ? networks[networkId] : 'not connected'}</p>
+          </div>
+          <div
+            style={{
+              marginLeft: '10px',
+              borderRadius: '50%',
+              backgroundColor: active ? 'green' : 'grey',
+              width: '20px',
+              height: '20px',
+            }}
+          />
+        </div>
+      </div>
     </div>
   );
 };
@@ -88,8 +114,6 @@ const App = () => {
       <Route exact path="/marketer" component={MarketerHomepage} />
       <Route exact path={PUBLISHER_SIGN_UP_ROUTE} component={PublisherSignUp} />
 
-      <Route exact path="/ptokens" component={Ptokens} />
-
       <Route exact path={SIGN_UP_FALLBACK_ROUTE} component={SignUpFallback} />
 
       <Route
@@ -101,7 +125,7 @@ const App = () => {
       <Route
         exact
         path={MARKETER_FEED_ROUTE}
-        component={() => WithContextActive(MarketerFeedContainer)}
+        component={() => WithContextActive(MarketerFeedListContainer)}
       />
 
       <Route
@@ -110,7 +134,6 @@ const App = () => {
         component={() => WithContextActive(MarketerWithdraw)}
       />
 
-      <Route exact path="/contract/test" component={ContractTest} />
       <Route exact path="/connection" component={ConnectorsInstance} />
       <Route
         exact

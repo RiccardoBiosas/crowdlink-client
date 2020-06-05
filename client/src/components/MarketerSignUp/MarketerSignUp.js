@@ -2,7 +2,7 @@ import React from 'react';
 import { Web3Consumer } from 'web3-react';
 import { useHistory, Redirect } from 'react-router-dom';
 import { SignUpCard } from '../shared/PublisherWizard/styles';
-import { PortisInstance } from '../../portis/PortisInstance';
+import PortisInstance from '../../portis/PortisInstance';
 import {
   CustomParagraph,
   CardContainerLayout,
@@ -12,7 +12,7 @@ import {
 import { MARKETER_FEED_ROUTE } from '../../routes-config';
 import ArrowDown from '../../assets/arrow-down.png';
 
-export const MarketerSignUp = () => {
+const MarketerSignUp = () => {
   const history = useHistory();
 
   return (
@@ -46,7 +46,7 @@ export const MarketerSignUp = () => {
                   </CustomParagraph>
                 </div>
                 <div>
-                  <img src={ArrowDown} />
+                  <img src={ArrowDown} alt="scroll down" />
                 </div>
                 <div>
                   <CustomParagraph
@@ -58,7 +58,7 @@ export const MarketerSignUp = () => {
                   </CustomParagraph>
                 </div>
                 <div>
-                  <img src={ArrowDown} />
+                  <img src={ArrowDown} alt="scroll down" />
                 </div>
                 <div>
                   <CustomParagraph
@@ -67,11 +67,10 @@ export const MarketerSignUp = () => {
                     paragraphFontWeight={600}
                   >
                     Referral links connected instantly to your account
-{' '}
                   </CustomParagraph>
                 </div>
                 <div>
-                  <img src={ArrowDown} />
+                  <img src={ArrowDown} alt="scroll down" />
                 </div>
 
                 <PortisInstance />
@@ -83,3 +82,5 @@ export const MarketerSignUp = () => {
     </CardContainerLayout>
   );
 };
+
+export default MarketerSignUp;

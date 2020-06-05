@@ -1,20 +1,35 @@
-import React, { useState, useEffect } from 'react';
-import { ParagraphButton, CustomParagraph } from '../../shared/GeneralCard';
-import { CampaignContainer, CampaignContainerComponent } from '../../shared/feed/styles';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
-import { LogicParagraphButtonContainer, MarketerCampaign } from '../MarketerFeedContainer';
+import axios from 'axios';
+import { ParagraphButton } from '../../shared/GeneralCard';
+import { CampaignContainer, CampaignContainerComponent } from '../../shared/feed/styles';
+import MarketerCampaign from '../screen/MarketerCampaign';
+import MarketerCampaignUrl from '../screen/MarketerCampaignUrl';
 import { MARKETER_WITHDRAW_ROUTE } from '../../../routes-config';
-import host, { CAMPAIGNS_CLICK_CREATE_LINK_ENDPOINT } from '../../../api-config';
-import axios from 'axios'
+import {
+  CAMPAIGNS_CLICK_CREATE_LINK_ENDPOINT,
+  CAMPAIGNS_ENDPOINT_CLICK_CAMPAIGN,
+} from '../../../api-config';
 
 const MarketerCampaignContainer = ({ x, contractInstance, account, indx }) => {
-  console.log('marketer campaign contianer', x);
   const [referralLink, setReferralLink] = useState();
   const [selectedCampaign, setSelectedCampaign] = useState();
 
   const history = useHistory();
 
+  const fetchReferralLink = useCallback(async () => {
+    const resp = await axios.get(`${CAMPAIGNS_ENDPOINT_CLICK_CAMPAIGN}?user_public_key=${account}
+      `);
+    console.log('fetchreferrallink resp', resp);
+    if (resp.data) {
+      setReferralLink(
+        resp.data.results[indx].links[0] ? resp.data.results[indx].links[0].url_code : null,
+      );
+    }
+  }, [referralLink]);
+
   useEffect(() => {
+    fetchReferralLink();
     if (referralLink && selectedCampaign) {
       addInfluencer();
     }
@@ -25,10 +40,6 @@ const MarketerCampaignContainer = ({ x, contractInstance, account, indx }) => {
   };
 
   const handleClick = async () => {
-    // const resp = await axios.get(
-    //   `${CAMPAIGNS_ENDPOINT_CLICK_CAMPAIGN}${id}${CAMPAIGNS_CLICK_CREATE_LINK_ENDPOINT}`
-    // );
-    console.log('x.self_url', x.self_url)
     const resp = await axios.post(`${x.self_url}${CAMPAIGNS_CLICK_CREATE_LINK_ENDPOINT}`, {
       user_public_key: account,
     });
@@ -36,32 +47,41 @@ const MarketerCampaignContainer = ({ x, contractInstance, account, indx }) => {
 
     setReferralLink(resp.data.url_code);
   };
-  return (
-    <CampaignContainer containerMargin="0 0 50px 0">
-      <MarketerCampaign x={x} referralLink={referralLink} containerMargin="0 0 0 16px" componentFlex={3} />
 
-      <CampaignContainerComponent componentFlex={1}>
-        {!referralLink ? (
-          <ParagraphButton
-            buttonColor="#4C83D4"
-            buttonFontSize={20}
-            buttonFontWeight={600}
-            onClick={handleClick}
-          >
-            Create Link +
-          </ParagraphButton>
-        ) : (
-          <ParagraphButton
-            buttonColor={'#7838D5'}
-            buttonFontSize={20}
-            buttonFontWeight={600}
-            onClick={() => history.push(MARKETER_WITHDRAW_ROUTE)}
-          >
-            Withdraw >
-          </ParagraphButton>
-        )}
-      </CampaignContainerComponent>
-    </CampaignContainer>
+  return (
+    <div>
+      <MarketerCampaignUrl x={x} />
+      <CampaignContainer containerMargin="0 0 50px 0">
+        <MarketerCampaign
+          x={x}
+          referralLink={referralLink}
+          containerMargin="0 0 0 16px"
+          componentFlex={3}
+        />
+
+        <CampaignContainerComponent componentFlex={1}>
+          {!referralLink ? (
+            <ParagraphButton
+              buttonColor="#4C83D4"
+              buttonFontSize={20}
+              buttonFontWeight={600}
+              onClick={handleClick}
+            >
+              Create Link +
+            </ParagraphButton>
+          ) : (
+            <ParagraphButton
+              buttonColor="#7838D5"
+              buttonFontSize={20}
+              buttonFontWeight={600}
+              onClick={() => history.push(MARKETER_WITHDRAW_ROUTE)}
+            >
+              Created -
+            </ParagraphButton>
+          )}
+        </CampaignContainerComponent>
+      </CampaignContainer>
+    </div>
   );
 };
 

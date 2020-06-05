@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import React, { useState, useLayoutEffect, useRef } from 'react';
-import * as THREE from 'three';
-import GLOBE from 'vanta/dist/vanta.globe.min.js';
+// import React, { useState, useLayoutEffect, useRef } from 'react';
+// import * as THREE from 'three';
+// import GLOBE from 'vanta/dist/vanta.globe.min.js';
 
 export const CardContainerLayout = styled.div`
   height: 90vh;
@@ -138,6 +138,7 @@ export const CustomParagraph = styled.p`
   line-height ${(props) => `${props.paragraphLineHeight}`};
   border: ${(props) => `${props.paragraphBorder}`};
   padding: ${(props) => props.paragraphPadding};
+  text-decoration-line: ${(props) => props.paragraphTextDecoration}
 
 `;
 

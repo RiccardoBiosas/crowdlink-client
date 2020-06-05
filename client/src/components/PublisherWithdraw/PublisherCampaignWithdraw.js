@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { ethers } from "ethers";
-import { useHistory, useLocation } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { ethers } from 'ethers';
+import { useHistory, useLocation } from 'react-router-dom';
 import {
   CardContainerLayout,
   CardLayoutWithBorder,
@@ -9,32 +9,30 @@ import {
   CustomParagraph,
   ParagraphButton,
   CardSubContainer,
-} from "../shared/GeneralCard";
-import { PUBLISHER_FEED_ROUTE } from "../../routes-config";
-import { RowContainer } from "../shared/PublisherWizard/styles";
-import copy from "../../assets/clipboard-copy.png";
-import { BasicContainer } from "../shared/feed/styles";
+} from '../shared/GeneralCard';
+import { PUBLISHER_FEED_ROUTE } from '../../routes-config';
+import { RowContainer } from '../shared/PublisherWizard/styles';
+import copy from '../../assets/clipboard-copy.png';
+import { BasicContainer } from '../shared/feed/styles';
 
-export const PublisherCampaignWithdraw = ({ contractInstance, account }) => {
+const PublisherCampaignWithdraw = ({ contractInstance, account }) => {
   const history = useHistory();
   const [balance, setBalance] = useState();
   const location = useLocation();
 
   const copyToClipboard = (txt) => {
-    const temporaryInput = document.createElement("input");
+    const temporaryInput = document.createElement('input');
     document.body.appendChild(temporaryInput);
-    temporaryInput.setAttribute("value", txt);
+    temporaryInput.setAttribute('value', txt);
     temporaryInput.select();
-    document.execCommand("copy");
+    document.execCommand('copy');
     document.body.removeChild(temporaryInput);
   };
 
   const checkCampaignOwnerTotalBalance = async () => {
-    const bal = await contractInstance.functions.campaign_owner_account_balance(
-      account
-    );
-    const converted_bal = ethers.utils.formatEther(bal);
-    setBalance(converted_bal);
+    const bal = await contractInstance.functions.campaign_owner_account_balance(account);
+    const convertedBal = ethers.utils.formatEther(bal);
+    setBalance(convertedBal);
   };
 
   useEffect(() => {
@@ -42,79 +40,77 @@ export const PublisherCampaignWithdraw = ({ contractInstance, account }) => {
   });
 
   const withdraw = async () => {
-    const receipt = await contractInstance.functions.withdrawFromCampaign(
-      location.url,
-      { gasLimit: 1200000 }
-    );
+    const receipt = await contractInstance.functions.withdrawFromCampaign(location.url, {
+      gasLimit: 1200000,
+    });
   };
 
   return (
     <CardContainerLayout>
       <CardLayoutWithBorder>
-        <CloseButtonContainer closeButtonContainerHeight={"6%"}>
+        <CloseButtonContainer closeButtonContainerHeight="6%">
           <ParagraphButton
-            buttonMargin={"6px 12px 0 0"}
+            buttonMargin="6px 12px 0 0"
             buttonFontSize={20}
             buttonFontWeight={900}
-            buttonColor={"#959090"}
+            buttonColor="#959090"
             onClick={() => history.push(PUBLISHER_FEED_ROUTE)}
           >
             x
           </ParagraphButton>
         </CloseButtonContainer>
-        <CardSubContainer subContainerHeight={"100%"}>
-          <CustomH1 h1Color={"#444444"} h1FontWeight={500}>
+        <CardSubContainer subContainerHeight="100%">
+          <CustomH1 h1Color="#444444" h1FontWeight={500}>
             Are you sure?
           </CustomH1>
           <CustomParagraph
-            paragraphColor={"#696868"}
+            paragraphColor="#696868"
             paragraphFontSize={20}
-            paragraphMargin={"0 0 8px 0"}
+            paragraphMargin="0 0 8px 0"
           >
             Withdrawing will end the campaign.
           </CustomParagraph>
-          <BasicContainer containerWidth={"100%"}>
-            <CustomParagraph paragraphColor={"#696868"} paragraphFontSize={20}>
+          <BasicContainer containerWidth="100%">
+            <CustomParagraph paragraphColor="#696868" paragraphFontSize={20}>
               Money will be sent to:
             </CustomParagraph>
           </BasicContainer>
 
-          <RowContainer containerWidth={"100%"}>
-            <CustomParagraph
-              paragraphColor={"#696868"}
-              paragraphMargin={"0 10px 0 0"}
-            >
+          <RowContainer containerWidth="100%">
+            <CustomParagraph paragraphColor="#696868" paragraphMargin="0 10px 0 0">
               {account}
             </CustomParagraph>
 
             <ParagraphButton>
-              <img src={copy} onClick={() => copyToClipboard(account)} />
+              <img src={copy} alt="copy to clipboard" onClick={() => copyToClipboard(account)} />
             </ParagraphButton>
           </RowContainer>
 
-          <RowContainer containerWidth={"100%"}>
-            <CustomParagraph paragraphColor={"#696868"} paragraphFontSize={20}>
+          <RowContainer containerWidth="100%">
+            <CustomParagraph paragraphColor="#696868" paragraphFontSize={20}>
               Total amount:
             </CustomParagraph>
             <CustomParagraph
-              paragraphColor={"#696868"}
+              paragraphColor="#696868"
               paragraphFontSize={20}
               paragraphFontWeight={600}
             >
-              {balance ? balance : ""} eth
+              {balance ? `${balance} eth` : ''}
             </CustomParagraph>
           </RowContainer>
 
           <ParagraphButton
-            buttonColor={"#7838D5"}
+            buttonColor="#7838D5"
             buttonFontSize={20}
             buttonFontWeight={600}
             onClick={withdraw}
           >
-            withdraw >
+            {'withdraw >'}
           </ParagraphButton>
         </CardSubContainer>
       </CardLayoutWithBorder>
     </CardContainerLayout>
   );
 };
+
+export default PublisherCampaignWithdraw;

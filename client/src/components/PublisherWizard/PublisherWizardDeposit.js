@@ -7,7 +7,7 @@ import {
   DepositInfoContainer,
   RowContainer,
 } from '../shared/PublisherWizard/styles';
-import { GlobalButton } from '../shared/styles';
+import GlobalButton from '../shared/styles';
 import { ReactComponent as Copy } from '../../assets/copy.svg';
 import { CustomParagraph, ParagraphButton } from '../shared/GeneralCard';
 import { ReactComponent as PortisLogo } from '../../assets/portis-logo.svg';
@@ -52,23 +52,27 @@ const PublisherWizardDeposit = ({ step, values, address }) => {
           not charge the referral creator.
         </CustomParagraph>
         <RowContainer>
+          <CustomParagraph paragraphColor="#959090" style={{ flex: '2' }}>
+            Contract:
+          </CustomParagraph>
           <CustomParagraph
             paragraphBorder="0.6px solid #206DFF"
             paragraphPadding="10px"
             paragraphColor="#696868"
             paragraphMargin="0 10px 0 0"
-            paragraphWidth="240px"
-            style={{ textAlign: 'center' }}
+            style={{ textAlign: 'center', flex: '4' }}
           >
             crowdlink.eth
           </CustomParagraph>
 
-          <ParagraphButton onClick={() => copyToClipboard(address)}>
+          <ParagraphButton style={{ flex: '1' }} onClick={() => copyToClipboard(address)}>
             <Copy />
           </ParagraphButton>
         </RowContainer>
-        <PortisLogo />
       </DepositInfoContainer>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <PortisLogo />
+      </div>
 
       <DepositButtonContainer>
         <GlobalButton type="submit" buttonWidth={200} buttonTextColor="white" buttonColor="#7838D5">

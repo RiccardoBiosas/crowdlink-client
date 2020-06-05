@@ -1,11 +1,16 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { CAMPAIGNS_ENDPOINT_CLICK_CAMPAIGN } from '../../../api-config';
-import { CampaignContainerLayout } from '../../shared/feed/styles';
+import { CampaignContainerLayout, ToTheLeftFlexContainer } from '../../shared/feed/styles';
 import MarketerCampaignContainer from './MarketerCampaignContainer';
+import { MARKETER_WITHDRAW_ROUTE } from '../../../routes-config';
+import GlobalButton from '../../shared/styles';
 
-const MarketerFeedContainer = ({ contractInstance, account }) => {
+const MarketerFeedListContainer = ({ contractInstance, account }) => {
   const [resp, setResp] = useState();
+
+  const history = useHistory();
 
   const fetchData = async () => {
     const response = await axios.get(CAMPAIGNS_ENDPOINT_CLICK_CAMPAIGN);
@@ -17,10 +22,23 @@ const MarketerFeedContainer = ({ contractInstance, account }) => {
   }, []);
 
   if (!resp || !resp.data) {
-    return <h1>waitng a</h1>;
+    return <h1>waiting</h1>;
   }
   return (
     <CampaignContainerLayout>
+      <ToTheLeftFlexContainer style={{ marginBottom: '40px' }}>
+        <GlobalButton
+          buttonRadius="50px"
+          buttonTextColor="#4C83D4"
+          buttonFontWeight={900}
+          buttonFontSize={26}
+          buttonColor="#F8F8F8"
+          buttonWidth="220"
+          onClick={() => history.push(MARKETER_WITHDRAW_ROUTE)}
+        >
+          {'Withdraw >'}
+        </GlobalButton>
+      </ToTheLeftFlexContainer>
       {resp &&
         resp.data.results.length > 0 &&
         resp.data.results.map((x, i) => (
@@ -36,4 +54,4 @@ const MarketerFeedContainer = ({ contractInstance, account }) => {
   );
 };
 
-export default MarketerFeedContainer;
+export default MarketerFeedListContainer;

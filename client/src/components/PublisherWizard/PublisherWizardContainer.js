@@ -17,7 +17,7 @@ import {
   HeadingContainer,
 } from '../shared/PublisherWizard/styles';
 import { ParagraphButton, CustomH1, CardContainerLayout } from '../shared/GeneralCard';
-import { GlobalButton } from '../shared/styles';
+import GlobalButton from '../shared/styles';
 
 const PayPerSaleStepHeadings = [
   'Place url link and commission per sale',
@@ -41,6 +41,9 @@ const emptyInitialValues = {
 const PublisherWizardContainer = ({ contractInstance, account, crowdlinkAddress }) => {
   const [step, setStep] = useState(1);
   const [respStatus, setRespStatus] = useState();
+  const [txHash, setTxHash] = useState();
+  const [receipt, setReceipt] = useState();
+  const [campaignData, setCampaignData] = useState({});
 
   const history = useHistory();
   const { workflow } = useParams();
@@ -49,11 +52,43 @@ const PublisherWizardContainer = ({ contractInstance, account, crowdlinkAddress 
   //   ? CrowdlinkReferral.networks[networkId].address
   //   : null;
 
+  const getReceipt = async () => {
+    const provider = ethers.getDefaultProvider('ropsten');
+    console.log('tx hash here', txHash);
+    const resp = await provider.waitForTransaction(txHash);
+    console.log('receipt here', resp);
+    setReceipt(resp);
+  };
+
+  const postCampaign = async () => {
+    console.log('campaigndata ', campaignData);
+    const { name, url, reward } = campaignData;
+
+    const resp = await axios.post(CAMPAIGNS_ENDPOINT_CLICK_CAMPAIGN, {
+      name,
+      user_public_key: account,
+      url,
+      reward,
+      // budget,
+    });
+    console.log('axios dashboard create campaign resp', resp);
+    setRespStatus(resp.status);
+  };
+
   useEffect(() => {
+    if (txHash && !respStatus) {
+      getReceipt();
+    }
+
+    if (receipt && !respStatus) {
+      postCampaign();
+    }
+
     if (respStatus) {
+      console.log('respstatus', respStatus);
       setStep(step + 1);
     }
-  }, [respStatus]);
+  }, [respStatus, txHash, receipt]);
 
   return (
     <CardContainerLayout>
@@ -83,26 +118,19 @@ const PublisherWizardContainer = ({ contractInstance, account, crowdlinkAddress 
 
           const campaign_type = 'click';
 
-          const receipt = await contractInstance.functions.openPayPerClickReferralCampaign(
+          const transaction = await contractInstance.functions.openPayPerClickReferralCampaign(
             bigNumberifyBudget,
             bigNumberifyReward,
             url,
             campaign_type,
             { value: bigNumberifyBudget, gasLimit: 2200000 },
           );
-          console.log('receipt', receipt);
-
-          if (receipt) {
-            const resp = await axios.post(CAMPAIGNS_ENDPOINT_CLICK_CAMPAIGN, {
-              name,
-              user_public_key: account,
-              url,
-              reward,
-              // budget,
-            });
-            console.log('axios dashboard create campaign resp', resp);
-            setRespStatus(resp.status);
+          console.log('receipt', transaction);
+          if (transaction) {
+            setTxHash(transaction.hash);
           }
+
+          setCampaignData({ ...campaignData, ...values });
         }}
       >
         {({ values }) => {
