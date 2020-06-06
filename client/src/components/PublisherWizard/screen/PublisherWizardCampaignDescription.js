@@ -1,5 +1,5 @@
 import React from 'react';
-import { CustomField, CustomLabel } from '../shared/PublisherWizard/styles';
+import { CustomField, CustomLabel } from '../../shared/PublisherWizard/styles';
 
 const PublisherWizardCampaignDescription = ({ step }) => {
   if (step !== 1) {

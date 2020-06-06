@@ -5,7 +5,7 @@ import {
   CustomH1,
   CustomParagraph,
   ParagraphButton,
-} from "../shared/GeneralCard";
+} from "../../shared/GeneralCard";
 // import axios from "axios";
 // import { ethers } from "ethers";
 // import { GlobalButton } from "../shared/styles";
@@ -15,7 +15,7 @@ import {
 //   CustomField,
 //   CustomForm,
 //} from "../shared/PublisherWizard/styles";
-import { PUBLISHER_FEED_ROUTE } from "../../routes-config";
+import { PUBLISHER_FEED_ROUTE } from "../../../routes-config";
 
 //DISPLAY ETHERSCAN TRANSACTION
 const PublisherWizardCampaignOutcome = ({

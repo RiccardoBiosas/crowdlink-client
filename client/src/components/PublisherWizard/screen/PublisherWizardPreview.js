@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
-import { CustomParagraph } from '../shared/GeneralCard';
-import { COINGECKO_API } from '../../api-config';
+import { CustomParagraph } from '../../shared/GeneralCard';
+import { COINGECKO_API } from '../../../api-config';
 
 const PublisherWizardPreview = ({ step, values }) => {
   const { url, reward, budget } = values;

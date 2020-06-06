@@ -3,22 +3,21 @@ import axios from 'axios';
 import { useHistory, useParams } from 'react-router-dom';
 import { ethers } from 'ethers';
 import { Formik } from 'formik';
-import PublisherWizardDeposit from './PublisherWizardDeposit';
-import PublisherWizardCampaignDescription from './PublisherWizardCampaignDescription';
-import PublisherWizardCampaignBudget from './PublisherWizardCampaignBudget';
-import PublisherWizardCampaignOutcome from './PublisherWizardCampaignOutcome';
-import PublisherWizardPreview from './PublisherWizardPreview';
-import { COINGECKO_API, CAMPAIGNS_ENDPOINT_CLICK_CAMPAIGN } from '../../api-config';
+import PublisherWizardDeposit from '../screen/PublisherWizardDeposit';
+import PublisherWizardCampaignDescription from '../screen/PublisherWizardCampaignDescription';
+import PublisherWizardCampaignBudget from '../screen/PublisherWizardCampaignBudget';
+import PublisherWizardCampaignOutcome from '../screen/PublisherWizardCampaignOutcome';
+import PublisherWizardPreview from '../screen/PublisherWizardPreview';
+import { COINGECKO_API, CAMPAIGNS_ENDPOINT_CLICK_CAMPAIGN } from '../../../api-config';
 import {
   CloseAndBackButtonContainer,
   NextButtonContainer,
   HeadingContainer,
   CustomForm,
-} from '../shared/PublisherWizard/styles';
-import { ParagraphButton, CustomH1, CardContainerLayout } from '../shared/GeneralCard';
-import CardLayout from '../shared/layout/CardLayout';
-
-import GlobalButton from '../shared/styles';
+} from '../../shared/PublisherWizard/styles';
+import { ParagraphButton, CustomH1, CardContainerLayout } from '../../shared/GeneralCard';
+import CardLayout from '../../shared/layout/CardLayout';
+import GlobalButton from '../../shared/styles';
 
 const PayPerSaleStepHeadings = [
   'Place url link and commission per sale',

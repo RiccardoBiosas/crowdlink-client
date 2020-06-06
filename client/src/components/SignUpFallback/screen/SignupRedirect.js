@@ -1,6 +1,6 @@
 import React from 'react';
 
-import PortisInstance from '../../portis/PortisInstance';
+import PortisInstance from '../../../portis/PortisInstance';
 
 const SignupRedirect = ({ text }) => {
   console.log('routes', text);

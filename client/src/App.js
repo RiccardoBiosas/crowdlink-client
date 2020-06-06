@@ -20,12 +20,12 @@ import PublisherSignUp from './components/PublisherSignUp/PublisherSignUp';
 import PublisherConnectGA from './components/PublisherConnectGA.js/PublisherConnectGA';
 import ConnectorsInstance from './connectors/connectorsInstance';
 import PublisherWorkflow from './components/PublisherWorkflow/PublisherWorkflow';
-import PublisherWizardContainer from './components/PublisherWizard/PublisherWizardContainer';
+import PublisherWizardContainer from './components/PublisherWizard/containers/index';
 import PublisherFeedContainer from './components/PublisherFeed/PublisherFeedContainer';
 import PublisherCampaignWithdraw from './components/PublisherWithdraw/PublisherCampaignWithdraw';
 import WithContextActive from './hocs/WithContextActive';
 import MarketerSignUp from './components/MarketerSignUp/MarketerSignUp';
-import SignUpFallback from './components/SignUpFallback/SignUpFallback';
+import SignUpFallback from './components/SignUpFallback/containers/index';
 import MarketerFeedListContainer from './components/MarketerFeed/containers/MarketerFeedListContainer';
 import MarketerWithdraw from './components/MarketerWithdraw/MarketerWithdraw';
 

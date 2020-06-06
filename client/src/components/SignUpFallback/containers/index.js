@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef, createRef } from 'react';
 import { Web3Consumer } from 'web3-react';
 import { Redirect } from 'react-router-dom';
-import { CardContainerLayout, CustomParagraph } from '../shared/GeneralCard';
-import { RowContainer } from '../shared/PublisherWizard/styles';
-import { PUBLISHER_WORKFLOW_ROUTE, MARKETER_FEED_ROUTE } from '../../routes-config';
-import SignupRedirect from './SignupRedirect';
-import CardLayout from '../shared/layout/CardLayout';
+import { CardContainerLayout, CustomParagraph } from '../../shared/GeneralCard';
+import { RowContainer } from '../../shared/PublisherWizard/styles';
+import { PUBLISHER_WORKFLOW_ROUTE, MARKETER_FEED_ROUTE } from '../../../routes-config';
+import SignupRedirect from '../screen/SignupRedirect';
+import CardLayout from '../../shared/layout/CardLayout';
 
 export const CREATOR = 'CREATOR';
 export const MARKETER = 'MARKETER';
@@ -20,8 +20,8 @@ const SignUpFallback = () => {
   const refs = useRef(Object.keys(redirectRoutes).map(() => createRef()));
 
   const handleMouseDown = (e) => {
-    console.log('ref0 contains', refs.current[0].current.contains(e.target));
-    console.log('ref1 containts', refs.current[1].current.contains(e.target));
+    // console.log('ref0 contains', refs.current[0].current.contains(e.target));
+    // console.log('ref1 containts', refs.current[1].current.contains(e.target));
 
     if (refs.current[0].current.contains(e.target)) {
       setRedirectedRoute(redirectRoutes[refs.current[0].current.dataset.route]);

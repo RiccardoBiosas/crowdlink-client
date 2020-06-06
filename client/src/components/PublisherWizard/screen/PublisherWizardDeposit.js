@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useWeb3Context } from 'web3-react';
-
 import { ethers } from 'ethers';
 import {
   DepositButtonContainer,
   DepositInfoContainer,
   RowContainer,
-} from '../shared/PublisherWizard/styles';
-import GlobalButton from '../shared/styles';
-import { ReactComponent as Copy } from '../../assets/copy.svg';
-import { CustomParagraph, ParagraphButton } from '../shared/GeneralCard';
-import { ReactComponent as PortisLogo } from '../../assets/portis-logo.svg';
+} from '../../shared/PublisherWizard/styles';
+import GlobalButton from '../../shared/styles';
+import { ReactComponent as Copy } from '../../../assets/copy.svg';
+import { CustomParagraph, ParagraphButton } from '../../shared/GeneralCard';
+import { ReactComponent as PortisLogo } from '../../../assets/portis-logo.svg';
 
 const PublisherWizardDeposit = ({ step, values, address }) => {
   const context = useWeb3Context();
