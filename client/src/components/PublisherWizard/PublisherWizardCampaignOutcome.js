@@ -18,12 +18,12 @@ import {
 import { PUBLISHER_FEED_ROUTE } from "../../routes-config";
 
 //DISPLAY ETHERSCAN TRANSACTION
-export const PublisherWizardCampaignCreationOutcome = ({
+const PublisherWizardCampaignOutcome = ({
   step,
   respStatus,
 }) => {
   const history = useHistory();
-  if (step !== 4) {
+  if (step !== 5) {
     return null;
   } else {
     console.log("outcome response status ", respStatus);
@@ -86,3 +86,6 @@ export const PublisherWizardCampaignCreationOutcome = ({
     }
   }
 };
+
+
+export default PublisherWizardCampaignOutcome;

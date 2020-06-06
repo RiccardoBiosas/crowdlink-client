@@ -40,7 +40,7 @@ const PublisherWizardDeposit = ({ step, values, address }) => {
     document.execCommand('copy');
     document.body.removeChild(temporaryInput);
   };
-  if (step !== 3) {
+  if (step !== 4) {
     return null;
   }
   return (

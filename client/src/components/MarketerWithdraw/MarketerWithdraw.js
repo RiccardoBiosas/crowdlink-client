@@ -3,7 +3,6 @@ import { useHistory } from 'react-router-dom';
 import { ethers } from 'ethers';
 import {
   CardContainerLayout,
-  CardLayoutWithBorder,
   CloseButtonContainer,
   CustomH1,
   CustomParagraph,
@@ -15,6 +14,7 @@ import { MARKETER_FEED_ROUTE } from '../../routes-config';
 import { RowContainer } from '../shared/PublisherWizard/styles';
 import copy from '../../assets/clipboard-copy.png';
 import { BasicContainer } from '../shared/feed/styles';
+import CardLayout from '../shared/layout/CardLayout';
 
 const MarketerWithdraw = ({ contractInstance, account }) => {
   const [balance, setBalance] = useState();
@@ -52,7 +52,7 @@ const MarketerWithdraw = ({ contractInstance, account }) => {
 
   return (
     <CardContainerLayout>
-      <CardLayoutWithBorder>
+      <CardLayout>
         <CloseButtonContainer closeButtonContainerHeight="6%">
           <ParagraphButton
             buttonMargin="6px 12px 0 0"
@@ -113,7 +113,7 @@ const MarketerWithdraw = ({ contractInstance, account }) => {
             </CustomH1>
           </div>
         )}
-      </CardLayoutWithBorder>
+      </CardLayout>
     </CardContainerLayout>
   );
 };

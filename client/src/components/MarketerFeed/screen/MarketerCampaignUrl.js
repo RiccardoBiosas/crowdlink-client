@@ -5,13 +5,18 @@ import { ToTheLeftFlexContainer } from '../../shared/feed/styles';
 const MarketerCampaignUrl = ({ x }) => {
   return (
     <ToTheLeftFlexContainer>
-      <CustomParagraph
-        paragraphColor="#959090"
-        paragraphFontSize={16}
-        paragraphTextDecoration="underline"
+      <a
+        style={{
+          color: '#E2E2E2',
+          fontSize: '16px',
+          marginBottom: '14px',
+        }}
+        target="_blank"
+        rel="noreferrer"
+        href={x.url}
       >
         {x.url}
-      </CustomParagraph>
+      </a>
     </ToTheLeftFlexContainer>
   );
 };

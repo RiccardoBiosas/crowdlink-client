@@ -1,7 +1,6 @@
 import React from 'react';
 import { Web3Consumer } from 'web3-react';
 import { useHistory, Redirect } from 'react-router-dom';
-import { SignUpCard } from '../shared/PublisherWizard/styles';
 import PortisInstance from '../../portis/PortisInstance';
 import {
   CustomParagraph,
@@ -11,13 +10,14 @@ import {
 } from '../shared/GeneralCard';
 import { MARKETER_FEED_ROUTE } from '../../routes-config';
 import ArrowDown from '../../assets/arrow-down.png';
+import CardLayout from '../shared/layout/CardLayout';
 
 const MarketerSignUp = () => {
   const history = useHistory();
 
   return (
     <CardContainerLayout>
-      <SignUpCard>
+      <CardLayout>
         <CloseButtonContainer>
           <ParagraphButton
             buttonMargin="6px 12px 0 0"
@@ -78,7 +78,7 @@ const MarketerSignUp = () => {
             );
           }}
         </Web3Consumer>
-      </SignUpCard>
+      </CardLayout>
     </CardContainerLayout>
   );
 };

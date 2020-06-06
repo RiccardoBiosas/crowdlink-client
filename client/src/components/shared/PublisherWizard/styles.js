@@ -8,25 +8,6 @@ export const CampaignContainer = styled.div`
   align-items: center;
 `;
 
-export const SignUpCard = styled(CardLayoutWithBorder)`
-  && {
-    justify-content: space-around;
-    height: 60vh;
-  }
-`;
-
-export const CampaignCard = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 60vw;
-  height: 60vh;
-  margin-top: 4vh;
-  background: #ffffff 0% 0% no-repeat padding-box;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 10px;
-`;
-
 export const CustomForm = styled(Form)`
   height: ${(props) => props.customformheight};
   display: flex;
@@ -124,3 +105,22 @@ export const CustomHTMLinput = styled.input`
     font-weight: 400;
   }
 `;
+
+// export const SignUpCard = styled(CardLayoutWithBorder)`
+//   && {
+//     justify-content: space-around;
+//     height: 60vh;
+//   }
+// `;
+
+// export const CampaignCard = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   width: 60vw;
+//   height: 60vh;
+//   margin-top: 4vh;
+//   background: #ffffff 0% 0% no-repeat padding-box;
+//   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+//   border-radius: 10px;
+// `;

@@ -1,7 +1,4 @@
 import styled from 'styled-components';
-// import React, { useState, useLayoutEffect, useRef } from 'react';
-// import * as THREE from 'three';
-// import GLOBE from 'vanta/dist/vanta.globe.min.js';
 
 export const CardContainerLayout = styled.div`
   height: 90vh;
@@ -19,69 +16,6 @@ export const StyledCardContainerLayout = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-`;
-
-// export const HomepageCardContainerLayout = (props) => {
-//   // const [vantaEffect, setVantaEffect] = useState(0)
-//   // const myRef = useRef(null)
-
-//   // useLayoutEffect(() => {
-//   //   if(!vantaEffect) {
-//   //     setVantaEffect(GLOBE({
-//   //       el: myRef.current,
-//   //       THREE: THREE
-//   //     }))
-//   //   }
-
-//   //   return () => {
-//   //     if(vantaEffect) {
-//   //       // console.log('unmounting')
-//   //       vantaEffect.destroy()
-//   //     }
-//   //   }
-//   // }, [vantaEffect])
-
-//   return (
-//     <div>{props.children}</div>
-//     // <StyledCardContainerLayout ref={myRef}>
-//     //   {props.children}
-//     // </StyledCardContainerLayout>
-//   );
-// };
-
-// export const HomepageCardContainerLayout = (props) => {
-//   const [vantaEffect, setVantaEffect] = useState(0)
-//   const myRef = useRef(null)
-
-//   useLayoutEffect(() => {
-//     if(!vantaEffect) {
-//       setVantaEffect(GLOBE({
-//         el: myRef.current,
-//         THREE: THREE
-//       }))
-//     }
-
-//     return () => {
-//       if(vantaEffect) {
-//         // console.log('unmounting')
-//         vantaEffect.destroy()
-//       }
-//     }
-//   }, [vantaEffect])
-
-//   return(
-//     <StyledCardContainerLayout ref={myRef}>
-//       {props.children}
-//     </StyledCardContainerLayout>
-//   )
-// }
-
-export const CardLayout = styled.div`
-  height: 60vh;
-  width: 60vw;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 `;
 
 export const ColumnContainer = styled.div`
@@ -142,24 +76,6 @@ export const CustomParagraph = styled.p`
 
 `;
 
-export const CardLayoutWithBorder = styled(CardLayout)`
-  align-items: center;
-  background: #ffffff 0% 0% no-repeat padding-box;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 10px;
-`;
-
-export const CardLayoutWithBorderSpaceAround = styled(CardLayout)`
-  align-items: center;
-  background: #ffffff 0% 0% no-repeat padding-box;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 10px;
-
-  && {
-    justify-content: space-around;
-  }
-`;
-
 export const ColumnContainerFilledHeight = styled(ColumnContainer)`
   flex: 1;
   justify-content: space-around;
@@ -189,3 +105,29 @@ export const CardLayoutWithHorizontalContainers = styled.div`
   width: ${(props) => props.cardLayoutWidth};
   height: ${(props) => props.cardLayoutHeight};
 `;
+
+// export const CardLayout = styled.div`
+//   height: 60vh;
+//   width: 60vw;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: space-between;
+// `;
+
+// export const CardLayoutWithBorder = styled(CardLayout)`
+//   align-items: center;
+//   background: #ffffff 0% 0% no-repeat padding-box;
+//   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+//   border-radius: 10px;
+// `;
+
+// export const CardLayoutWithBorderSpaceAround = styled(CardLayout)`
+//   align-items: center;
+//   background: #ffffff 0% 0% no-repeat padding-box;
+//   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+//   border-radius: 10px;
+
+//   && {
+//     justify-content: space-around;
+//   }
+// `;

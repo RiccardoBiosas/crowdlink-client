@@ -3,7 +3,6 @@ import { ethers } from 'ethers';
 import { useHistory, useLocation } from 'react-router-dom';
 import {
   CardContainerLayout,
-  CardLayoutWithBorder,
   CloseButtonContainer,
   CustomH1,
   CustomParagraph,
@@ -14,6 +13,7 @@ import { PUBLISHER_FEED_ROUTE } from '../../routes-config';
 import { RowContainer } from '../shared/PublisherWizard/styles';
 import copy from '../../assets/clipboard-copy.png';
 import { BasicContainer } from '../shared/feed/styles';
+import CardLayout from '../shared/layout/CardLayout';
 
 const PublisherCampaignWithdraw = ({ contractInstance, account }) => {
   const history = useHistory();
@@ -47,7 +47,7 @@ const PublisherCampaignWithdraw = ({ contractInstance, account }) => {
 
   return (
     <CardContainerLayout>
-      <CardLayoutWithBorder>
+      <CardLayout>
         <CloseButtonContainer closeButtonContainerHeight="6%">
           <ParagraphButton
             buttonMargin="6px 12px 0 0"
@@ -81,8 +81,8 @@ const PublisherCampaignWithdraw = ({ contractInstance, account }) => {
               {account}
             </CustomParagraph>
 
-            <ParagraphButton>
-              <img src={copy} alt="copy to clipboard" onClick={() => copyToClipboard(account)} />
+            <ParagraphButton onClick={() => copyToClipboard(account)}>
+              <img src={copy} alt="copy to clipboard" />
             </ParagraphButton>
           </RowContainer>
 
@@ -108,7 +108,7 @@ const PublisherCampaignWithdraw = ({ contractInstance, account }) => {
             {'withdraw >'}
           </ParagraphButton>
         </CardSubContainer>
-      </CardLayoutWithBorder>
+      </CardLayout>
     </CardContainerLayout>
   );
 };

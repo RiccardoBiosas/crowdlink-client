@@ -1,7 +1,6 @@
 import React from 'react';
 import { Web3Consumer } from 'web3-react';
 import { useHistory, useLocation } from 'react-router-dom';
-import { SignUpCard } from '../shared/PublisherWizard/styles';
 import PortisInstance from '../../portis/PortisInstance';
 import GlobalButton from '../shared/styles';
 import {
@@ -21,6 +20,7 @@ import {
 } from '../../routes-config';
 import { REWARD_PER_SALE_WORKFLOW } from '../PublisherWorkflow/PublisherWorkflow';
 import ArrowDown from '../../assets/arrow-down.png';
+import CardLayout from '../shared/layout/CardLayout';
 
 const PublisherSignUp = () => {
   // const context = useWeb3Context();
@@ -31,7 +31,7 @@ const PublisherSignUp = () => {
 
   return (
     <CardContainerLayout>
-      <SignUpCard>
+      <CardLayout>
         <CloseButtonContainer>
           <ParagraphButton
             buttonMargin="6px 12px 0 0"
@@ -94,7 +94,8 @@ const PublisherSignUp = () => {
                       workflow === REWARD_PER_SALE_WORKFLOW
                         ? PUBLISHER_GA_CONNECT_ROUTE
                         : `${PUBLISHER_DASHBOARD_ROUTE_WITH_PARAM}/clicks`,
-                    )}
+                    )
+                  }
                 >
                   Go To Dashboard
                 </GlobalButton>
@@ -168,7 +169,7 @@ const PublisherSignUp = () => {
             );
           }}
         </Web3Consumer>
-      </SignUpCard>
+      </CardLayout>
     </CardContainerLayout>
   );
 };

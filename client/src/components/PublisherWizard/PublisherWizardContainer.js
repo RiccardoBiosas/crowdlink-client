@@ -4,19 +4,20 @@ import { useHistory, useParams } from 'react-router-dom';
 import { ethers } from 'ethers';
 import { Formik } from 'formik';
 import PublisherWizardDeposit from './PublisherWizardDeposit';
-import { PublisherWizardCreateReferralCampaign } from './PublisherWizardCreateReferralCampaign';
-import { PublisherWizardCampaignCreationOutcome } from './PublisherWizardCampaignCreationOutcome';
-import { PublisherWizardPreview } from './PublisherWizardPreview';
-import host, { COINGECKO_API, CAMPAIGNS_ENDPOINT_CLICK_CAMPAIGN } from '../../api-config';
-
+import PublisherWizardCampaignDescription from './PublisherWizardCampaignDescription';
+import PublisherWizardCampaignBudget from './PublisherWizardCampaignBudget';
+import PublisherWizardCampaignOutcome from './PublisherWizardCampaignOutcome';
+import PublisherWizardPreview from './PublisherWizardPreview';
+import { COINGECKO_API, CAMPAIGNS_ENDPOINT_CLICK_CAMPAIGN } from '../../api-config';
 import {
-  CampaignCard,
-  CustomForm,
   CloseAndBackButtonContainer,
   NextButtonContainer,
   HeadingContainer,
+  CustomForm,
 } from '../shared/PublisherWizard/styles';
 import { ParagraphButton, CustomH1, CardContainerLayout } from '../shared/GeneralCard';
+import CardLayout from '../shared/layout/CardLayout';
+
 import GlobalButton from '../shared/styles';
 
 const PayPerSaleStepHeadings = [
@@ -44,6 +45,7 @@ const PublisherWizardContainer = ({ contractInstance, account, crowdlinkAddress 
   const [txHash, setTxHash] = useState();
   const [receipt, setReceipt] = useState();
   const [campaignData, setCampaignData] = useState({});
+  const totalSteps = 5;
 
   const history = useHistory();
   const { workflow } = useParams();
@@ -142,7 +144,7 @@ const PublisherWizardContainer = ({ contractInstance, account, crowdlinkAddress 
                 alignItems: 'center',
               }}
             >
-              <CampaignCard>
+              <CardLayout>
                 <CloseAndBackButtonContainer>
                   <ParagraphButton
                     buttonMargin="6px 0 0 12px"
@@ -184,10 +186,11 @@ const PublisherWizardContainer = ({ contractInstance, account, crowdlinkAddress 
                   setBudget={setBudget}
                 />
                 <PublisherWizardPreview step={step} budget={budget} /> */}
-                  <PublisherWizardCreateReferralCampaign workflow={workflow} step={step} />
+                  <PublisherWizardCampaignDescription workflow={workflow} step={step} />
+                  <PublisherWizardCampaignBudget step={step} />
                   <PublisherWizardPreview step={step} values={values} />
                   <PublisherWizardDeposit step={step} values={values} address={crowdlinkAddress} />
-                  <PublisherWizardCampaignCreationOutcome step={step} respStatus={respStatus} />
+                  <PublisherWizardCampaignOutcome step={step} respStatus={respStatus} />
                 </CustomForm>
                 {step < 3 && (
                   <NextButtonContainer>
@@ -201,7 +204,7 @@ const PublisherWizardContainer = ({ contractInstance, account, crowdlinkAddress 
                     </GlobalButton>
                   </NextButtonContainer>
                 )}
-              </CampaignCard>
+              </CardLayout>
             </div>
           );
         }}

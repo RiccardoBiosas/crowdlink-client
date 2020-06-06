@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import {
-  CampaignContainer,
-  CampaignCard,
-  CloseAndBackButtonContainer,
-} from '../shared/PublisherWizard/styles';
-import { ParagraphButton, CustomParagraph } from '../shared/GeneralCard';
+
+import { CustomParagraph } from '../shared/GeneralCard';
 import { COINGECKO_API } from '../../api-config';
 
-export const PublisherWizardPreview = ({ step, values }) => {
+const PublisherWizardPreview = ({ step, values }) => {
   const { url, reward, budget } = values;
   const [ethPrice, setEthPrice] = useState();
 
@@ -23,7 +19,7 @@ export const PublisherWizardPreview = ({ step, values }) => {
     fetchPrice();
   }, []);
 
-  if (step !== 2) {
+  if (step !== 3) {
     return null;
   }
   return (
@@ -35,13 +31,15 @@ export const PublisherWizardPreview = ({ step, values }) => {
         </CustomParagraph>
         <CustomParagraph>
           Your reward converted to ethereum:
-{' '}
-{ethPrice ? reward / ethPrice : 'null'}
+          {ethPrice ? reward / ethPrice : 'null'}
         </CustomParagraph>
         <CustomParagraph>
-          your budget converted to ethereum: {ethPrice ? budget / ethPrice : 'null'}
+          your budget converted to ethereum:
+          {ethPrice ? budget / ethPrice : 'null'}
         </CustomParagraph>
       </div>
     </div>
   );
 };
+
+export default PublisherWizardPreview;

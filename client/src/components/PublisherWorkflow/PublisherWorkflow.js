@@ -11,12 +11,11 @@ import {
   CardContainerLayout,
   ParagraphButton,
   CustomParagraph,
-  CardLayoutWithBorder,
   CustomH2,
   CloseButtonContainer,
-  ColumnContainer,
   CardSubContainer,
 } from '../shared/GeneralCard';
+import CardLayout from '../shared/layout/CardLayout';
 import { RowContainer } from '../shared/PublisherWizard/styles';
 
 // move to constant.js
@@ -29,7 +28,7 @@ const PublisherWorkflow = () => {
 
   return (
     <CardContainerLayout>
-      <CardLayoutWithBorder>
+      <CardLayout>
         <CloseButtonContainer>
           <ParagraphButton
             buttonMargin="6px 12px 0 0"
@@ -117,7 +116,7 @@ const PublisherWorkflow = () => {
             </ColumnContainer>
           </ColumnContainer> */}
         </CardSubContainer>
-      </CardLayoutWithBorder>
+      </CardLayout>
     </CardContainerLayout>
   );
 };

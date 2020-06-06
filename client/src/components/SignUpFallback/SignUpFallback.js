@@ -1,95 +1,73 @@
-import React from 'react';
+import React, { useState, useEffect, useRef, createRef } from 'react';
 import { Web3Consumer } from 'web3-react';
-import {
-  CardContainerLayout,
-  CardLayoutWithBorderSpaceAround,
-  CustomParagraph,
-} from '../shared/GeneralCard';
+import { Redirect } from 'react-router-dom';
+import { CardContainerLayout, CustomParagraph } from '../shared/GeneralCard';
 import { RowContainer } from '../shared/PublisherWizard/styles';
-import { PUBLISHER_GA_CONNECT_ROUTE, MARKETER_FEED_ROUTE } from '../../routes-config';
+import { PUBLISHER_WORKFLOW_ROUTE, MARKETER_FEED_ROUTE } from '../../routes-config';
 import SignupRedirect from './SignupRedirect';
+import CardLayout from '../shared/layout/CardLayout';
 
 export const CREATOR = 'CREATOR';
 export const MARKETER = 'MARKETER';
 
 const redirectRoutes = {
-  CREATOR: PUBLISHER_GA_CONNECT_ROUTE,
+  CREATOR: PUBLISHER_WORKFLOW_ROUTE,
   MARKETER: MARKETER_FEED_ROUTE,
 };
 
 const SignUpFallback = () => {
-  return (
-    <CardContainerLayout>
-      <Web3Consumer>
-        {(context) => {
-          const { active } = context;
-          // if (!active) {
-          return (
-            <CardLayoutWithBorderSpaceAround>
-              <CustomParagraph
-                paragraphColor="#959090"
-                paragraphFontSize={22}
-                paragraphFontWeight={900}
-              >
-                Sign up if you want to access our dashboards!
-              </CustomParagraph>
-              <RowContainer containerWidth="60%" containerJustify="space-around">
-                {Object.keys(redirectRoutes).map((x, i) => (
-                  <SignupRedirect
-                    active={active}
-                    redirectRoute={redirectRoutes[x]}
-                    text={x.toLowerCase()}
-                  />
-                ))}
-              </RowContainer>
-            </CardLayoutWithBorderSpaceAround>
-          );
-          // }
-          // return (
-          //   <Redirect to={redirectRoute} />
-          //   // <CardLayoutWithBorder>
-          //   //   <ColumnContainer>
-          //   //     <div>
-          //   //       <ParagraphButton
-          //   //         buttonColor={"#7838D5"}
-          //   //         buttonFontWeight={900}
-          //   //         buttonFontSize={24}
-          //   //         onClick={() => history.push(PUBLISHER_GA_CONNECT_ROUTE)}
-          //   //       >
-          //   //         Create +
-          //   //       </ParagraphButton>
-          //   //       <CustomParagraph
-          //   //         paragraphFontSize={22}
-          //   //         paragraphColor={"#696868"}
-          //   //       >
-          //   //         reward per sale (commission)
-          //   //       </CustomParagraph>
-          //   //     </div>
+  const [redirectedRoute, setRedirectedRoute] = useState();
+  const refs = useRef(Object.keys(redirectRoutes).map(() => createRef()));
 
-          //   //     <div>
-          //   //       <ParagraphButton
-          //   //         buttonColor={"#4C83D4"}
-          //   //         buttonFontWeight={900}
-          //   //         buttonFontSize={24}
-          //   //         onClick={() =>
-          //   //           history.push(`${PUBLISHER_DASHBOARD_ROUTE_WITH_PARAM}/clicks`)
-          //   //         }
-          //   //       >
-          //   //         Create +
-          //   //       </ParagraphButton>
-          //   //       <CustomParagraph
-          //   //         paragraphFontSize={22}
-          //   //         paragraphColor={"#696868"}
-          //   //       >
-          //   //         reward per click (traffic)
-          //   //       </CustomParagraph>
-          //   //     </div>
-          //   //   </ColumnContainer>
-          //   // </CardLayoutWithBorder>
-          // );
-        }}
-      </Web3Consumer>
-    </CardContainerLayout>
+  const handleMouseDown = (e) => {
+    console.log('ref0 contains', refs.current[0].current.contains(e.target));
+    console.log('ref1 containts', refs.current[1].current.contains(e.target));
+
+    if (refs.current[0].current.contains(e.target)) {
+      setRedirectedRoute(redirectRoutes[refs.current[0].current.dataset.route]);
+    }
+    if (refs.current[1].current.contains(e.target)) {
+      setRedirectedRoute(redirectRoutes[refs.current[1].current.dataset.route]);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleMouseDown);
+
+    return () => {
+      document.removeEventListener('mousedown', handleMouseDown);
+    };
+  }, [refs, redirectedRoute]);
+
+  return (
+    <Web3Consumer>
+      {(context) => {
+        const { active } = context;
+        if (!active) {
+          return (
+            <CardContainerLayout>
+              <CardLayout>
+                <CustomParagraph
+                  paragraphColor="#959090"
+                  paragraphFontSize={22}
+                  paragraphFontWeight={900}
+                >
+                  Sign up if you want to access our dashboards!
+                </CustomParagraph>
+                <RowContainer containerWidth="60%" containerJustify="space-around">
+                  {Object.keys(redirectRoutes).map((x, i) => (
+                    <span ref={refs.current[i]} data-route={x}>
+                      <SignupRedirect text={x.toLowerCase()} />
+                    </span>
+                  ))}
+                </RowContainer>
+              </CardLayout>
+            </CardContainerLayout>
+          );
+        }
+        return <Redirect to={redirectedRoute} />;
+      }}
+    </Web3Consumer>
   );
 };
 

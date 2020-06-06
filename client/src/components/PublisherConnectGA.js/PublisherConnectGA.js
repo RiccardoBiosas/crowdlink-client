@@ -11,9 +11,9 @@ import {
   CustomH1,
   CustomH2,
 } from '../shared/GeneralCard';
-import { SignUpCard } from '../shared/PublisherWizard/styles';
 import { ImageContainer, BottomContainer } from './styles';
 import host, { GA_OAUTH_ENDPOINT } from '../../api-config';
+import CardLayout from '../shared/layout/CardLayout';
 
 // import { PUBLISHER_DASHBOARD_ROUTE_WITH_PARAM } from "../../routes-config";
 
@@ -26,7 +26,7 @@ const PublisherConnectGA = () => {
   };
   return (
     <CardContainerLayout>
-      <SignUpCard>
+      <CardLayout>
         <CloseButtonContainer>
           <ParagraphButton
             buttonMargin="6px 12px 0 0"
@@ -83,7 +83,7 @@ const PublisherConnectGA = () => {
             Connect
           </GlobalButton> */}
         </BottomContainer>
-      </SignUpCard>
+      </CardLayout>
     </CardContainerLayout>
   );
 };
