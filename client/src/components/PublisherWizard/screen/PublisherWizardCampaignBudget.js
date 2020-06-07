@@ -6,7 +6,14 @@ const PublisherWizardCampaignBudget = ({ step }) => {
     return null;
   }
   return (
-    <>
+    <div
+      style={{
+        height: '60%',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-around',
+      }}
+    >
       <div>
         <CustomLabel
           labelColor="#696868"
@@ -33,7 +40,7 @@ const PublisherWizardCampaignBudget = ({ step }) => {
           <CustomField id="budget" name="budget" type="number" />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

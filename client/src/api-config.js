@@ -1,16 +1,18 @@
 // #### third-party APIs
 
 export const COINGECKO_API = 'https://api.coingecko.com/api/v3/';
+export const ROPSTEN_ETHERSCAN = 'https://ropsten.etherscan.io/';
+
+export const ROPSTEN_ETHERSCAN_TX = 'https://ropsten.etherscan.io/tx/';
 
 // #### back-end API
-// let host = "https://crowdlink.me";
 let host;
 
 const hostname = window && window.location && window.location.hostname;
-
+const domainExpr = RegExp('crowdlink.me');
 console.log('hostname ', hostname);
 
-if (hostname === 'https://crowdlink.me') {
+if (domainExpr.test(hostname)) {
   host = 'https://crowdlink.me';
 } else {
   host = 'http://localhost:8000';

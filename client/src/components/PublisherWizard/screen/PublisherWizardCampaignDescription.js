@@ -6,7 +6,14 @@ const PublisherWizardCampaignDescription = ({ step }) => {
     return null;
   }
   return (
-    <>
+    <div
+      style={{
+        height: '60%',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-around',
+      }}
+    >
       <div>
         <CustomLabel
           labelColor="#696868"
@@ -28,7 +35,7 @@ const PublisherWizardCampaignDescription = ({ step }) => {
           <CustomField id="url" name="url" type="text" />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

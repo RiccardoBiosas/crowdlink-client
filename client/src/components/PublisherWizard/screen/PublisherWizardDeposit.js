@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ClockLoader from 'react-spinners/ClockLoader';
 import { useWeb3Context } from 'web3-react';
 import { ethers } from 'ethers';
 import {
@@ -11,7 +12,7 @@ import { ReactComponent as Copy } from '../../../assets/copy.svg';
 import { CustomParagraph, ParagraphButton } from '../../shared/GeneralCard';
 import { ReactComponent as PortisLogo } from '../../../assets/portis-logo.svg';
 
-const PublisherWizardDeposit = ({ step, values, address }) => {
+const PublisherWizardDeposit = ({ step, values, address, isBroadcasted }) => {
   const context = useWeb3Context();
   const [resolvedAddress, setResolvedAddress] = useState();
 
@@ -44,33 +45,46 @@ const PublisherWizardDeposit = ({ step, values, address }) => {
   }
   return (
     <>
-      <DepositInfoContainer>
-        <CustomParagraph paragraphColor="#696868" paragraphFontSize={18}>
-          You can withdraw anytime, CL does
-          <br />
-          not charge the referral creator.
-        </CustomParagraph>
-        <RowContainer>
-          <CustomParagraph paragraphColor="#959090" style={{ flex: '2' }}>
-            Contract:
-          </CustomParagraph>
+      <div
+        style={{
+          height: '60%',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-around',
+        }}
+      >
+        <DepositInfoContainer>
           <CustomParagraph
-            paragraphBorder="0.6px solid #206DFF"
-            paragraphPadding="10px"
             paragraphColor="#696868"
-            paragraphMargin="0 10px 0 0"
-            style={{ textAlign: 'center', flex: '4' }}
+            paragraphFontSize={18}
+            style={{ textAlign: 'center', lineHeight: '27px' }}
           >
-            crowdlink.eth
+            You can withdraw anytime, CL does
+            <br />
+            not charge the referral creator.
           </CustomParagraph>
+          <RowContainer style={{ height: '100%' }}>
+            <CustomParagraph paragraphColor="#959090" style={{ flex: '2' }}>
+              Contract:
+            </CustomParagraph>
+            <CustomParagraph
+              paragraphBorder="0.6px solid #206DFF"
+              paragraphPadding="10px"
+              paragraphColor="#696868"
+              paragraphMargin="0 10px 0 0"
+              style={{ textAlign: 'center', flex: '4' }}
+            >
+              crowdlink.eth
+            </CustomParagraph>
 
-          <ParagraphButton style={{ flex: '1' }} onClick={() => copyToClipboard(address)}>
-            <Copy />
-          </ParagraphButton>
-        </RowContainer>
-      </DepositInfoContainer>
-      <div style={{ display: 'flex', alignItems: 'center' }}>
-        <PortisLogo />
+            <ParagraphButton style={{ flex: '1' }} onClick={() => copyToClipboard(address)}>
+              <Copy />
+            </ParagraphButton>
+          </RowContainer>
+        </DepositInfoContainer>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          {!isBroadcasted ? <PortisLogo /> : <ClockLoader color="#206DFF" size={110} />}
+        </div>
       </div>
 
       <DepositButtonContainer>

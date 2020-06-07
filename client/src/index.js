@@ -1,13 +1,13 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import "normalize.css";
-import "./index.css";
-import App from "./App";
-import Web3Provider from "web3-react";
-import connectors from "./portis/index";
-import * as serviceWorker from "./serviceWorker";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import 'normalize.css';
+import './index.css';
+import Web3Provider from 'web3-react';
+import App from './App';
+import connectors from './portis/index';
+import * as serviceWorker from './serviceWorker';
 
-require("dotenv").config();
+require('dotenv').config();
 
 // const GlobalStyle = createGlobalStyle`
 // ${normalize}
@@ -32,20 +32,13 @@ require("dotenv").config();
 
 // `;
 
-
 ReactDOM.render(
   <React.StrictMode>
     <Web3Provider connectors={connectors} libraryName="ethers.js">
-      {/* <BodyContainerLayout> */}
-        {/* <div style={{position: 'relative', zIndex: '2'}}> */}
-        <App />
-
-        {/* </div> */}
-
-      {/* </BodyContainerLayout> */}
+      <App />
     </Web3Provider>
   </React.StrictMode>,
-  document.getElementById("root")
+  document.getElementById('root'),
 );
 
 // If you want your app to work offline and load faster, you can change

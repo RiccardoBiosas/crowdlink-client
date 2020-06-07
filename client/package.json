@@ -22,6 +22,7 @@
     "react-scripts": "3.4.1",
     "react-spinners": "^0.8.3",
     "react-spring": "^8.0.27",
+    "react-toastify": "^6.0.5",
     "styled-components": "^5.1.0",
     "web3-react": "^5.0.5"
   },

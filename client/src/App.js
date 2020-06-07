@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { ethers } from 'ethers';
 import { useWeb3Context } from 'web3-react';
 import {
@@ -13,21 +13,23 @@ import {
   SIGN_UP_FALLBACK_ROUTE,
   PUBLISHER_WITHDRAW_ROUTE_WITH_PARAM,
   MARKETER_WITHDRAW_ROUTE,
+  MARKETER_HOMEPAGE,
 } from './routes-config';
 import PublisherHomepage from './components/PublisherHomepage';
 import MarketerHomepage from './components/MarketerHomepage';
 import PublisherSignUp from './components/PublisherSignUp/PublisherSignUp';
-import PublisherConnectGA from './components/PublisherConnectGA.js/PublisherConnectGA';
+import PublisherConnectGA from './components/PublisherConnectGA/PublisherConnectGA';
 import ConnectorsInstance from './connectors/connectorsInstance';
 import PublisherWorkflow from './components/PublisherWorkflow/PublisherWorkflow';
 import PublisherWizardContainer from './components/PublisherWizard/containers/index';
-import PublisherFeedContainer from './components/PublisherFeed/PublisherFeedContainer';
+import PublisherFeedContainer from './components/PublisherFeed/containers/PublisherFeedCampaignListContainer';
 import PublisherCampaignWithdraw from './components/PublisherWithdraw/PublisherCampaignWithdraw';
 import WithContextActive from './hocs/WithContextActive';
 import MarketerSignUp from './components/MarketerSignUp/MarketerSignUp';
 import SignUpFallback from './components/SignUpFallback/containers/index';
 import MarketerFeedListContainer from './components/MarketerFeed/containers/MarketerFeedListContainer';
 import MarketerWithdraw from './components/MarketerWithdraw/MarketerWithdraw';
+import NotFound from './components/404/NotFound';
 
 // move to constant.js
 const networks = {
@@ -66,7 +68,7 @@ const Navbar = () => {
     >
       <div
         style={{
-          width: '40%',
+          width: '50%',
           height: '10vh',
           display: 'flex',
           justifyContent: 'space-around',
@@ -74,7 +76,7 @@ const Navbar = () => {
         }}
       >
         <p style={{ margin: '0', color: '#FFFFFF', fontSize: '16px', fontWeight: '900' }}>
-          {balance || 'not connected'}
+          {balance ? `Balance: ${balance} ETH` : 'not connected'}
         </p>
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <div
@@ -93,7 +95,7 @@ const Navbar = () => {
           </div>
           <div
             style={{
-              marginLeft: '10px',
+              marginLeft: '18px',
               borderRadius: '50%',
               backgroundColor: active ? 'green' : 'grey',
               width: '20px',
@@ -110,51 +112,55 @@ const App = () => {
   return (
     <BrowserRouter>
       <Route path="/" component={Navbar} />
-      <Route exact path="/" component={PublisherHomepage} />
-      <Route exact path="/marketer" component={MarketerHomepage} />
-      <Route exact path={PUBLISHER_SIGN_UP_ROUTE} component={PublisherSignUp} />
 
-      <Route exact path={SIGN_UP_FALLBACK_ROUTE} component={SignUpFallback} />
+      <Switch>
+        <Route exact path="/" component={PublisherHomepage} />
+        <Route exact path={MARKETER_HOMEPAGE} component={MarketerHomepage} />
+        <Route exact path={PUBLISHER_SIGN_UP_ROUTE} component={PublisherSignUp} />
 
-      <Route
-        exact
-        path={`${PUBLISHER_DASHBOARD_ROUTE_WITH_PARAM}/:workflow`}
-        component={() => WithContextActive(PublisherWizardContainer)}
-      />
+        <Route exact path={SIGN_UP_FALLBACK_ROUTE} component={SignUpFallback} />
 
-      <Route
-        exact
-        path={MARKETER_FEED_ROUTE}
-        component={() => WithContextActive(MarketerFeedListContainer)}
-      />
+        <Route
+          exact
+          path={`${PUBLISHER_DASHBOARD_ROUTE_WITH_PARAM}/:workflow`}
+          component={() => WithContextActive(PublisherWizardContainer)}
+        />
 
-      <Route
-        exact
-        path={MARKETER_WITHDRAW_ROUTE}
-        component={() => WithContextActive(MarketerWithdraw)}
-      />
+        <Route
+          exact
+          path={MARKETER_FEED_ROUTE}
+          component={() => WithContextActive(MarketerFeedListContainer)}
+        />
 
-      <Route exact path="/connection" component={ConnectorsInstance} />
-      <Route
-        exact
-        path={`${PUBLISHER_WITHDRAW_ROUTE_WITH_PARAM}/:campaign`}
-        component={() => WithContextActive(PublisherCampaignWithdraw)}
-      />
+        <Route
+          exact
+          path={MARKETER_WITHDRAW_ROUTE}
+          component={() => WithContextActive(MarketerWithdraw)}
+        />
 
-      <Route
-        exact
-        path={PUBLISHER_FEED_ROUTE}
-        component={() => WithContextActive(PublisherFeedContainer)}
-      />
-      <Route
-        exact
-        path={PUBLISHER_GA_CONNECT_ROUTE}
-        component={() => WithContextActive(PublisherConnectGA)}
-      />
+        <Route exact path="/connection" component={ConnectorsInstance} />
+        <Route
+          exact
+          path={`${PUBLISHER_WITHDRAW_ROUTE_WITH_PARAM}/:campaign`}
+          component={() => WithContextActive(PublisherCampaignWithdraw)}
+        />
 
-      <Route exact path={PUBLISHER_WORKFLOW_ROUTE} component={PublisherWorkflow} />
+        <Route
+          exact
+          path={PUBLISHER_FEED_ROUTE}
+          component={() => WithContextActive(PublisherFeedContainer)}
+        />
+        <Route
+          exact
+          path={PUBLISHER_GA_CONNECT_ROUTE}
+          component={() => WithContextActive(PublisherConnectGA)}
+        />
 
-      <Route exact path={MARKETER_SIGN_UP_ROUTE} component={MarketerSignUp} />
+        <Route exact path={PUBLISHER_WORKFLOW_ROUTE} component={PublisherWorkflow} />
+
+        <Route exact path={MARKETER_SIGN_UP_ROUTE} component={MarketerSignUp} />
+        <Route path="*" component={NotFound} />
+      </Switch>
 
       {/* ############### WITHOUT CONTEXT ACTIVE. ONLY FOR QUICK TESTING */}
       {/* <Route
@@ -174,10 +180,10 @@ const App = () => {
           component={PublisherFeedContainer}
         /> */}
       {/* <Route
-          exact
-          path={`${PUBLISHER_DASHBOARD_ROUTE_WITH_PARAM}/:workflow`}
-          component={PublisherWizardContainer}
-        /> */}
+        exact
+        path={`${PUBLISHER_DASHBOARD_ROUTE_WITH_PARAM}/:workflow/test`}
+        component={PublisherWizardContainer}
+      /> */}
       {/* <Route
         exact
         path={MARKETER_FEED_ROUTE}

@@ -1,23 +1,20 @@
 import React from 'react';
 import { ToTheLeftFlexContainer } from '../../shared/feed/styles';
 
-const MarketerCampaignUrl = ({ x }) => {
+const PublisherFeedCampaignName = ({ name }) => {
   return (
     <ToTheLeftFlexContainer>
-      <a
+      <p
         style={{
           color: '#E2E2E2',
           fontSize: '16px',
           marginBottom: '14px',
         }}
-        target="_blank"
-        rel="noreferrer"
-        href={x.url}
       >
-        {x.url}
-      </a>
+        {name}
+      </p>
     </ToTheLeftFlexContainer>
   );
 };
 
-export default MarketerCampaignUrl;
+export default PublisherFeedCampaignName;

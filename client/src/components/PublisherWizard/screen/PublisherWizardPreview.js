@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { CustomParagraph } from '../../shared/GeneralCard';
+import { CustomParagraph, ParagraphButton } from '../../shared/GeneralCard';
 import { COINGECKO_API } from '../../../api-config';
 
 const PublisherWizardPreview = ({ step, values }) => {
@@ -22,19 +22,60 @@ const PublisherWizardPreview = ({ step, values }) => {
     return null;
   }
   return (
-    <div>
-      <div>
-        <CustomParagraph>
-          Your website:
+    <div
+      style={{
+        height: '60%',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-around',
+      }}
+    >
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}
+      >
+        <CustomParagraph paragraphWidth="200px">Your website:</CustomParagraph>
+        <CustomParagraph
+          paragraphColor="#696868"
+          paragraphMargin="0 0 0 12px"
+          style={{ minWidth: '120px' }}
+        >
           {url}
         </CustomParagraph>
-        <CustomParagraph>
-          Your reward converted to ethereum:
-          {ethPrice ? reward / ethPrice : 'null'}
+      </div>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}
+      >
+        <CustomParagraph paragraphWidth="200px">Your budget:</CustomParagraph>
+        <CustomParagraph
+          style={{ minWidth: '120px' }}
+          paragraphColor="#696868"
+          paragraphMargin="0 0 0 12px"
+        >
+          {ethPrice ? `${(reward / ethPrice).toFixed(4)} eth` : 'null'}
         </CustomParagraph>
-        <CustomParagraph>
-          your budget converted to ethereum:
-          {ethPrice ? budget / ethPrice : 'null'}
+      </div>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}
+      >
+        <CustomParagraph paragraphWidth="200px">Your reward per click:</CustomParagraph>
+        <CustomParagraph
+          style={{ minWidth: '120px' }}
+          paragraphColor="#696868"
+          paragraphMargin="0 0 0 12px"
+        >
+          {ethPrice ? `${(reward / ethPrice).toFixed(4)} eth` : 'null'}
         </CustomParagraph>
       </div>
     </div>

@@ -10,9 +10,11 @@ export const CampaignContainer = styled.div`
 
 export const CustomForm = styled(Form)`
   height: ${(props) => props.customformheight};
+  width: 70%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  align-items: center;
 `;
 
 export const HeadingContainer = styled.div`
@@ -21,7 +23,7 @@ export const HeadingContainer = styled.div`
 `;
 
 export const NextButtonContainer = styled.div`
-  height: 30%;
+  height: 20%;
   display: flex;
   align-items: center;
 `;
@@ -33,7 +35,7 @@ export const DepositInfoContainer = styled.div`
 `;
 
 export const DepositButtonContainer = styled.div`
-  height: 30%;
+  height: 20%;
   display: flex;
   align-items: center;
   justify-content: center;
