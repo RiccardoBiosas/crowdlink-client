@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useTransition } from 'react-spring';
-import axios from 'axios';
 import { CampaignContainerLayout, ToTheLeftFlexContainer } from '../../shared/feed/styles';
-
 import { PUBLISHER_DASHBOARD_ROUTE_WITH_PARAM } from '../../../routes-config';
 import GlobalButton from '../../shared/styles';
-import { CAMPAIGNS_ENDPOINT_CLICK_CAMPAIGN } from '../../../api-config';
 import PublisherFeedCampaign from '../screen/PublisherFeedCampaign';
+import { getClickCampaigns } from '../../../utils/crowdlink/API';
 // import useFetch from '../../../hooks/useFetch';
 
 const PublisherFeedContainer = ({ account, contractInstance }) => {
@@ -16,25 +13,17 @@ const PublisherFeedContainer = ({ account, contractInstance }) => {
 
   const history = useHistory();
 
-  // const resp = useFetch(CAMPAIGNS_ENDPOINT_CLICK_CAMPAIGN);
+  // const resp = useFetch(CAMPAIGNS_CLICK_ENDPOINT);
   // console.log('resp resp response', resp);
   const fetchData = async () => {
-    const response = await axios.get(CAMPAIGNS_ENDPOINT_CLICK_CAMPAIGN);
+    // const response = await axios.get(CAMPAIGNS_CLICK_ENDPOINT);
+    const response = await getClickCampaigns();
     setResp(response);
   };
 
   useEffect(() => {
     fetchData();
   }, []);
-
-  // const transitions = useTransition(showStats, null, {
-  //   from: { opacitiy: 0, transform: 'translateY(-20%)' },
-  //   enter: { opacity: 1, transform: 'translateY(0%)' },
-  //   leave: { opacity: 0, transform: 'translateY(-20%)' },
-  //   config: {
-  //     duration: 400,
-  //   },
-  // });
 
   if (!resp || !resp.data) {
     return <h1>waiting</h1>;

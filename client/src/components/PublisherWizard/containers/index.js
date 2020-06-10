@@ -9,9 +9,9 @@ import PublisherWizardCampaignDescription from '../screen/PublisherWizardCampaig
 import PublisherWizardCampaignBudget from '../screen/PublisherWizardCampaignBudget';
 import PublisherWizardCampaignOutcome from '../screen/PublisherWizardCampaignOutcome';
 import PublisherWizardPreview from '../screen/PublisherWizardPreview';
-import {
+import host, {
   COINGECKO_API,
-  CAMPAIGNS_ENDPOINT_CLICK_CAMPAIGN,
+  CAMPAIGNS_CLICK_ENDPOINT,
   ROPSTEN_ETHERSCAN_TX,
 } from '../../../api-config';
 import {
@@ -53,7 +53,7 @@ const InfoToast = ({ txHash }) => {
       <p style={{ color: 'white' }}>Transaction broadcasted!</p>
       <p style={{ color: 'white' }}>Check the status on etherscan while we wait for confirmation</p>
       <p style={{ color: 'white' }}>
-        <a href={`${ROPSTEN_ETHERSCAN_TX}${txHash}`} target="_blank">
+        <a href={`${ROPSTEN_ETHERSCAN_TX}${txHash}`} target="_blank" rel="noopener noreferrer">
           {txHash}
         </a>
       </p>
@@ -87,7 +87,7 @@ const PublisherWizardContainer = ({ contractInstance, account, crowdlinkAddress 
     console.log('campaigndata ', campaignData);
     const { name, url, reward } = campaignData;
 
-    const resp = await axios.post(CAMPAIGNS_ENDPOINT_CLICK_CAMPAIGN, {
+    const resp = await axios.post(`${host}${CAMPAIGNS_CLICK_ENDPOINT}`, {
       name,
       user_public_key: account,
       url,

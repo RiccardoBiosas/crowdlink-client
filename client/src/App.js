@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { ethers } from 'ethers';
 import { useWeb3Context } from 'web3-react';
+import { createBrowserHistory } from 'history';
 import {
   PUBLISHER_SIGN_UP_ROUTE,
   PUBLISHER_WORKFLOW_ROUTE,
@@ -108,9 +109,11 @@ const Navbar = () => {
   );
 };
 
+export const history = createBrowserHistory();
+
 const App = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter history={history}>
       <Route path="/" component={Navbar} />
 
       <Switch>

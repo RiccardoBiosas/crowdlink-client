@@ -6,9 +6,9 @@ import { CampaignContainer, CampaignContainerComponent } from '../../shared/feed
 import MarketerCampaign from '../screen/MarketerCampaign';
 import MarketerCampaignUrl from '../screen/MarketerCampaignUrl';
 import { MARKETER_WITHDRAW_ROUTE } from '../../../routes-config';
-import {
+import host, {
   CAMPAIGNS_CLICK_CREATE_LINK_ENDPOINT,
-  CAMPAIGNS_ENDPOINT_CLICK_CAMPAIGN,
+  CAMPAIGNS_CLICK_ENDPOINT,
 } from '../../../api-config';
 
 const MarketerCampaignContainer = ({ x, contractInstance, account, indx }) => {
@@ -18,7 +18,7 @@ const MarketerCampaignContainer = ({ x, contractInstance, account, indx }) => {
   const history = useHistory();
 
   const fetchReferralLink = useCallback(async () => {
-    const resp = await axios.get(`${CAMPAIGNS_ENDPOINT_CLICK_CAMPAIGN}?user_public_key=${account}
+    const resp = await axios.get(`${host}${CAMPAIGNS_CLICK_ENDPOINT}?user_public_key=${account}
       `);
     console.log('fetchreferrallink resp', resp);
     if (resp.data) {

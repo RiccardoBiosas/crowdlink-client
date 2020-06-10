@@ -49,7 +49,7 @@ const MarketerCampaign = ({ x, referralLink }) => {
             Reward:
           </CustomParagraph>
           <CustomParagraph paragraphColor="#959090" paragraphFontSize={16}>
-            {`${x.reward.toFixed(2)}$`}
+            {`${parseInt(x.reward, 10).toFixed(2)}$`}
           </CustomParagraph>
         </CampaignContainerDataContainer>
         <CampaignContainerDataContainer style={{ alignItems: 'center' }}>

@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
-import { CAMPAIGNS_ENDPOINT_CLICK_CAMPAIGN } from '../../../api-config';
+import host, { CAMPAIGNS_CLICK_ENDPOINT } from '../../../api-config';
 import { CampaignContainerLayout, ToTheLeftFlexContainer } from '../../shared/feed/styles';
 import MarketerCampaignContainer from './MarketerCampaignContainer';
 import { MARKETER_WITHDRAW_ROUTE } from '../../../routes-config';
 import GlobalButton from '../../shared/styles';
+import { getClickCampaigns } from '../../../utils/crowdlink/API';
 
 const MarketerFeedListContainer = ({ contractInstance, account }) => {
   const [resp, setResp] = useState();
@@ -13,7 +14,10 @@ const MarketerFeedListContainer = ({ contractInstance, account }) => {
   const history = useHistory();
 
   const fetchData = async () => {
-    const response = await axios.get(CAMPAIGNS_ENDPOINT_CLICK_CAMPAIGN);
+    // const response = await axios.get(`${host}${CAMPAIGNS_CLICK_ENDPOINT}`);
+    const response = await getClickCampaigns();
+    console.log('response fetchdata', response);
+
     setResp(response);
   };
 

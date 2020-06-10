@@ -20,7 +20,6 @@ if (domainExpr.test(hostname)) {
 
 console.log('backend api host', host);
 
-export const CAMPAIGNS_ENDPOINT_CLICK_CAMPAIGN = `${host}/api/click/campaigns/`;
 export const CAMPAIGNS_CLICK_ENDPOINT = '/api/click/campaigns/';
 export const CAMPAIGNS_CLICK_CREATE_LINK_ENDPOINT = 'create_link/'; // NEEDS TO START WITH AN ID PARAMETER!
 export const USERS_ENDPOINT = '/api/users/';
