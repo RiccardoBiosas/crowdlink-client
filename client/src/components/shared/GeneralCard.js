@@ -6,8 +6,6 @@ export const CardContainerLayout = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: ${(props) =>
-    props.cardContainerBackgroundColor ? props.cardContainerBackgroundColor : '#23153C'};
 `;
 
 export const StyledCardContainerLayout = styled.div`

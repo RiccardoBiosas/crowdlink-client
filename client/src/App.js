@@ -64,7 +64,6 @@ const Navbar = () => {
         width: '100%',
         display: 'flex',
         justifyContent: 'flex-end',
-        backgroundColor: '#23153C',
       }}
     >
       <div

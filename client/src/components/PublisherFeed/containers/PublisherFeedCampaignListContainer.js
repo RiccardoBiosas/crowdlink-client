@@ -47,7 +47,14 @@ const PublisherFeedContainer = ({ account, contractInstance }) => {
       {resp.data.results.length > 0 &&
         resp.data.results
           .filter((x) => x.user_public_key === account)
-          .map((x, i) => <PublisherFeedCampaign x={x} key={`publisher${i}`} />)}
+          .map((x, i) => (
+            <PublisherFeedCampaign
+              x={x}
+              key={`publisher${i}`}
+              contractInstance={contractInstance}
+              account={account}
+            />
+          ))}
     </CampaignContainerLayout>
   );
 };

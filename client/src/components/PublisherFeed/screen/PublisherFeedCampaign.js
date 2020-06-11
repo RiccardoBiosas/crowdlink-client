@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useEffect, Fragment } from 'react';
 import { useTransition, animated } from 'react-spring';
+import { useHistory } from 'react-router-dom';
 import { ParagraphButton, CustomParagraph } from '../../shared/GeneralCard';
 import {
   CampaignContainerLayout,
@@ -19,9 +20,12 @@ import {
 import CopyToClipboard from '../../shared/components/CopyToClipboard';
 import PublisherFeedCampaignName from './PublisherFeedCampaignName';
 import PublisherCampaignDropdown from './PublisherCampaignDropdown';
+import ArrowDown from '../../../assets/arrow-down.png';
 
-const PublisherFeedCampaign = ({ x }) => {
+const PublisherFeedCampaign = ({ x, contractInstance, account }) => {
   const [showStats, setShowStats] = useState(false);
+
+  const history = useHistory();
 
   const transition = useTransition(showStats, null, {
     from: { opacitiy: 0, transform: 'translateY(-20%)' },
@@ -60,7 +64,7 @@ const PublisherFeedCampaign = ({ x }) => {
             </CampaignContainerDataContainer>
           </CampaignContainerComponent>
           <CampaignContainerComponent componentFlex={1}>
-            {/* <ParagraphButton
+            <ParagraphButton
               buttonColor="#7838D5"
               buttonFontSize={20}
               buttonFontWeight={600}
@@ -72,16 +76,32 @@ const PublisherFeedCampaign = ({ x }) => {
               }
             >
               {'Withdraw >'}
-            </ParagraphButton> */}
-            <ParagraphButton
+            </ParagraphButton>
+            {/* <ParagraphButton
               buttonColor="#7838D5"
               buttonFontSize={20}
               buttonFontWeight={600}
               onClick={() => setShowStats(!showStats)}
             >
               {!showStats ? 'Show stats' : 'Hide stats'}
-            </ParagraphButton>
+            </ParagraphButton> */}
           </CampaignContainerComponent>
+          <div
+            style={{
+              position: 'relative',
+              height: '80%',
+              display: 'flex',
+              alignItems: ' flex-end',
+              right: '20px',
+            }}
+          >
+            <button
+              onClick={() => setShowStats(!showStats)}
+              style={{ outline: 'none', background: 'none', border: 'none', cursor: 'pointer' }}
+            >
+              <img src={ArrowDown} alt="open dropdown" />
+            </button>
+          </div>
         </CampaignContainer>
       </div>
       {transition.map(({ item, key, props }) => {
@@ -89,7 +109,11 @@ const PublisherFeedCampaign = ({ x }) => {
           <>
             {item && (
               <animated.div style={props} key={key}>
-                <PublisherCampaignDropdown />
+                <PublisherCampaignDropdown
+                  contractInstance={contractInstance}
+                  account={account}
+                  website={x.url}
+                />
               </animated.div>
             )}
           </>

@@ -2,7 +2,6 @@ pragma solidity ^0.5.16;
 import "../node_modules/@openzeppelin/contracts/ownership/Ownable.sol";
 import "../node_modules/@openzeppelin/contracts/math/SafeMath.sol";
 
-
 contract CrowdlinkReferral is Ownable {
     using SafeMath for uint256;
 
@@ -45,6 +44,24 @@ contract CrowdlinkReferral is Ownable {
     mapping(address => uint256) public campaign_owner_account_balance; //referral campaign owner's balance
     mapping(address => uint256) public influencer_account_balance; //influencers' balance
     mapping(address => ReferralCampaign[]) public referral_campaign_collection; //lists of referral campaigns associated to an address
+
+    function getBalanceOfLinkToInfluencer(string memory _link)
+        public
+        view
+        returns (uint256)
+    {
+        Influencer memory influencer_instance = influencers[_link];
+        address influencer_instance_address = influencer_instance.addr;
+        return influencer_account_balance[influencer_instance_address];
+    }
+
+    function getInfluencerBalance(address _addr) public view returns (uint256) {
+        return influencer_account_balance[_addr];
+    }
+
+    function getOwnerBalance(address _addr) public view returns (uint256) {
+        return campaign_owner_account_balance[_addr];
+    }
 
     function addInfluencer(
         string memory _website,
@@ -160,21 +177,6 @@ contract CrowdlinkReferral is Ownable {
             _campaignType
         );
         return campaign_owner_account_balance[msg.sender];
-    }
-
-    function getBalanceOfInfluencer(string memory _link)
-        public
-        view
-        returns (uint256)
-    {
-        Influencer storage influencer_instance = influencers[_link];
-        string memory influencer_instance_link = influencer_instance
-            .referral_link;
-        if (helper_compareStrings(influencer_instance_link, _link)) {
-            address influencer_addr = address(influencer_instance.addr);
-            return influencer_addr.balance;
-        }
-        return 0;
     }
 
     function forwardPayPerClickRewards(
@@ -393,6 +395,71 @@ contract CrowdlinkReferral is Ownable {
                 .campaignReward,
             referral_campaign_collection[_account_address][_index].isActive,
             camapaign_referral_type,
+            referral_campaign_influencers_address_list
+        );
+    }
+
+    function lookUpCampaignRemainingBudget(
+        address _address,
+        string memory _website
+    ) public view returns (uint256) {
+        (
+            uint256 referral_campaign_indx,
+            bool found
+        ) = helper_selectReferralCampaign(_address, _website);
+        require(
+            found == true &&
+                referral_campaign_collection[_address][referral_campaign_indx]
+                    .isActive ==
+                true
+        );
+        return
+            referral_campaign_collection[_address][referral_campaign_indx]
+                .remainingBudget;
+    }
+
+    function lookUpCampaignReferralByWebsite(
+        address _account_address,
+        string memory _website
+    ) public view returns (uint256, address[] memory) {
+        (uint256 _index, bool found) = helper_selectReferralCampaign(
+            _account_address,
+            _website
+        );
+        require(
+            found == true &&
+                referral_campaign_collection[_account_address][_index]
+                    .campaignBudget !=
+                0
+        );
+
+
+            string memory campaign_referral_website
+         = referral_campaign_collection[_account_address][_index].website;
+
+            string memory camapaign_referral_type
+         = referral_campaign_collection[_account_address][_index].campaignType;
+
+
+            address[] memory referral_campaign_influencers_address_list
+         = new address[](
+            referral_campaign_collection[_account_address][_index]
+                .referral_campaign_referral_links_list
+                .length
+        ); //length of the array equal to length of the referral campaign's referral links array
+
+            string[] memory short_urls_list
+         = referral_campaign_collection[_account_address][_index]
+            .referral_campaign_referral_links_list;
+
+        for (uint256 i = 0; i < short_urls_list.length; i++) {
+            address influencer_addr = influencers[short_urls_list[i]].addr;
+            referral_campaign_influencers_address_list[i] = influencer_addr;
+        }
+
+        return (
+            referral_campaign_collection[_account_address][_index]
+                .remainingBudget,
             referral_campaign_influencers_address_list
         );
     }

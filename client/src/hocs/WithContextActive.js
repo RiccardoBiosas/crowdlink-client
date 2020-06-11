@@ -1,8 +1,8 @@
 import React from 'react';
-import { Redirect, useHistory, withRouter } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { Web3Consumer } from 'web3-react';
 import { ethers } from 'ethers';
-import CrowdlinkReferral from '../contracts/CrowdlinkReferral';
+import CrowdlinkReferral from '../contracts/CrowdlinkReferral.json';
 import { SIGN_UP_FALLBACK_ROUTE } from '../routes-config';
 
 const WithContextActive = (ComposedComponent) => {

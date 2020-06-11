@@ -11,6 +11,10 @@ html {
   font-family: 'Open Sans', sans-serif;
 }
 
+body {
+  background-color: #23153c;
+}
+
 p {
   margin: 0;
   padding: 0;
