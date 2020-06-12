@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, createRef } from 'react';
 import { useLocation, Redirect } from 'react-router-dom';
 import { Web3Consumer } from 'web3-react';
+import OpenConnectorsModal from '../../../connectors/containers/index'
 import { CardContainerLayout, CustomParagraph } from '../../shared/GeneralCard';
 import { RowContainer } from '../../shared/PublisherWizard/styles';
 import { PUBLISHER_WORKFLOW_ROUTE, MARKETER_FEED_ROUTE } from '../../../routes-config';
@@ -71,7 +72,7 @@ const SignUpFallback = () => {
                 </CustomParagraph>
                 {location.state ? (
                   <span ref={ref}>
-                    <SignupRedirect text="" />
+                    <OpenConnectorsModal />
                   </span>
                 ) : (
                   <RowContainer containerWidth="60%" containerJustify="space-around">

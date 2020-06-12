@@ -11,6 +11,7 @@ import {
 import { MARKETER_FEED_ROUTE } from '../../routes-config';
 import ArrowDown from '../../assets/arrow-down.png';
 import CardLayout from '../shared/layout/CardLayout';
+import OpenConnectorsModal from '../../connectors/containers';
 
 const MarketerSignUp = () => {
   const history = useHistory();
@@ -73,7 +74,8 @@ const MarketerSignUp = () => {
                   <img src={ArrowDown} alt="scroll down" />
                 </div>
 
-                <PortisInstance />
+                {/* <PortisInstance /> */}
+                <OpenConnectorsModal />
               </>
             );
           }}

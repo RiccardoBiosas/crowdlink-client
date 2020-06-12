@@ -1,7 +1,6 @@
-import React, {useState, useRef} from 'react';
+import React from 'react';
 import { Web3Consumer } from 'web3-react';
 import { useHistory, useLocation } from 'react-router-dom';
-import PortisInstance from '../../portis/PortisInstance';
 import GlobalButton from '../shared/styles';
 import {
   CustomParagraph,
@@ -22,14 +21,12 @@ import { REWARD_PER_SALE_WORKFLOW } from '../PublisherWorkflow/PublisherWorkflow
 import ArrowDown from '../../assets/arrow-down.png';
 import CardLayout from '../shared/layout/CardLayout';
 // import ConnectorsInstance from '../../connectors/screen/connectorsInstance'
-import ConnectorsModal  from '../../connectors/containers/index';
+import OpenConnectorsModal from '../../connectors/containers/index';
 
 const PublisherSignUp = () => {
   // const context = useWeb3Context();
-  const [modalState, setModalState] = useState(false)
   const history = useHistory();
   const location = useLocation();
-  const ref = useRef()
 
   const { workflow } = location;
 
@@ -168,14 +165,8 @@ const PublisherSignUp = () => {
                 >
                   Deposit commission payout. Withdraw any time.
                 </CustomParagraph>
-                {/* <PortisInstance /> */}
-                <button ref={ref} style={{width: '200px'}} onClick={() => setModalState(!modalState)}>open</button>
-                {/* {modalState && (<div style={{zIndex: 10000, position: 'fixed', top: 0, left: 0, height: '400px'}}>
-                  <ConnectorsInstance />
 
-                </div>)} */}
-                <ConnectorsModal openerRef={ref} modalState={modalState} />
-
+                  <OpenConnectorsModal />
               </>
             );
           }}

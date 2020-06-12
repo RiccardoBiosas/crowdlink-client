@@ -1,34 +1,40 @@
-import React, {useState, useLayoutEffect, forwardRef} from 'react'
-import ConnectorsModal from '../screen/ConnectorsModal'
+import React, { useState, useLayoutEffect, useRef } from 'react';
+import ConnectorsModal from '../screen/ConnectorsModal';
 
-const ConnectorsModalContainer = ({openerRef, modalState}) => {
-  console.log('opener ref ', openerRef)
-  const [coords, setCoords] = useState()
-  const [size, setSize]=useState()
-  // const output = openerRef.current ? openerRef.current.getBoundingClientRect() : {x: '50%', y: '50%'}
+
+const OpenConnectorsModal = ({text}) => {
+  const [modalState, setModalState] = useState(false);
+  const [refProperties, setRefProperties] = useState();
+  const ref = useRef();
 
   useLayoutEffect(() => {
-    if(openerRef && !coords) {
-      const output = openerRef.current.getBoundingClientRect()
-      console.log(output)
-      console.log(output)
-      setCoords({...coords, coordX: output.right, coordY: output.top})
+    if (ref && !refProperties) {
+      const elmDOM = ref.current.getBoundingClientRect();
 
-      setSize({width: output.width, height: output.height})
-
+      setRefProperties({
+        ...refProperties,
+        coordX: elmDOM.right,
+        coordY: elmDOM.top,
+        openerWidth: elmDOM.width,
+        openerHeight: elmDOM.height
+      });
     }
+  });
+  console.log('ref properties', refProperties)
 
-  }, [coords])
+  return (
+    <>
+      <button ref={ref} style={{ width: '200px', backgroundColor: 'red' }} onClick={() => setModalState(!modalState)}>
+        {text}
+      </button>
 
+      {refProperties && <ConnectorsModal refProperties={refProperties} modalState={modalState} />}
+    </>
+  );
+};
 
-  if(coords) {
-    return(
-
-      <ConnectorsModal coordX={coords.coordX - size.width} coordY={coords.coordY} openerWidth={size.width} openerHeight={size.height} modalState={modalState} />
-    )
-  } else {
-    return <></>
-  }
+OpenConnectorsModal.defaultProps = {
+  text: 'sign up'
 }
 
-export default ConnectorsModalContainer
+export default OpenConnectorsModal;
