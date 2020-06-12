@@ -23,6 +23,7 @@ import {
 import { ParagraphButton, CustomH1, CardContainerLayout } from '../../shared/GeneralCard';
 import CardLayout from '../../shared/layout/CardLayout';
 import GlobalButton from '../../shared/styles';
+import WizardFormValidationSchema from '../validationSchema/schema';
 
 const PayPerSaleStepHeadings = [
   'Name your campaign & Place url',
@@ -142,6 +143,7 @@ const PublisherWizardContainer = ({ contractInstance, account, crowdlinkAddress 
     <>
       <CardContainerLayout>
         <Formik
+          validationSchema={WizardFormValidationSchema}
           initialValues={emptyInitialValues}
           onSubmit={async (values) => {
             const { name, url, reward, budget } = values;
@@ -182,7 +184,7 @@ const PublisherWizardContainer = ({ contractInstance, account, crowdlinkAddress 
             setCampaignData({ ...campaignData, ...values });
           }}
         >
-          {({ values }) => {
+          {({ values, errors }) => {
             return (
               <div
                 style={{
@@ -230,7 +232,11 @@ const PublisherWizardContainer = ({ contractInstance, account, crowdlinkAddress 
                           : PayPerClickStepHeadings[step - 1]}
                       </CustomH1>
                     </HeadingContainer>
-                    <PublisherWizardCampaignDescription workflow={workflow} step={step} />
+                    <PublisherWizardCampaignDescription
+                      errors={errors}
+                      workflow={workflow}
+                      step={step}
+                    />
                     <PublisherWizardCampaignBudget step={step} />
                     <PublisherWizardPreview step={step} values={values} />
                     <PublisherWizardDeposit

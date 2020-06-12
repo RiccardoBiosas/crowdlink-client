@@ -1,7 +1,8 @@
 import React from 'react';
 import { CustomField, CustomLabel } from '../../shared/PublisherWizard/styles';
 
-const PublisherWizardCampaignDescription = ({ step }) => {
+const PublisherWizardCampaignDescription = ({ step, errors }) => {
+  console.log(errors);
   if (step !== 1) {
     return null;
   }

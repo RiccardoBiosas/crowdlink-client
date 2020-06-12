@@ -20,7 +20,7 @@ import PublisherHomepage from './components/PublisherHomepage';
 import MarketerHomepage from './components/MarketerHomepage';
 import PublisherSignUp from './components/PublisherSignUp/PublisherSignUp';
 import PublisherConnectGA from './components/PublisherConnectGA/PublisherConnectGA';
-import ConnectorsInstance from './connectors/connectorsInstance';
+import ConnectorsInstance from './connectors/screen/connectorsInstance';
 import PublisherWorkflow from './components/PublisherWorkflow/PublisherWorkflow';
 import PublisherWizardContainer from './components/PublisherWizard/containers/index';
 import PublisherFeedContainer from './components/PublisherFeed/containers/PublisherFeedCampaignListContainer';
@@ -31,6 +31,7 @@ import SignUpFallback from './components/SignUpFallback/containers/index';
 import MarketerFeedListContainer from './components/MarketerFeed/containers/MarketerFeedListContainer';
 import MarketerWithdraw from './components/MarketerWithdraw/MarketerWithdraw';
 import NotFound from './components/404/NotFound';
+import ContractTest from './ContractTest';
 
 // move to constant.js
 const networks = {
@@ -116,6 +117,11 @@ const App = () => {
       <Route path="/" component={Navbar} />
 
       <Switch>
+        {/* only for test */}
+        <Route exact path={'/contract/test'} component={ContractTest} />
+        {/* only for test */}
+
+
         <Route exact path="/" component={PublisherHomepage} />
         <Route exact path={MARKETER_HOMEPAGE} component={MarketerHomepage} />
         <Route exact path={PUBLISHER_SIGN_UP_ROUTE} component={PublisherSignUp} />
@@ -163,6 +169,7 @@ const App = () => {
         <Route exact path={MARKETER_SIGN_UP_ROUTE} component={MarketerSignUp} />
         <Route path="*" component={NotFound} />
       </Switch>
+
 
       {/* ############### WITHOUT CONTEXT ACTIVE. ONLY FOR QUICK TESTING */}
       {/* <Route
