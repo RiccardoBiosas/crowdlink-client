@@ -11,7 +11,7 @@ const MarketerCampaignUrl = ({ x }) => {
           marginBottom: '14px',
         }}
         target="_blank"
-        rel="noreferrer"
+        rel="noopener noreferrer"
         href={x.url}
       >
         {x.url}

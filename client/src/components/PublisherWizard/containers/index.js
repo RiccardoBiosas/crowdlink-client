@@ -62,7 +62,12 @@ const InfoToast = ({ txHash }) => {
   );
 };
 
-const PublisherWizardContainer = ({ contractInstance, account, crowdlinkAddress }) => {
+const PublisherWizardContainer = ({
+  contractInstance,
+  account,
+  crowdlinkAddress,
+  connectorName,
+}) => {
   const [step, setStep] = useState(1);
   const [respStatus, setRespStatus] = useState();
   const [txHash, setTxHash] = useState();
@@ -114,7 +119,7 @@ const PublisherWizardContainer = ({ contractInstance, account, crowdlinkAddress 
       getReceipt();
     }
     if (txHash && !receipt && isBroadcasted) {
-      toast.info(<InfoToast txHash={txHash} />, {
+      toast.info(`Transaction broadcasted!`, {
         position: 'top-center',
         transition: Slide,
         autoClose: 4000,
@@ -244,6 +249,8 @@ const PublisherWizardContainer = ({ contractInstance, account, crowdlinkAddress 
                       values={values}
                       address={crowdlinkAddress}
                       isBroadcasted={isBroadcasted}
+                      txHash={txHash}
+                      connectorName={connectorName}
                     />
                     <PublisherWizardCampaignOutcome
                       step={step}
@@ -280,7 +287,6 @@ const PublisherWizardContainer = ({ contractInstance, account, crowdlinkAddress 
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        style={{ width: '600px' }}
       />
     </>
   );

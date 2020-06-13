@@ -62,6 +62,7 @@ export const RowContainer = styled.div`
   justify-content: ${(props) =>
     props.containerJustify === 'around' ? 'space-around' : 'space-between'};
   align-items: center;
+  margin: ${(props) => props.containerMargin || '0'};
 `;
 
 export const CustomField = styled(Field)`

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Web3Consumer } from 'web3-react';
 import { useHistory, Redirect } from 'react-router-dom';
-import PortisInstance from '../../portis/PortisInstance';
 import {
   CustomParagraph,
   CardContainerLayout,
@@ -55,7 +54,7 @@ const MarketerSignUp = () => {
                     paragraphFontSize={22}
                     paragraphFontWeight={600}
                   >
-                    You will receive funds via Portis Wallet
+                    You will receive funds via your selected Web3 wallet
                   </CustomParagraph>
                 </div>
                 <div>

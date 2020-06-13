@@ -1,8 +1,8 @@
 import React, { useState, useLayoutEffect, useRef } from 'react';
 import ConnectorsModal from '../screen/ConnectorsModal';
+import { ParagraphButton } from '../../components/shared/GeneralCard';
 
-
-const OpenConnectorsModal = ({text}) => {
+const OpenConnectorsModal = ({ text }) => {
   const [modalState, setModalState] = useState(false);
   const [refProperties, setRefProperties] = useState();
   const ref = useRef();
@@ -16,17 +16,24 @@ const OpenConnectorsModal = ({text}) => {
         coordX: elmDOM.right,
         coordY: elmDOM.top,
         openerWidth: elmDOM.width,
-        openerHeight: elmDOM.height
+        openerHeight: elmDOM.height,
       });
     }
   });
-  console.log('ref properties', refProperties)
+  console.log('ref properties', refProperties);
 
   return (
     <>
-      <button ref={ref} style={{ width: '200px', backgroundColor: 'red' }} onClick={() => setModalState(!modalState)}>
+      <ParagraphButton
+        type="button"
+        buttonColor="#4C83D4"
+        buttonFontWeight={900}
+        buttonFontSize={24}
+        ref={ref}
+        onClick={() => setModalState(!modalState)}
+      >
         {text}
-      </button>
+      </ParagraphButton>
 
       {refProperties && <ConnectorsModal refProperties={refProperties} modalState={modalState} />}
     </>
@@ -34,7 +41,7 @@ const OpenConnectorsModal = ({text}) => {
 };
 
 OpenConnectorsModal.defaultProps = {
-  text: 'sign up'
-}
+  text: 'Sign up +',
+};
 
 export default OpenConnectorsModal;

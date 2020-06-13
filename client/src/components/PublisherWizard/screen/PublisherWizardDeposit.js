@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ClockLoader from 'react-spinners/ClockLoader';
 import { useWeb3Context } from 'web3-react';
 import { ethers } from 'ethers';
+import { ROPSTEN_ETHERSCAN_TX } from '../../../api-config';
 import {
   DepositButtonContainer,
   DepositInfoContainer,
@@ -10,9 +11,24 @@ import {
 import GlobalButton from '../../shared/styles';
 import { ReactComponent as Copy } from '../../../assets/copy.svg';
 import { CustomParagraph, ParagraphButton } from '../../shared/GeneralCard';
-import { ReactComponent as PortisLogo } from '../../../assets/portis-logo.svg';
+// import { ReactComponent as PortisLogo } from '../../../assets/portis-logo.svg';
+// import { ReactComponent as MetamaskLogo } from '../../../assets/wallet-logos/metamask-logo.svg';
+import portisLogo from '../../../assets/portis-logo.svg';
+import metamaskLogo from '../../../assets/wallet-logos/metamask-logo.svg';
 
-const PublisherWizardDeposit = ({ step, values, address, isBroadcasted }) => {
+const logos = {
+  injected: metamaskLogo,
+  portis: portisLogo,
+};
+
+const PublisherWizardDeposit = ({
+  step,
+  values,
+  address,
+  isBroadcasted,
+  connectorName,
+  txHash,
+}) => {
   const context = useWeb3Context();
   const [resolvedAddress, setResolvedAddress] = useState();
 
@@ -83,14 +99,34 @@ const PublisherWizardDeposit = ({ step, values, address, isBroadcasted }) => {
           </RowContainer>
         </DepositInfoContainer>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          {!isBroadcasted ? <PortisLogo /> : <ClockLoader color="#206DFF" size={110} />}
+          {!isBroadcasted ? (
+            <img src={logos[connectorName.toLowerCase()]} alt="wallet-logo" />
+          ) : (
+            <ClockLoader color="#206DFF" size={110} />
+          )}
         </div>
       </div>
 
       <DepositButtonContainer>
-        <GlobalButton type="submit" buttonWidth={200} buttonTextColor="white" buttonColor="#7838D5">
-          Pay with portis
-        </GlobalButton>
+        {!isBroadcasted || !txHash ? (
+          <GlobalButton
+            type="submit"
+            buttonWidth={300}
+            buttonTextColor="white"
+            buttonColor="#7838D5"
+          >
+            {connectorName.toLowerCase() === 'injected'
+              ? 'Pay with your metamask account'
+              : `Pay with ${connectorName} account`}
+          </GlobalButton>
+        ) : (
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <p>Check your transaction on etherscan:</p>
+            <a href={`${ROPSTEN_ETHERSCAN_TX}${txHash}`} target="_blank" rel="noopener noreferrer">
+              {txHash}
+            </a>
+          </div>
+        )}
       </DepositButtonContainer>
     </>
   );

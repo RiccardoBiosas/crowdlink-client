@@ -11,7 +11,7 @@ import {
   CardLayoutWithHorizontalContainers,
 } from './shared/GeneralCard';
 import { MARKETER_SIGN_UP_ROUTE } from '../routes-config';
-import { ReactComponent as CrowdLinkHomepageMarketer } from '../assets/crowdlink-homepage-marketer.svg';
+import { ReactComponent as CrowdLinkHomepageMarketerImage } from '../assets/crowdlink-homepage-marketer.svg';
 
 const MarketerHomepage = () => {
   const history = useHistory();
@@ -60,7 +60,9 @@ const MarketerHomepage = () => {
             </ParagraphButton>
           </ColumnContainer>
         </CardSubContainer>
-        <CrowdLinkHomepageMarketer />
+        <div>
+          <CrowdLinkHomepageMarketerImage />
+        </div>
       </CardLayoutWithHorizontalContainers>
     </CardContainerLayout>
   );

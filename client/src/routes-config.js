@@ -1,3 +1,4 @@
+export const PUBLISHER_HOMEPAGE = '/';
 export const MARKETER_HOMEPAGE = '/marketer';
 export const PUBLISHER_SIGN_UP_ROUTE = '/creator/register';
 // export const PUBLISHER_DASHBOARD_PAY_PER_SALE_ROUTE = '/creator/sales/dashboard'

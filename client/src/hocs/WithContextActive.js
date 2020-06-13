@@ -12,7 +12,7 @@ const WithContextActive = (ComposedComponent) => {
   const prevLocation = window.location.pathname;
   return (
     <Web3Consumer>
-      {({ library, networkId, active, account }) => {
+      {({ library, networkId, active, account, connectorName }) => {
         if (!active) {
           return (
             <Redirect
@@ -38,6 +38,7 @@ const WithContextActive = (ComposedComponent) => {
           <ComposedComponent
             contractInstance={contract}
             account={account}
+            connectorName={connectorName}
             crowdlinkAddress={crowdlinkAddress}
           />
         );

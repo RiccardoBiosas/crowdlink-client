@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { ethers } from 'ethers';
-import { useWeb3Context } from 'web3-react';
 import { createBrowserHistory } from 'history';
+import Navbar from './navbar/containers';
+
 import {
   PUBLISHER_SIGN_UP_ROUTE,
   PUBLISHER_WORKFLOW_ROUTE,
@@ -20,7 +20,6 @@ import PublisherHomepage from './components/PublisherHomepage';
 import MarketerHomepage from './components/MarketerHomepage';
 import PublisherSignUp from './components/PublisherSignUp/PublisherSignUp';
 import PublisherConnectGA from './components/PublisherConnectGA/PublisherConnectGA';
-import ConnectorsInstance from './connectors/screen/connectorsInstance';
 import PublisherWorkflow from './components/PublisherWorkflow/PublisherWorkflow';
 import PublisherWizardContainer from './components/PublisherWizard/containers/index';
 import PublisherFeedContainer from './components/PublisherFeed/containers/PublisherFeedCampaignListContainer';
@@ -33,82 +32,6 @@ import MarketerWithdraw from './components/MarketerWithdraw/MarketerWithdraw';
 import NotFound from './components/404/NotFound';
 import ContractTest from './ContractTest';
 
-// move to constant.js
-const networks = {
-  1: 'mainnet',
-  3: 'ropsten',
-};
-
-const Navbar = () => {
-  const { active, account, networkId } = useWeb3Context();
-  const [balance, setBalance] = useState();
-
-  const getBalance = async () => {
-    const provider = ethers.getDefaultProvider(networkId);
-    const balance = await provider.getBalance(account);
-    // console.log("balance", balance);
-    const balanceToEth = ethers.utils.formatEther(balance);
-    // console.log("balance to int", balanceToEth);
-    setBalance(parseFloat(balanceToEth).toFixed(4));
-  };
-
-  useEffect(() => {
-    if (active) {
-      getBalance();
-      // eventListener()
-    }
-  });
-
-  return (
-    <div
-      style={{
-        width: '100%',
-        display: 'flex',
-        justifyContent: 'flex-end',
-      }}
-    >
-      <div
-        style={{
-          width: '50%',
-          height: '10vh',
-          display: 'flex',
-          justifyContent: 'space-around',
-          alignItems: 'center',
-        }}
-      >
-        <p style={{ margin: '0', color: '#FFFFFF', fontSize: '16px', fontWeight: '900' }}>
-          {balance ? `Balance: ${balance} ETH` : 'not connected'}
-        </p>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <div
-            style={{
-              backgroundColor: '#F3F3F3',
-              borderRadius: '5px',
-              width: '140px',
-              fontSize: '16px',
-              height: '40px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <p style={{ color: '#2A4365' }}>{active ? networks[networkId] : 'not connected'}</p>
-          </div>
-          <div
-            style={{
-              marginLeft: '18px',
-              borderRadius: '50%',
-              backgroundColor: active ? 'green' : 'grey',
-              width: '20px',
-              height: '20px',
-            }}
-          />
-        </div>
-      </div>
-    </div>
-  );
-};
-
 export const history = createBrowserHistory();
 
 const App = () => {
@@ -118,9 +41,8 @@ const App = () => {
 
       <Switch>
         {/* only for test */}
-        <Route exact path={'/contract/test'} component={ContractTest} />
+        <Route exact path="/contract/test" component={ContractTest} />
         {/* only for test */}
-
 
         <Route exact path="/" component={PublisherHomepage} />
         <Route exact path={MARKETER_HOMEPAGE} component={MarketerHomepage} />
@@ -146,7 +68,6 @@ const App = () => {
           component={() => WithContextActive(MarketerWithdraw)}
         />
 
-        <Route exact path="/connection" component={ConnectorsInstance} />
         <Route
           exact
           path={`${PUBLISHER_WITHDRAW_ROUTE_WITH_PARAM}/:campaign`}
@@ -167,9 +88,9 @@ const App = () => {
         <Route exact path={PUBLISHER_WORKFLOW_ROUTE} component={PublisherWorkflow} />
 
         <Route exact path={MARKETER_SIGN_UP_ROUTE} component={MarketerSignUp} />
+
         <Route path="*" component={NotFound} />
       </Switch>
-
 
       {/* ############### WITHOUT CONTEXT ACTIVE. ONLY FOR QUICK TESTING */}
       {/* <Route

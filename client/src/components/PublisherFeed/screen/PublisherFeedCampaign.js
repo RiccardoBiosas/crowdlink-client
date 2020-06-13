@@ -72,8 +72,7 @@ const PublisherFeedCampaign = ({ x, contractInstance, account }) => {
                 history.push({
                   pathname: `${PUBLISHER_WITHDRAW_ROUTE_WITH_PARAM}/${x.name}`,
                   url: x.url,
-                })
-              }
+                })}
             >
               {'Withdraw >'}
             </ParagraphButton>
@@ -96,6 +95,7 @@ const PublisherFeedCampaign = ({ x, contractInstance, account }) => {
             }}
           >
             <button
+              type="button"
               onClick={() => setShowStats(!showStats)}
               style={{ outline: 'none', background: 'none', border: 'none', cursor: 'pointer' }}
             >

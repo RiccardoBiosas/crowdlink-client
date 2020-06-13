@@ -3,8 +3,7 @@ import { useWeb3Context } from 'web3-react';
 import connectors from '../../portis/index';
 import metamaskLogo from '../../assets/wallet-logos/metamask-logo.svg';
 import portisLogo from '../../assets/portis-logo.svg';
-import { WalletCard } from '../styles/WalletCard';
-import {ParagraphButton} from '../../components/shared/GeneralCard'
+import WalletButton from '../styles/WalletButton';
 
 const logos = {
   injected: metamaskLogo,
@@ -21,20 +20,17 @@ const ConnectorsInstance = () => {
   return (
     <>
       {Object.keys(connectors).map((connectorName) => (
-        <WalletCard>
-          <button>
-            <img src={logos[connectorName.toLowerCase()]} />
-            <p
-               key={connectorName} onClick={() => context.setConnector(connectorName)}>
-              {`${connectorName.toLowerCase() === 'injected' ? 'metamask' : connectorName}`}
-            </p>
-            {/* <ParagraphButton
+        <WalletButton type="button" onClick={() => context.setConnector(connectorName)}>
+          <img src={logos[connectorName.toLowerCase()]} alt="wallet-logo" />
+          <p key={connectorName}>
+            {`${connectorName.toLowerCase() === 'injected' ? 'metamask' : connectorName}`}
+          </p>
+          {/* <ParagraphButton
                 buttonColor="black"
                 buttonMargin="0 0 0 6px"  key={connectorName} onClick={() => context.setConnector(connectorName)}>
               {`${connectorName.toLowerCase() === 'injected' ? 'metamask' : connectorName}`}
             </ParagraphButton> */}
-          </button>
-        </WalletCard>
+        </WalletButton>
       ))}
     </>
   );

@@ -17,7 +17,7 @@ import {
   CardContainerLayout,
 } from './shared/GeneralCard';
 import GlobalButton from './shared/styles';
-import { ReactComponent as CrowdLinkHomepagePublisher } from '../assets/crowdlink-homepage-creator.svg';
+import { ReactComponent as CrowdLinkHomepagePublisherImage } from '../assets/crowdlink-homepage-creator.svg';
 
 const PublisherHomepage = () => {
   const history = useHistory();
@@ -81,7 +81,9 @@ const PublisherHomepage = () => {
           </ColumnContainer>
         </CardSubContainer>
 
-        <CrowdLinkHomepagePublisher />
+        <div>
+          <CrowdLinkHomepagePublisherImage />
+        </div>
       </CardLayoutWithHorizontalContainers>
     </CardContainerLayout>
   );

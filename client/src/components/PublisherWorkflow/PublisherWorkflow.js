@@ -14,9 +14,9 @@ import {
   CustomH2,
   CloseButtonContainer,
   CardSubContainer,
+  ColumnContainer,
 } from '../shared/GeneralCard';
 import CardLayout from '../shared/layout/CardLayout';
-import { RowContainer } from '../shared/PublisherWizard/styles';
 
 // move to constant.js
 export const REWARD_PER_SALE_WORKFLOW = 'PAY_PER_SALE';
@@ -40,11 +40,14 @@ const PublisherWorkflow = () => {
             x
           </ParagraphButton>
         </CloseButtonContainer>
-        <CardSubContainer subContainerHeight="100%" justify="space-around" align="flex-start">
+        {/* <CardSubContainer subContainerHeight="100%" justify="space-around" align="flex-start"> */}
+        <div style={{ flex: 1, display: 'flex', alignItems: 'center' }}>
           <CustomH2 h2FontWeight={600} h2FontSize={26}>
             I want my referral link to:
           </CustomH2>
-          {/* <RowContainer containerJustify="around" containerWidth="100%"> */}
+        </div>
+
+        <ColumnContainer containerFlex="2" containerJustify="space-around">
           <div>
             <ParagraphButton
               buttonColor="#7838D5"
@@ -82,40 +85,21 @@ const PublisherWorkflow = () => {
               reward per click (traffic)
             </CustomParagraph>
           </div>
-          {/* </RowContainer> */}
+        </ColumnContainer>
 
-          <div>
-            <CustomParagraph paragraphColor="#696868" paragraphFontSize={20}>
-              Already created a campaign? Go to
-              <ParagraphButton
-                buttonColor="#4C83D4"
-                buttonMargin="0 0 0 6px"
-                onClick={() => history.push(PUBLISHER_FEED_ROUTE)}
-              >
-                dashboard
-              </ParagraphButton>
-            </CustomParagraph>
-          </div>
-
-          {/* <ColumnContainer horizontalAlign="center" columnContainerWidth="100%">
-            <CustomH2 h2Width="50%" h2FontWeight={600} h2FontSize={26}>
-              Already created a campaign?
-            </CustomH2>
-            <ColumnContainer horizontalAlign="center" columnContainerWidth="50%">
-              <ParagraphButton
-                buttonColor="#4C83D4"
-                buttonFontWeight={900}
-                buttonFontSize={24}
-                onClick={() => history.push(PUBLISHER_FEED_ROUTE)}
-              >
-                dashboard +
-              </ParagraphButton>
-              <CustomParagraph paragraphFontSize={20} paragraphColor="#696868">
-                go to your camapaign feed
-              </CustomParagraph>
-            </ColumnContainer>
-          </ColumnContainer> */}
-        </CardSubContainer>
+        <div style={{ flex: 1, display: 'flex', alignItems: 'center' }}>
+          <CustomParagraph paragraphColor="#696868" paragraphFontSize={20}>
+            Already created a campaign? Go to
+            <ParagraphButton
+              buttonColor="#4C83D4"
+              buttonMargin="0 0 0 6px"
+              onClick={() => history.push(PUBLISHER_FEED_ROUTE)}
+            >
+              dashboard
+            </ParagraphButton>
+          </CustomParagraph>
+        </div>
+        {/* </CardSubContainer> */}
       </CardLayout>
     </CardContainerLayout>
   );

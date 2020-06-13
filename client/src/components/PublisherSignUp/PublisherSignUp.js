@@ -20,7 +20,6 @@ import {
 import { REWARD_PER_SALE_WORKFLOW } from '../PublisherWorkflow/PublisherWorkflow';
 import ArrowDown from '../../assets/arrow-down.png';
 import CardLayout from '../shared/layout/CardLayout';
-// import ConnectorsInstance from '../../connectors/screen/connectorsInstance'
 import OpenConnectorsModal from '../../connectors/containers/index';
 
 const PublisherSignUp = () => {
@@ -95,8 +94,8 @@ const PublisherSignUp = () => {
                       workflow === REWARD_PER_SALE_WORKFLOW
                         ? PUBLISHER_GA_CONNECT_ROUTE
                         : `${PUBLISHER_DASHBOARD_ROUTE_WITH_PARAM}/clicks`,
-                    )
-                  }
+                      // eslint-disable-next-line
+                    )}
                 >
                   Go To Dashboard
                 </GlobalButton>
@@ -109,7 +108,7 @@ const PublisherSignUp = () => {
                     paragraphFontSize={22}
                     paragraphFontWeight={600}
                   >
-                    Sign up with Portis
+                    Sign up with our supported web3 wallets
                   </CustomParagraph>
                 </div>
                 <div>
@@ -158,15 +157,19 @@ const PublisherSignUp = () => {
                     </div>
                   </>
                 )}
-                <CustomParagraph
-                  paragraphColor="#959090"
-                  paragraphFontSize={22}
-                  paragraphFontWeight={600}
-                >
-                  Deposit commission payout. Withdraw any time.
-                </CustomParagraph>
+                <div>
+                  <CustomParagraph
+                    paragraphColor="#959090"
+                    paragraphFontSize={22}
+                    paragraphFontWeight={600}
+                  >
+                    Deposit commission payout. Withdraw any time.
+                  </CustomParagraph>
+                </div>
 
+                <div>
                   <OpenConnectorsModal />
+                </div>
               </>
             );
           }}

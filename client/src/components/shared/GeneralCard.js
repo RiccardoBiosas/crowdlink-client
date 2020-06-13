@@ -19,7 +19,10 @@ export const StyledCardContainerLayout = styled.div`
 export const ColumnContainer = styled.div`
   display: flex;
   flex-direction: column;
+  height: ${(props) => (props.columnContainerHeight ? props.columnContainerHeight : 'inherit')};
+  flex ${(props) => props.containerFlex || ''};
   width: ${(props) => (props.columnContainerWidth ? props.columnContainerWidth : '30vw')};
+  justify-content: ${(props) => props.containerJustify || ''};
   margin: ${(props) => props.columnContainerMargin};
   align-items: ${(props) =>
     props.horizontalAlign === 'center'
