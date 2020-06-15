@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useWeb3Context } from 'web3-react';
-import GlobalButton from '../components/shared/styles';
+import GlobalButton from '../shared/styles';
 
 const PortisInstance = ({ text }) => {
   const context = useWeb3Context();
@@ -23,6 +24,10 @@ const PortisInstance = ({ text }) => {
       </GlobalButton>
     </>
   );
+};
+
+PortisInstance.propTypes = {
+  text: PropTypes.string,
 };
 
 PortisInstance.defaultProps = {

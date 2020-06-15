@@ -13,12 +13,14 @@ const withHover = (ComposedComponent) => {
     const mouseOut = () => {
       setHoverState(false);
     };
-    console.log('CURRENT HOVER STATE ', hoverState);
+    // console.log('CURRENT HOVER STATE ', hoverState);
 
     return (
-      <div onMouseOver={mouseOver} onMouseOut={mouseOut}>
+      <div onMouseOver={mouseOver} onMouseOut={mouseOut} style={{ position: 'relative' }}>
         <ComposedComponent {...props} />
-        {hoverState && <p style={{ position: 'absolute', color: 'white' }}>{onHoverText || ''}</p>}
+        {hoverState && (
+          <p style={{ position: 'absolute', color: 'white', top: '40px' }}>{onHoverText || ''}</p>
+        )}
       </div>
     );
   };

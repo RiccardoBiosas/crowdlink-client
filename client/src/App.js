@@ -1,8 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
-import Navbar from './navbar/containers';
-
+import Navbar from './shared/components/navbar/containers/index';
 import {
   PUBLISHER_SIGN_UP_ROUTE,
   PUBLISHER_WORKFLOW_ROUTE,
@@ -16,20 +15,20 @@ import {
   MARKETER_WITHDRAW_ROUTE,
   MARKETER_HOMEPAGE,
 } from './routes-config';
-import PublisherHomepage from './components/PublisherHomepage';
-import MarketerHomepage from './components/MarketerHomepage';
-import PublisherSignUp from './components/PublisherSignUp/PublisherSignUp';
-import PublisherConnectGA from './components/PublisherConnectGA/PublisherConnectGA';
-import PublisherWorkflow from './components/PublisherWorkflow/PublisherWorkflow';
-import PublisherWizardContainer from './components/PublisherWizard/containers/index';
-import PublisherFeedContainer from './components/PublisherFeed/containers/PublisherFeedCampaignListContainer';
-import PublisherCampaignWithdraw from './components/PublisherWithdraw/PublisherCampaignWithdraw';
-import WithContextActive from './hocs/WithContextActive';
-import MarketerSignUp from './components/MarketerSignUp/MarketerSignUp';
-import SignUpFallback from './components/SignUpFallback/containers/index';
-import MarketerFeedListContainer from './components/MarketerFeed/containers/MarketerFeedListContainer';
-import MarketerWithdraw from './components/MarketerWithdraw/MarketerWithdraw';
-import NotFound from './components/404/NotFound';
+import PublisherHomepage from './routes/PublisherHomepage';
+import MarketerHomepage from './routes/MarketerHomepage';
+import PublisherSignUp from './routes/PublisherSignUp/PublisherSignUp';
+import PublisherConnectGA from './routes/PublisherConnectGA/PublisherConnectGA';
+import PublisherWorkflow from './routes/PublisherWorkflow/PublisherWorkflow';
+import PublisherWizardContainer from './routes/PublisherWizard/containers/index';
+import PublisherFeedContainer from './routes/PublisherFeed/containers/PublisherFeedCampaignListContainer';
+import PublisherCampaignWithdraw from './routes/PublisherWithdraw/PublisherCampaignWithdraw';
+import WithContextActive from './hocs/withContextActive';
+import MarketerSignUp from './routes/MarketerSignUp/MarketerSignUp';
+import SignUpFallback from './routes/SignUpFallback/containers/index';
+import MarketerFeedListContainer from './routes/MarketerFeed/containers/MarketerFeedListContainer';
+import MarketerWithdraw from './routes/MarketerWithdraw/MarketerWithdraw';
+import NotFound from './routes/404/NotFound';
 import ContractTest from './ContractTest';
 
 export const history = createBrowserHistory();

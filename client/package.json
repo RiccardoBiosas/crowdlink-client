@@ -13,6 +13,7 @@
     "ethers": "^4.0.47",
     "formik": "^2.1.4",
     "normalize.css": "^8.0.1",
+    "prop-types": "^15.7.2",
     "ptokens": "^0.4.2",
     "ptokens-pbtc": "^0.4.2",
     "react": "^16.13.1",

@@ -1,14 +1,8 @@
 import React from 'react';
 import { useWeb3Context } from 'web3-react';
 import connectors from '../../portis/index';
-import metamaskLogo from '../../assets/wallet-logos/metamask-logo.svg';
-import portisLogo from '../../assets/portis-logo.svg';
 import WalletButton from '../styles/WalletButton';
-
-const logos = {
-  injected: metamaskLogo,
-  portis: portisLogo,
-};
+import walletLogos from '../../constants/walletLogos';
 
 const ConnectorsInstance = () => {
   const context = useWeb3Context();
@@ -19,9 +13,13 @@ const ConnectorsInstance = () => {
 
   return (
     <>
-      {Object.keys(connectors).map((connectorName) => (
-        <WalletButton type="button" onClick={() => context.setConnector(connectorName)}>
-          <img src={logos[connectorName.toLowerCase()]} alt="wallet-logo" />
+      {Object.keys(connectors).map((connectorName, i) => (
+        <WalletButton
+          type="button"
+          key={`wallet-modal-${i}`}
+          onClick={() => context.setConnector(connectorName)}
+        >
+          <img src={walletLogos[connectorName.toLowerCase()]} alt="wallet-logo" />
           <p key={connectorName}>
             {`${connectorName.toLowerCase() === 'injected' ? 'metamask' : connectorName}`}
           </p>

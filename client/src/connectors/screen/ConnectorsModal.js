@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useTransition, animated } from 'react-spring';
 import ConnectorsInstance from './ConnectorsInstance';
 import WalletCardLayout from '../styles/WalletCardLayout';
@@ -32,10 +33,12 @@ const ConnectorsModal = ({ refProperties, modalState }) => {
   return (
     <>
       {transition.map(({ item, key, props }) => {
+        console.log('transition key modal', key);
+        console.log('item modal', item);
         return (
           <>
             {item && (
-              <animated.div style={props} key={key}>
+              <animated.div style={props} key={`modal-transition-${key}`}>
                 <WalletCardLayout>
                   <div className="choose-wallet">
                     <p>use account from</p>
@@ -51,6 +54,16 @@ const ConnectorsModal = ({ refProperties, modalState }) => {
       })}
     </>
   );
+};
+
+ConnectorsModal.propTypes = {
+  refProperties: PropTypes.shape({
+    coordX: PropTypes.number,
+    coordY: PropTypes.number.isRequired,
+    openerWidth: PropTypes.number,
+    openerHeight: PropTypes.number,
+  }).isRequired,
+  modalState: PropTypes.bool.isRequired,
 };
 
 export default ConnectorsModal;

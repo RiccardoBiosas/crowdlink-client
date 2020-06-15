@@ -1,6 +1,7 @@
 import React, { useState, useLayoutEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 import ConnectorsModal from '../screen/ConnectorsModal';
-import { ParagraphButton } from '../../components/shared/GeneralCard';
+import { ParagraphButton } from '../../shared/GeneralCard';
 
 const OpenConnectorsModal = ({ text }) => {
   const [modalState, setModalState] = useState(false);
@@ -38,6 +39,10 @@ const OpenConnectorsModal = ({ text }) => {
       {refProperties && <ConnectorsModal refProperties={refProperties} modalState={modalState} />}
     </>
   );
+};
+
+OpenConnectorsModal.propTypes = {
+  text: PropTypes.string,
 };
 
 OpenConnectorsModal.defaultProps = {
