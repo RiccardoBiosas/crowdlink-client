@@ -4,14 +4,10 @@ import ClockLoader from 'react-spinners/ClockLoader';
 import { useWeb3Context } from 'web3-react';
 import { ethers } from 'ethers';
 import { ROPSTEN_ETHERSCAN_TX } from '../../../api-config';
-import {
-  DepositButtonContainer,
-  DepositInfoContainer,
-  RowContainer,
-} from '../../../shared/PublisherWizard/styles';
-import GlobalButton from '../../../shared/styles';
+import StyledGeneralWrapper from '../../../shared/styles/StyledGeneralWrapper';
+import StyledGeneralButton from '../../../shared/styles/StyledGeneralButton';
 import { ReactComponent as Copy } from '../../../assets/copy.svg';
-import { CustomParagraph, ParagraphButton } from '../../../shared/GeneralCard';
+import { StyledCustomParagraph, StyledParagraphButton } from '../../../shared/GeneralCard';
 // import { ReactComponent as PortisLogo } from '../../../assets/portis-logo.svg';
 // import { ReactComponent as MetamaskLogo } from '../../../assets/wallet-logos/metamask-logo.svg';
 import portisLogo from '../../../assets/portis-logo.svg';
@@ -71,8 +67,8 @@ const PublisherWizardDeposit = ({
           justifyContent: 'space-around',
         }}
       >
-        <DepositInfoContainer>
-          <CustomParagraph
+        <StyledGeneralWrapper wrapperHeight="50%" wrapperFlex wrapperFlexDirection="column">
+          <StyledCustomParagraph
             paragraphColor="#696868"
             paragraphFontSize={18}
             style={{ textAlign: 'center', lineHeight: '27px' }}
@@ -80,12 +76,14 @@ const PublisherWizardDeposit = ({
             You can withdraw anytime, CL does
             <br />
             not charge the referral creator.
-          </CustomParagraph>
-          <RowContainer style={{ height: '100%' }}>
-            <CustomParagraph paragraphColor="#959090" style={{ flex: '2' }}>
+          </StyledCustomParagraph>
+          <StyledGeneralWrapper wrapperHeight="100%" wrapperFlex wrapperJustify="space-between">
+            {' '}
+            style={{ height: '100%' }}>
+            <StyledCustomParagraph paragraphColor="#959090" style={{ flex: '2' }}>
               Contract:
-            </CustomParagraph>
-            <CustomParagraph
+            </StyledCustomParagraph>
+            <StyledCustomParagraph
               paragraphBorder="0.6px solid #206DFF"
               paragraphPadding="10px"
               paragraphColor="#696868"
@@ -93,13 +91,12 @@ const PublisherWizardDeposit = ({
               style={{ textAlign: 'center', flex: '4' }}
             >
               crowdlink.eth
-            </CustomParagraph>
-
-            <ParagraphButton style={{ flex: '1' }} onClick={() => copyToClipboard(address)}>
+            </StyledCustomParagraph>
+            <StyledParagraphButton style={{ flex: '1' }} onClick={() => copyToClipboard(address)}>
               <Copy />
-            </ParagraphButton>
-          </RowContainer>
-        </DepositInfoContainer>
+            </StyledParagraphButton>
+          </StyledGeneralWrapper>
+        </StyledGeneralWrapper>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           {!isBroadcasted ? (
             <img src={logos[connectorName.toLowerCase()]} alt="wallet-logo" />
@@ -109,9 +106,14 @@ const PublisherWizardDeposit = ({
         </div>
       </div>
 
-      <DepositButtonContainer>
+      <StyledGeneralWrapper
+        wrapperHeight="20%"
+        wrapperFlex
+        wrapperAlign="center"
+        wrapperJustify="center"
+      >
         {!isBroadcasted || !txHash ? (
-          <GlobalButton
+          <StyledGeneralButton
             type="submit"
             buttonWidth={300}
             buttonTextColor="white"
@@ -120,7 +122,7 @@ const PublisherWizardDeposit = ({
             {connectorName.toLowerCase() === 'injected'
               ? 'Pay with your metamask'
               : `Pay with ${connectorName}`}
-          </GlobalButton>
+          </StyledGeneralButton>
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <p>Check your transaction on etherscan:</p>
@@ -129,7 +131,7 @@ const PublisherWizardDeposit = ({
             </a>
           </div>
         )}
-      </DepositButtonContainer>
+      </StyledGeneralWrapper>
     </>
   );
 };

@@ -2,31 +2,30 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { PUBLISHER_WORKFLOW_ROUTE } from '../routes-config';
 import {
-  ColumnContainer,
-  ParagraphButton,
-  CustomParagraph,
-  CustomH1,
-  CardLayoutWithHorizontalContainers,
-  CardSubContainer,
-  CardContainerLayout,
+  StyledParagraphButton,
+  StyledCustomParagraph,
+  StyledCustomH1,
 } from '../shared/GeneralCard';
-import GlobalButton from '../shared/styles';
+import StyledCardLayout from '../shared/styles/StyledCardLayout';
+import StyledGeneralWrapper from '../shared/styles/StyledGeneralWrapper';
+import StyledColumnWrapper from '../shared/styles/StyledColumnWrapper';
+import StyledGeneralButton from '../shared/styles/StyledGeneralButton';
 import { ReactComponent as CrowdLinkHomepagePublisherImage } from '../assets/crowdlink-homepage-creator.svg';
 
 const PublisherHomepage = () => {
   const history = useHistory();
 
   return (
-    <CardContainerLayout cardContainerBackgroundColor="#23153C">
-      <CardLayoutWithHorizontalContainers cardLayoutHeight="60vh" cardLayoutWidth="90vw">
-        <CardSubContainer justify="space-between" align="flex-start">
+    <StyledCardLayout cardContainerBackgroundColor="#23153C">
+      <div style={{ height: '60vh', width: '90vw' }}>
+        <StyledGeneralWrapper wrapperFlex wrapperJustify="space-between" wrapperAlign="flex-start">
           <div>
-            <CustomH1 h1FontSize={40} h1LineHeight="54px" h1Color="#F8F8F8">
+            <StyledCustomH1 h1FontSize={40} h1LineHeight="54px" h1Color="#F8F8F8">
               Create a referral campaign
               <br />
               within minutes
-            </CustomH1>
-            <CustomParagraph
+            </StyledCustomH1>
+            <StyledCustomParagraph
               paragraphFontSize={26}
               paragraphMargin="32px 0 0 0"
               paragraphColor="#E2E2E2"
@@ -35,24 +34,24 @@ const PublisherHomepage = () => {
               set a commission per sale from links
               <br />
               and let the rest be history
-            </CustomParagraph>
+            </StyledCustomParagraph>
           </div>
           {/*
           <div>
-            <CustomParagraph paragraphColor={"#4C83D4"}>
+            <StyledCustomParagraph paragraphColor={"#4C83D4"}>
               Have bitcoin but not ethereum? <br /> Swap it for pTokens and then
               you're ready to go!
-            </CustomParagraph>
-            <ParagraphButton
+            </StyledCustomParagraph>
+            <StyledParagraphButton
               paragraphFontSize={22}
               buttonColor={"#7838D5"}
               onClick={() => history.push(PTOKENS_SWAP_ROUTE)}
             >
               Swap
-            </ParagraphButton>
+            </StyledParagraphButton>
           </div> */}
-          <ColumnContainer>
-            <GlobalButton
+          <StyledColumnWrapper>
+            <StyledGeneralButton
               buttonRadius="50px"
               buttonTextColor="#4C83D4"
               buttonFontWeight={900}
@@ -62,24 +61,24 @@ const PublisherHomepage = () => {
               onClick={() => history.push(PUBLISHER_WORKFLOW_ROUTE)}
             >
               Get Started
-            </GlobalButton>
+            </StyledGeneralButton>
 
-            <ParagraphButton
+            <StyledParagraphButton
               buttonColor="#F8F8F8"
               paragraphFontSize={26}
               buttonMargin="10px 0 0 6px"
               onClick={() => history.push('/marketer')}
             >
               {'I am a marketer >'}
-            </ParagraphButton>
-          </ColumnContainer>
-        </CardSubContainer>
+            </StyledParagraphButton>
+          </StyledColumnWrapper>
+        </StyledGeneralWrapper>
 
         <div>
           <CrowdLinkHomepagePublisherImage />
         </div>
-      </CardLayoutWithHorizontalContainers>
-    </CardContainerLayout>
+      </div>
+    </StyledCardLayout>
   );
 };
 

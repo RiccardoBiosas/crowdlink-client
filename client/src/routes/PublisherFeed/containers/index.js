@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { ethers } from 'ethers';
 import { useHistory } from 'react-router-dom';
-import { CampaignContainerLayout } from '../../../shared/feed/styles';
-import { ParagraphButton } from '../../../shared/GeneralCard';
+import StyledCardLayout from '../../../shared/styles/StyledCardLayout';
+import StyledGeneralWrapper from '../../../shared/styles/StyledGeneralWrapper';
+import { StyledParagraphButton } from '../../../shared/GeneralCard';
 import { PUBLISHER_HOMEPAGE, PUBLISHER_DASHBOARD_ROUTE_WITH_PARAM } from '../../../routes-config';
-import GlobalButton from '../../../shared/styles';
+import StyledGeneralButton from '../../../shared/styles/StyledGeneralButton';
 import PublisherFeedCampaign from '../screen/PublisherFeedCampaign';
 import { getClickCampaigns } from '../../../utils/crowdlink/API';
-import { RowContainer } from '../../../shared/PublisherWizard/styles';
 // import useFetch from '../../../hooks/useFetch';
 
 const PublisherFeedContainer = ({ account, contractInstance }) => {
@@ -34,10 +34,15 @@ const PublisherFeedContainer = ({ account, contractInstance }) => {
   }
 
   return (
-    <CampaignContainerLayout>
-      <RowContainer containerMargin="0 0 40px 0" containerWidth="80vw">
+    <StyledCardLayout cardLayoutHeight="100%" cardLayoutPadding="4rem">
+      <StyledGeneralWrapper
+        wrapperMargin="0 0 40px 0"
+        wrapperWidth="80vw"
+        wrapperFlex
+        wrapperJustify="space-between"
+      >
         <div>
-          <GlobalButton
+          <StyledGeneralButton
             type="button"
             buttonRadius="50px"
             buttonTextColor="#4C83D4"
@@ -48,11 +53,10 @@ const PublisherFeedContainer = ({ account, contractInstance }) => {
             onClick={() => history.push(`${PUBLISHER_DASHBOARD_ROUTE_WITH_PARAM}/sales`)}
           >
             Create +
-          </GlobalButton>
+          </StyledGeneralButton>
         </div>
-
         <div>
-          <ParagraphButton
+          <StyledParagraphButton
             buttonMargin="6px 12px 0 0"
             buttonFontSize={20}
             buttonFontWeight={900}
@@ -60,9 +64,9 @@ const PublisherFeedContainer = ({ account, contractInstance }) => {
             onClick={() => history.push(PUBLISHER_HOMEPAGE)}
           >
             Home +
-          </ParagraphButton>
+          </StyledParagraphButton>
         </div>
-      </RowContainer>
+      </StyledGeneralWrapper>
       {resp.data.results.length > 0 &&
         resp.data.results
           .filter((x) => x.user_public_key === account)
@@ -74,7 +78,7 @@ const PublisherFeedContainer = ({ account, contractInstance }) => {
               account={account}
             />
           ))}
-    </CampaignContainerLayout>
+    </StyledCardLayout>
   );
 };
 

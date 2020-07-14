@@ -11,15 +11,12 @@ import PublisherWizardCampaignBudget from '../screen/PublisherWizardCampaignBudg
 import PublisherWizardCampaignOutcome from '../screen/PublisherWizardCampaignOutcome';
 import PublisherWizardPreview from '../screen/PublisherWizardPreview';
 import host, { COINGECKO_API, CAMPAIGNS_CLICK_ENDPOINT } from '../../../api-config';
-import {
-  CloseAndBackButtonContainer,
-  NextButtonContainer,
-  HeadingContainer,
-  CustomForm,
-} from '../../../shared/PublisherWizard/styles';
-import { ParagraphButton, CustomH1, CardContainerLayout } from '../../../shared/GeneralCard';
+import { StyledCustomForm } from '../../../shared/PublisherWizard/styles';
+import StyledGeneralWrapper from '../../../shared/styles/StyledGeneralWrapper';
+import { StyledParagraphButton, StyledCustomH1 } from '../../../shared/GeneralCard';
+import StyledCardLayout from '../../../shared/styles/StyledCardLayout';
 import CardLayout from '../../../shared/layout/CardLayout';
-import GlobalButton from '../../../shared/styles';
+import StyledGeneralButton from '../../../shared/styles/StyledGeneralButton';
 import WizardFormValidationSchema from '../validationSchema/schema';
 import payPerClickStepHeadings from '../contants/payPerClickStepHeadings';
 import payPerSaleStepHeadings from '../contants/payPerSaleStepHeadings';
@@ -109,7 +106,7 @@ const PublisherWizardContainer = ({
 
   return (
     <>
-      <CardContainerLayout>
+      <StyledCardLayout>
         <Formik
           validationSchema={WizardFormValidationSchema}
           initialValues={emptyInitialValues}
@@ -162,8 +159,14 @@ const PublisherWizardContainer = ({
                 }}
               >
                 <CardLayout>
-                  <CloseAndBackButtonContainer>
-                    <ParagraphButton
+                  <StyledGeneralWrapper
+                    wrapperWidth="100%"
+                    wrapperHeight="10%"
+                    wrapperFlex
+                    wrapperAlign="flex-start"
+                    wrapperJustify="space-between"
+                  >
+                    <StyledParagraphButton
                       buttonMargin="6px 0 0 18px"
                       buttonFontSize={18}
                       buttonFontWeight={300}
@@ -175,8 +178,8 @@ const PublisherWizardContainer = ({
                       }}
                     >
                       Back
-                    </ParagraphButton>
-                    <ParagraphButton
+                    </StyledParagraphButton>
+                    <StyledParagraphButton
                       buttonMargin="6px 20px 0 0"
                       buttonFontSize={20}
                       buttonFontWeight={900}
@@ -184,12 +187,12 @@ const PublisherWizardContainer = ({
                       onClick={() => history.push('/')}
                     >
                       x
-                    </ParagraphButton>
-                  </CloseAndBackButtonContainer>
+                    </StyledParagraphButton>
+                  </StyledGeneralWrapper>
 
-                  <CustomForm customformheight={step < totalSteps - 1 ? '70%' : '90%'}>
-                    <HeadingContainer headingMargin="0 0 14px 0">
-                      <CustomH1
+                  <StyledCustomForm customFormHeight={step < totalSteps - 1 ? '70%' : '90%'}>
+                    <StyledGeneralWrapper wrapperHeight="10%" wrapperMargin="0 0 14px 0">
+                      <StyledCustomH1
                         h1Color="#444444"
                         h1FontSize={26}
                         h1FontWeight={500}
@@ -198,8 +201,8 @@ const PublisherWizardContainer = ({
                         {workflow === 'sales'
                           ? payPerSaleStepHeadings[step - 1]
                           : payPerClickStepHeadings[step - 1]}
-                      </CustomH1>
-                    </HeadingContainer>
+                      </StyledCustomH1>
+                    </StyledGeneralWrapper>
                     <PublisherWizardCampaignDescription
                       errors={errors}
                       workflow={workflow}
@@ -220,25 +223,30 @@ const PublisherWizardContainer = ({
                       values={values}
                       respStatus={respStatus}
                     />
-                  </CustomForm>
+                  </StyledCustomForm>
                   {step < totalSteps - 1 && (
-                    <NextButtonContainer>
-                      <GlobalButton
+                    <StyledGeneralWrapper
+                      wrapperHeight="20%"
+                      wrapperFlex
+                      wrapperAlign="center"
+                      wrapperJustify="center"
+                    >
+                      <StyledGeneralButton
                         buttonWidth={200}
                         buttonTextColor="white"
                         buttonColor="#4C83D4"
                         onClick={() => setStep(step + 1)}
                       >
                         Next
-                      </GlobalButton>
-                    </NextButtonContainer>
+                      </StyledGeneralButton>
+                    </StyledGeneralWrapper>
                   )}
                 </CardLayout>
               </div>
             );
           }}
         </Formik>
-      </CardContainerLayout>
+      </StyledCardLayout>
       <ToastContainer
         position="top-center"
         transition={Slide}

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const GlobalButton = styled.button`
+const StyledGeneralButton = styled.button`
     width: ${(props) => props.buttonWidth}px;
     height: 48px;
     border-radius: ${(props) => (props.buttonRadius ? `${props.buttonRadius}` : '8px')};
@@ -18,22 +18,19 @@ const GlobalButton = styled.button`
       switch (props.buttonColor) {
         case 'blue':
           return '#206DFF 0% 0% no-repeat padding-box;';
-          break;
         case 'green':
           return '#00E15D 0% 0% no-repeat padding-box;';
-          break;
         case 'orange':
           return '#F6851B 0% 0% no-repeat padding-box;';
-          break;
+
         case 'purple':
           return '#f7296e 0% 0% no-repeat padding-box;';
-          break;
+
         case 'darkBlue':
           return '#311b58 0% 0% no-repeat padding-box;';
-          break;
+
         default:
           return `${props.buttonColor} 0% 0% no-repeat padding-box;`;
-          break;
       }
     }}
 
@@ -42,13 +39,13 @@ const GlobalButton = styled.button`
           switch (props.buttonColor) {
             case 'blue':
               return '#4381F7 0% 0% no-repeat padding-box;';
-              break;
+
             case 'green':
               return '#31AB37 0% 0% no-repeat padding-box;';
-              break;
+
             case 'orange':
               return '#F6851B 0% 0% no-repeat padding-box;';
-              break;
+
             default:
               return `${props.buttonColor} 0% 0% no-repeat padding-box`;
           }
@@ -61,4 +58,4 @@ const GlobalButton = styled.button`
     }
 `;
 
-export default GlobalButton;
+export default StyledGeneralButton;

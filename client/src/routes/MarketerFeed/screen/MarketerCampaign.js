@@ -2,11 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { toast, ToastContainer, Slide } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
-import { ParagraphButton, CustomParagraph } from '../../../shared/GeneralCard';
-import {
-  CampaignContainerComponent,
-  CampaignContainerDataContainer,
-} from '../../../shared/feed/styles';
+import { StyledParagraphButton, StyledCustomParagraph } from '../../../shared/GeneralCard';
+import StyledColumnWrapper from '../../../shared/styles/StyledColumnWrapper';
+import StyledGeneralWrapper from '../../../shared/styles/StyledGeneralWrapper';
 import copy from '../../../assets/clipboard-copy.png';
 import host from '../../../api-config';
 
@@ -44,31 +42,43 @@ const MarketerCampaign = ({ x, referralLink }) => {
   };
   return (
     <>
-      <CampaignContainerComponent containerMargin="0 0 0 16px" componentFlex={3}>
-        <CampaignContainerDataContainer>
-          <CustomParagraph paragraphColor="#1E1E1E" paragraphFontSize={16} paragraphWidth="32%">
+      <StyledColumnWrapper
+        columnWrapperMargin="0 0 0 16px"
+        columnWrapperFlexSize={3}
+        columnWrapperJustify="center"
+      >
+        <StyledGeneralWrapper wrapperFlex wrapperWidth="100%" wrapperAlign="center">
+          <StyledCustomParagraph
+            paragraphColor="#1E1E1E"
+            paragraphFontSize={16}
+            paragraphWidth="32%"
+          >
             Reward:
-          </CustomParagraph>
-          <CustomParagraph paragraphColor="#959090" paragraphFontSize={16}>
+          </StyledCustomParagraph>
+          <StyledCustomParagraph paragraphColor="#959090" paragraphFontSize={16}>
             {`${parseInt(x.reward, 10).toFixed(2)}$`}
-          </CustomParagraph>
-        </CampaignContainerDataContainer>
-        <CampaignContainerDataContainer style={{ alignItems: 'center' }}>
-          <CustomParagraph paragraphFontSize={16} paragraphColor="#1E1E1E" paragraphWidth="32%">
+          </StyledCustomParagraph>
+        </StyledGeneralWrapper>
+        <StyledGeneralWrapper wrapperFlex wrapperWidth="100%" wrapperAlign="center">
+          <StyledCustomParagraph
+            paragraphFontSize={16}
+            paragraphColor="#1E1E1E"
+            paragraphWidth="32%"
+          >
             Your unique referral link:
-          </CustomParagraph>
-          <CustomParagraph
+          </StyledCustomParagraph>
+          <StyledCustomParagraph
             paragraphColor="#959090"
             paragraphFontSize={16}
             paragraphMargin="0 8px 0 0"
           >
             {referralLink ? `${host}/cl/${referralLink}` : 'not generated yet'}
-          </CustomParagraph>
-          <ParagraphButton onClick={copyToClipboard}>
+          </StyledCustomParagraph>
+          <StyledParagraphButton onClick={copyToClipboard}>
             <img src={copy} alt="copy to clipboard button" />
-          </ParagraphButton>
-        </CampaignContainerDataContainer>
-      </CampaignContainerComponent>
+          </StyledParagraphButton>
+        </StyledGeneralWrapper>
+      </StyledColumnWrapper>
       <ToastContainer
         position="top-center"
         transition={Slide}

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { ethers } from 'ethers';
-import { ParagraphButton, CustomParagraph } from '../../../shared/GeneralCard';
-import { DropdownCampaignContainer } from '../../../shared/feed/styles';
+import { StyledParagraphButton, StyledCustomParagraph } from '../../../shared/GeneralCard';
+import StyledDropdownCampaignLayout from '../../../shared/styles/styles';
 
 const PublisherCampaignDropdown = ({ contractInstance, account, website }) => {
   const [campaignData, setCampaignData] = useState({});
@@ -21,7 +21,10 @@ const PublisherCampaignDropdown = ({ contractInstance, account, website }) => {
   });
 
   return (
-    <DropdownCampaignContainer style={{ display: 'flex', justifyContent: 'space-around' }}>
+    <StyledDropdownCampaignLayout
+      dropdownCampaignMargin="0 0 30px 0"
+      style={{ display: 'flex', justifyContent: 'space-around' }}
+    >
       <div
         style={{
           display: 'flex',
@@ -32,12 +35,12 @@ const PublisherCampaignDropdown = ({ contractInstance, account, website }) => {
           height: '80%',
         }}
       >
-        <ParagraphButton buttonColor="#1E1E1E" buttonFontSize={18} buttonFontWeight={400}>
+        <StyledParagraphButton buttonColor="#1E1E1E" buttonFontSize={18} buttonFontWeight={400}>
           Remaining budget:
-        </ParagraphButton>
-        <CustomParagraph paragraphColor="#959090" paragraphFontSize={18}>
+        </StyledParagraphButton>
+        <StyledCustomParagraph paragraphColor="#959090" paragraphFontSize={18}>
           {campaignData ? `${parseFloat(campaignData.remainingBalance, 10).toFixed(4)} eth` : ''}
-        </CustomParagraph>
+        </StyledCustomParagraph>
       </div>
       <div
         style={{
@@ -49,14 +52,14 @@ const PublisherCampaignDropdown = ({ contractInstance, account, website }) => {
           height: '80%',
         }}
       >
-        <ParagraphButton buttonColor="#1E1E1E" buttonFontSize={18} buttonFontWeight={400}>
+        <StyledParagraphButton buttonColor="#1E1E1E" buttonFontSize={18} buttonFontWeight={400}>
           Generated subscriptions
-        </ParagraphButton>
-        <CustomParagraph paragraphColor="#959090" paragraphFontSize={18}>
+        </StyledParagraphButton>
+        <StyledCustomParagraph paragraphColor="#959090" paragraphFontSize={18}>
           0
-        </CustomParagraph>
+        </StyledCustomParagraph>
       </div>
-    </DropdownCampaignContainer>
+    </StyledDropdownCampaignLayout>
   );
 };
 

@@ -1,7 +1,7 @@
 import React, { useState, useLayoutEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import ConnectorsModal from '../screen/ConnectorsModal';
-import { ParagraphButton } from '../../shared/GeneralCard';
+import { StyledParagraphButton } from '../../shared/GeneralCard';
 
 const OpenConnectorsModal = ({ text }) => {
   const [modalState, setModalState] = useState(false);
@@ -25,7 +25,7 @@ const OpenConnectorsModal = ({ text }) => {
 
   return (
     <>
-      <ParagraphButton
+      <StyledParagraphButton
         type="button"
         buttonColor="#4C83D4"
         buttonFontWeight={900}
@@ -34,7 +34,7 @@ const OpenConnectorsModal = ({ text }) => {
         onClick={() => setModalState(!modalState)}
       >
         {text}
-      </ParagraphButton>
+      </StyledParagraphButton>
 
       {refProperties && <ConnectorsModal refProperties={refProperties} modalState={modalState} />}
     </>

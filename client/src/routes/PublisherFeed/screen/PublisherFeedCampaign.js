@@ -3,13 +3,11 @@ import PropTypes from 'prop-types';
 import { ethers } from 'ethers';
 import { useTransition, animated } from 'react-spring';
 import { useHistory } from 'react-router-dom';
-import { ParagraphButton, CustomParagraph } from '../../../shared/GeneralCard';
-import {
-  CampaignContainer,
-  CampaignContainerComponent,
-  CampaignContainerDataContainer,
-} from '../../../shared/feed/styles';
+import { StyledParagraphButton, StyledCustomParagraph } from '../../../shared/GeneralCard';
+import StyledColumnWrapper from '../../../shared/styles/StyledColumnWrapper';
+import StyledGeneralWrapper from '../../../shared/styles/StyledGeneralWrapper';
 import { RowContainer } from '../../../shared/PublisherWizard/styles';
+import StyledCardWrapper from '../../../shared/styles/StyledCardWrapper';
 
 import { PUBLISHER_WITHDRAW_ROUTE_WITH_PARAM } from '../../../routes-config';
 
@@ -37,20 +35,47 @@ const PublisherFeedCampaign = ({ x, contractInstance, account }) => {
     <>
       <div>
         <PublisherFeedCampaignName name={x.name} />
-        <CampaignContainer
-          containerHeight="180px"
-          containerMargin={showStats ? '0 0 0px 0' : '0 0 20px 0'}
-          dropdownOpen={showStats}
+        <StyledCardWrapper
+          cardWrapperHeight="180px"
+          cardWrapperWidth="80vw"
+          cardWrapperFlexDirection="row"
+          cardWrapperBackground="#ffffff 0% 0% no-repeat padding-box"
+          cardWrapperBoxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+          cardWrapperMargin={showStats ? '0 0 0px 0' : '0 0 20px 0'}
+          cardDropdownOpen={showStats}
         >
-          <CampaignContainerComponent containerMargin="0 0 0 18px" componentFlex={3}>
-            <CampaignContainerDataContainer style={{ alignItems: 'center' }}>
-              <CustomParagraph paragraphFontSize={18} paragraphColor="#1E1E1E" paragraphWidth="32%">
+          <StyledColumnWrapper
+            columnWrapperMargin="0 0 0 18px"
+            columnWrapperFlexSize={3}
+            columnWrapperJustify="center"
+            columnWrapperHeight="100%"
+          >
+            <StyledGeneralWrapper
+              wrapperFlex
+              wrapperAlign="center"
+              // wrapperJustify="space-between"
+              wrapperWidth="100%"
+            >
+              <StyledCustomParagraph
+                paragraphFontSize={18}
+                paragraphColor="#1E1E1E"
+                paragraphWidth="32%"
+              >
                 Campaign URL:
-              </CustomParagraph>
-              <RowContainer>
-                <CustomParagraph paragraphColor="#696868" paragraphMargin="0 10px 0 0">
+              </StyledCustomParagraph>
+              <StyledGeneralWrapper
+                wrapperFlex
+                wrapperAlign="center"
+                // wrapperWidth="100%"
+                wrapperMargin="0 8px 0 0"
+              >
+                <StyledCustomParagraph
+                  // paragraphWidth="40%"
+                  paragraphColor="#696868"
+                  paragraphMargin="0 10px 0 0"
+                >
                   {x.url}
-                </CustomParagraph>
+                </StyledCustomParagraph>
 
                 <CopyToClipboard
                   condition={x.url.length > 0}
@@ -58,11 +83,16 @@ const PublisherFeedCampaign = ({ x, contractInstance, account }) => {
                   successTxt="copied!"
                   failureTxt="there is no URL to copy!"
                 />
-              </RowContainer>
-            </CampaignContainerDataContainer>
-          </CampaignContainerComponent>
-          <CampaignContainerComponent componentFlex={1}>
-            <ParagraphButton
+              </StyledGeneralWrapper>
+            </StyledGeneralWrapper>
+          </StyledColumnWrapper>
+          <StyledColumnWrapper
+            columnWrapperJustify="center"
+            columnWrapperAlign="center"
+            columnWrapperHeight="100%"
+            columnWrapperFlexSize={1}
+          >
+            <StyledParagraphButton
               buttonColor="#7838D5"
               buttonFontSize={20}
               buttonFontWeight={600}
@@ -70,20 +100,19 @@ const PublisherFeedCampaign = ({ x, contractInstance, account }) => {
                 history.push({
                   pathname: `${PUBLISHER_WITHDRAW_ROUTE_WITH_PARAM}/${x.name}`,
                   url: x.url,
-                })
-              }
+                })}
             >
               {'Withdraw >'}
-            </ParagraphButton>
-            {/* <ParagraphButton
+            </StyledParagraphButton>
+            {/* <StyledParagraphButton
               buttonColor="#7838D5"
               buttonFontSize={20}
               buttonFontWeight={600}
               onClick={() => setShowStats(!showStats)}
             >
               {!showStats ? 'Show stats' : 'Hide stats'}
-            </ParagraphButton> */}
-          </CampaignContainerComponent>
+            </StyledParagraphButton> */}
+          </StyledColumnWrapper>
           <div
             style={{
               position: 'relative',
@@ -101,7 +130,7 @@ const PublisherFeedCampaign = ({ x, contractInstance, account }) => {
               <img src={ArrowDown} alt="open dropdown" />
             </button>
           </div>
-        </CampaignContainer>
+        </StyledCardWrapper>
       </div>
       {transition.map(({ item, key, props }) => {
         return (

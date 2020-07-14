@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import { CustomParagraph } from '../../../shared/GeneralCard';
+import { StyledCustomParagraph } from '../../../shared/GeneralCard';
 import { COINGECKO_API } from '../../../api-config';
 
 const PublisherWizardPreview = ({ step, values }) => {
@@ -38,14 +38,14 @@ const PublisherWizardPreview = ({ step, values }) => {
           justifyContent: 'space-between',
         }}
       >
-        <CustomParagraph paragraphWidth="200px">Your website:</CustomParagraph>
-        <CustomParagraph
+        <StyledCustomParagraph paragraphWidth="200px">Your website:</StyledCustomParagraph>
+        <StyledCustomParagraph
           paragraphColor="#696868"
           paragraphMargin="0 0 0 12px"
           style={{ minWidth: '120px' }}
         >
           {url}
-        </CustomParagraph>
+        </StyledCustomParagraph>
       </div>
       <div
         style={{
@@ -54,14 +54,14 @@ const PublisherWizardPreview = ({ step, values }) => {
           justifyContent: 'space-between',
         }}
       >
-        <CustomParagraph paragraphWidth="200px">Your budget:</CustomParagraph>
-        <CustomParagraph
+        <StyledCustomParagraph paragraphWidth="200px">Your budget:</StyledCustomParagraph>
+        <StyledCustomParagraph
           style={{ minWidth: '120px' }}
           paragraphColor="#696868"
           paragraphMargin="0 0 0 12px"
         >
           {ethPrice ? `${(budget / ethPrice).toFixed(4)} eth` : 'null'}
-        </CustomParagraph>
+        </StyledCustomParagraph>
       </div>
       <div
         style={{
@@ -70,14 +70,14 @@ const PublisherWizardPreview = ({ step, values }) => {
           justifyContent: 'space-between',
         }}
       >
-        <CustomParagraph paragraphWidth="200px">Your reward per click:</CustomParagraph>
-        <CustomParagraph
+        <StyledCustomParagraph paragraphWidth="200px">Your reward per click:</StyledCustomParagraph>
+        <StyledCustomParagraph
           style={{ minWidth: '120px' }}
           paragraphColor="#696868"
           paragraphMargin="0 0 0 12px"
         >
           {ethPrice ? `${(reward / ethPrice).toFixed(4)} eth` : 'null'}
-        </CustomParagraph>
+        </StyledCustomParagraph>
       </div>
     </div>
   );

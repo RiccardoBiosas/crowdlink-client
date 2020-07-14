@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { CustomField, CustomLabel } from '../../../shared/PublisherWizard/styles';
+import { StyledCustomField, StyledCustomLabel } from '../../../shared/PublisherWizard/styles';
 
 const PublisherWizardCampaignDescription = ({ step, errors }) => {
   console.log(errors);
@@ -18,24 +18,29 @@ const PublisherWizardCampaignDescription = ({ step, errors }) => {
       }}
     >
       <div>
-        <CustomLabel
+        <StyledCustomLabel
           labelColor="#696868"
           labelFontSize={18}
           labelMargin="0 0 12px 0"
           htmlFor="name"
         >
           Your campaign name
-        </CustomLabel>
+        </StyledCustomLabel>
         <div>
-          <CustomField id="name" name="name" type="text" />
+          <StyledCustomField id="name" name="name" type="text" />
         </div>
       </div>
       <div>
-        <CustomLabel labelColor="#696868" labelFontSize={18} labelMargin="0 0 12px 0" htmlFor="url">
+        <StyledCustomLabel
+          labelColor="#696868"
+          labelFontSize={18}
+          labelMargin="0 0 12px 0"
+          htmlFor="url"
+        >
           Your website URL
-        </CustomLabel>
+        </StyledCustomLabel>
         <div>
-          <CustomField id="url" name="url" type="text" />
+          <StyledCustomField id="url" name="url" type="text" />
         </div>
       </div>
     </div>

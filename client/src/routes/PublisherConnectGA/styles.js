@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
-export const ImageContainer = styled.div`
+export const StyledImageContainer = styled.div`
   display: flex;
   flex: 1;
   align-items: center;
 `;
 
-export const BottomContainer = styled.div`
+export const StyledBottomContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;

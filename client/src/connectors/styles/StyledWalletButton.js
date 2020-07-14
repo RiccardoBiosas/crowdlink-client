@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const WalletButton = styled.button`
+const StyledWalletButton = styled.button`
   width: 42%;
   height: 60%;
   display: flex;
@@ -22,4 +22,4 @@ const WalletButton = styled.button`
   }
 `;
 
-export default WalletButton;
+export default StyledWalletButton;

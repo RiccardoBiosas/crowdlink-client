@@ -1,17 +1,19 @@
 import React from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-import GlobalButton from '../../shared/styles';
+import StyledGeneralButton from '../../shared/styles/StyledGeneralButton';
 import { ReactComponent as GoogleAnalyticsSVG } from '../../assets/google-analytics.svg';
 import {
-  CustomParagraph,
-  CardContainerLayout,
-  CloseButtonContainer,
-  ParagraphButton,
-  CustomH1,
-  CustomH2,
+  StyledCustomParagraph,
+  StyledParagraphButton,
+  StyledCustomH1,
+  StyledCustomH2,
 } from '../../shared/GeneralCard';
-import { ImageContainer, BottomContainer } from './styles';
+import StyledGeneralWrapper from '../../shared/styles/StyledGeneralWrapper';
+
+import StyledCardLayout from '../../shared/styles/StyledCardLayout';
+
+import { StyledImageContainer, StyledBottomContainer } from './styles';
 import host, { GA_OAUTH_ENDPOINT } from '../../api-config';
 import CardLayout from '../../shared/layout/CardLayout';
 
@@ -25,10 +27,10 @@ const PublisherConnectGA = () => {
     console.log('oauth', resp);
   };
   return (
-    <CardContainerLayout>
+    <StyledCardLayout>
       <CardLayout>
-        <CloseButtonContainer>
-          <ParagraphButton
+        <StyledGeneralWrapper wrapperWidth="100%" wrapperFlex wrapperJustify="flex-end">
+          <StyledParagraphButton
             buttonMargin="6px 12px 0 0"
             buttonFontSize={20}
             buttonFontWeight={900}
@@ -36,26 +38,30 @@ const PublisherConnectGA = () => {
             onClick={() => history.push('/')}
           >
             x
-          </ParagraphButton>
-        </CloseButtonContainer>
+          </StyledParagraphButton>
+        </StyledGeneralWrapper>
         <div>
-          <CustomH1 h1FontSize={30} h1FontWeight={600}>
+          <StyledCustomH1 h1FontSize={30} h1FontWeight={600}>
             Create your Referral Campaign
-          </CustomH1>
-          <CustomH2 h2FontSize={26} h2Color="#696868" h2FontWeight={400}>
+          </StyledCustomH1>
+          <StyledCustomH2 h2FontSize={26} h2Color="#696868" h2FontWeight={400}>
             Connect to Google Analytics:
-          </CustomH2>
+          </StyledCustomH2>
         </div>
 
-        <ImageContainer>
+        <StyledImageContainer>
           <GoogleAnalyticsSVG style={{ height: '100px', width: '100px' }} />
-        </ImageContainer>
-        <BottomContainer>
-          <CustomParagraph paragraphColor="#696868" paragraphWidth="60%" paragraphLineHeight="20px">
+        </StyledImageContainer>
+        <StyledBottomContainer>
+          <StyledCustomParagraph
+            paragraphColor="#696868"
+            paragraphWidth="60%"
+            paragraphLineHeight="20px"
+          >
             Make sure you’re tracking aquisitions of your sales via Google Analytics. Learn how here
-          </CustomParagraph>
+          </StyledCustomParagraph>
 
-          {/* <GlobalButton
+          {/* <StyledGeneralButton
             buttonWidth={200}
             buttonColor={"#4C83D4"}
             buttonTextColor={"#ffff"}
@@ -64,27 +70,27 @@ const PublisherConnectGA = () => {
             }
           >
             Connect
-          </GlobalButton> */}
-          <GlobalButton
+          </StyledGeneralButton> */}
+          <StyledGeneralButton
             buttonWidth={200}
             buttonColor="#4C83D4"
             buttonTextColor="#ffff"
             onClick={GAoauth}
           >
             Connect
-          </GlobalButton>
+          </StyledGeneralButton>
 
-          {/* <GlobalButton
+          {/* <StyledGeneralButton
             buttonWidth={200}
             buttonColor={"#4C83D4"}
             buttonTextColor={"#ffff"}
             onClick={GAoauth}
           >
             Connect
-          </GlobalButton> */}
-        </BottomContainer>
+          </StyledGeneralButton> */}
+        </StyledBottomContainer>
       </CardLayout>
-    </CardContainerLayout>
+    </StyledCardLayout>
   );
 };
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { toast, ToastContainer, Slide } from 'react-toastify';
-import { ParagraphButton } from '../GeneralCard';
+import { StyledParagraphButton } from '../GeneralCard';
 import copy from '../../assets/clipboard-copy.png';
 
 const CopyToClipboard = ({ condition, contentToCopy, successTxt, failureTxt }) => {
@@ -40,9 +40,9 @@ const CopyToClipboard = ({ condition, contentToCopy, successTxt, failureTxt }) =
   };
   return (
     <>
-      <ParagraphButton onClick={copyToClipboard}>
+      <StyledParagraphButton onClick={copyToClipboard}>
         <img src={copy} alt="copy to clipboard button" />
-      </ParagraphButton>
+      </StyledParagraphButton>
       <ToastContainer
         position="top-center"
         transition={Slide}

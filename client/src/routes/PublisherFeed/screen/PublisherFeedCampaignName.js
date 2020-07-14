@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ToTheLeftFlexContainer } from '../../../shared/feed/styles';
+import StyledGeneralWrapper from '../../../shared/styles/StyledGeneralWrapper';
 
 const PublisherFeedCampaignName = ({ name }) => {
   return (
-    <ToTheLeftFlexContainer>
+    <StyledGeneralWrapper wrapperFlex wrapperWidth="80vw">
       <p
         style={{
           color: '#E2E2E2',
@@ -14,7 +14,7 @@ const PublisherFeedCampaignName = ({ name }) => {
       >
         {name}
       </p>
-    </ToTheLeftFlexContainer>
+    </StyledGeneralWrapper>
   );
 };
 

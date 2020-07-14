@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { CustomField, CustomLabel } from '../../../shared/PublisherWizard/styles';
+import { StyledCustomField, StyledCustomLabel } from '../../../shared/PublisherWizard/styles';
 
 const PublisherWizardCampaignBudget = ({ step }) => {
   if (step !== 2) {
@@ -16,29 +16,29 @@ const PublisherWizardCampaignBudget = ({ step }) => {
       }}
     >
       <div>
-        <CustomLabel
+        <StyledCustomLabel
           labelColor="#696868"
           labelFontSize={18}
           labelMargin="0 0 12px 0"
           htmlFor="reward"
         >
           Reward per click
-        </CustomLabel>
+        </StyledCustomLabel>
         <div>
-          <CustomField id="reward" name="reward" type="number" />
+          <StyledCustomField id="reward" name="reward" type="number" />
         </div>
       </div>
       <div>
-        <CustomLabel
+        <StyledCustomLabel
           labelColor="#696868"
           labelFontSize={18}
           labelMargin="0 0 12px 0"
           htmlFor="budget"
         >
           Your budget
-        </CustomLabel>
+        </StyledCustomLabel>
         <div>
-          <CustomField id="budget" name="budget" type="number" />
+          <StyledCustomField id="budget" name="budget" type="number" />
         </div>
       </div>
     </div>

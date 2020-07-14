@@ -21,7 +21,7 @@ import PublisherSignUp from './routes/PublisherSignUp/PublisherSignUp';
 import PublisherConnectGA from './routes/PublisherConnectGA/PublisherConnectGA';
 import PublisherWorkflow from './routes/PublisherWorkflow/PublisherWorkflow';
 import PublisherWizardContainer from './routes/PublisherWizard/containers/index';
-import PublisherFeedContainer from './routes/PublisherFeed/containers/PublisherFeedCampaignListContainer';
+import PublisherFeedContainer from './routes/PublisherFeed/containers';
 import PublisherCampaignWithdraw from './routes/PublisherWithdraw/PublisherCampaignWithdraw';
 import WithContextActive from './hocs/withContextActive';
 import MarketerSignUp from './routes/MarketerSignUp/MarketerSignUp';

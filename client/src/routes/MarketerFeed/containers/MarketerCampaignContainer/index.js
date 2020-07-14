@@ -3,17 +3,18 @@ import { ethers } from 'ethers';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
-import { ParagraphButton } from '../../../shared/GeneralCard';
-import { CampaignContainer, CampaignContainerComponent } from '../../../shared/feed/styles';
-import MarketerCampaign from '../screen/MarketerCampaign';
-import MarketerCampaignUrl from '../screen/MarketerCampaignUrl';
-import { MARKETER_WITHDRAW_ROUTE } from '../../../routes-config';
+import { StyledParagraphButton } from '../../../../shared/GeneralCard';
+import StyledCardWrapper from '../../../../shared/styles/StyledCardWrapper';
+import StyledColumnWrapper from '../../../../shared/styles/StyledColumnWrapper';
+import MarketerCampaign from '../../screen/MarketerCampaign';
+import MarketerCampaignUrl from '../../screen/MarketerCampaignUrl';
+import { MARKETER_WITHDRAW_ROUTE } from '../../../../routes-config';
 import host, {
   CAMPAIGNS_CLICK_CREATE_LINK_ENDPOINT,
   CAMPAIGNS_CLICK_ENDPOINT,
-} from '../../../api-config';
+} from '../../../../api-config';
 
-const MarketerCampaignContainer = ({ x, contractInstance, account, indx }) => {
+const MarketerStyledCampaignLayout = ({ x, contractInstance, account, indx }) => {
   const [referralLink, setReferralLink] = useState();
   const [selectedCampaign, setSelectedCampaign] = useState();
 
@@ -53,7 +54,15 @@ const MarketerCampaignContainer = ({ x, contractInstance, account, indx }) => {
   return (
     <div>
       <MarketerCampaignUrl url={x.url} />
-      <CampaignContainer containerMargin="0 0 50px 0">
+      <StyledCardWrapper
+        cardWrapperMargin="0 0 50px 0"
+        // cardWrapperJustify="flex-start"
+        cardWrapperWidth="80vw"
+        cardWrapperHeight="180px"
+        cardWrapperBoxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+        cardWrapperBackground="#ffffff 0% 0% no-repeat padding-box"
+        cardWrapperFlexDirection="row"
+      >
         <MarketerCampaign
           x={x}
           referralLink={referralLink}
@@ -61,33 +70,38 @@ const MarketerCampaignContainer = ({ x, contractInstance, account, indx }) => {
           componentFlex={3}
         />
 
-        <CampaignContainerComponent componentFlex={1}>
+        <StyledColumnWrapper
+          columnWrapperHeight="100%"
+          columnWrapperJustify="center"
+          columnWrapperAlign="center"
+          columnWrapperFlexSize={1}
+        >
           {!referralLink ? (
-            <ParagraphButton
+            <StyledParagraphButton
               buttonColor="#4C83D4"
               buttonFontSize={20}
               buttonFontWeight={600}
               onClick={handleClick}
             >
               Create Link +
-            </ParagraphButton>
+            </StyledParagraphButton>
           ) : (
-            <ParagraphButton
+            <StyledParagraphButton
               buttonColor="#7838D5"
               buttonFontSize={20}
               buttonFontWeight={600}
               onClick={() => history.push(MARKETER_WITHDRAW_ROUTE)}
             >
               Created -
-            </ParagraphButton>
+            </StyledParagraphButton>
           )}
-        </CampaignContainerComponent>
-      </CampaignContainer>
+        </StyledColumnWrapper>
+      </StyledCardWrapper>
     </div>
   );
 };
 
-MarketerCampaignContainer.propTypes = {
+MarketerStyledCampaignLayout.propTypes = {
   x: PropTypes.shape({
     self_url: PropTypes.string,
     name: PropTypes.string,
@@ -101,4 +115,4 @@ MarketerCampaignContainer.propTypes = {
   indx: PropTypes.number.isRequired,
 };
 
-export default MarketerCampaignContainer;
+export default MarketerStyledCampaignLayout;

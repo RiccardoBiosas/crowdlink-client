@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const WalletCardLayout = styled.div`
+const StyledWalletCardLayout = styled.div`
   width: 340px;
   height: 190px;
   background-color: #ffff;
@@ -19,4 +19,4 @@ const WalletCardLayout = styled.div`
   }
 `;
 
-export default WalletCardLayout;
+export default StyledWalletCardLayout;

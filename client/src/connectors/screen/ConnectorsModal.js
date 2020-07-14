@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useTransition, animated } from 'react-spring';
 import ConnectorsInstance from './ConnectorsInstance';
-import WalletCardLayout from '../styles/WalletCardLayout';
+import StyledWalletCardLayout from '../styles/StyledWalletCardLayout';
 
 const ConnectorsModal = ({ refProperties, modalState }) => {
   const { coordX, coordY, openerWidth, openerHeight } = refProperties;
@@ -39,14 +39,14 @@ const ConnectorsModal = ({ refProperties, modalState }) => {
           <>
             {item && (
               <animated.div style={props} key={`modal-transition-${key}`}>
-                <WalletCardLayout>
+                <StyledWalletCardLayout>
                   <div className="choose-wallet">
                     <p>use account from</p>
                   </div>
                   <div className="wallets">
                     <ConnectorsInstance />
                   </div>
-                </WalletCardLayout>
+                </StyledWalletCardLayout>
               </animated.div>
             )}
           </>

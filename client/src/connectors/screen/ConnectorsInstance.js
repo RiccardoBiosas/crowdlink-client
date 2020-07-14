@@ -1,7 +1,7 @@
 import React from 'react';
 import { useWeb3Context } from 'web3-react';
 import connectors from '../../portis/index';
-import WalletButton from '../styles/WalletButton';
+import StyledWalletButton from '../styles/StyledWalletButton';
 import walletLogos from '../../constants/walletLogos';
 
 const ConnectorsInstance = () => {
@@ -14,7 +14,7 @@ const ConnectorsInstance = () => {
   return (
     <>
       {Object.keys(connectors).map((connectorName, i) => (
-        <WalletButton
+        <StyledWalletButton
           type="button"
           key={`wallet-modal-${i}`}
           onClick={() => context.setConnector(connectorName)}
@@ -28,7 +28,7 @@ const ConnectorsInstance = () => {
                 buttonMargin="0 0 0 6px"  key={connectorName} onClick={() => context.setConnector(connectorName)}>
               {`${connectorName.toLowerCase() === 'injected' ? 'metamask' : connectorName}`}
             </ParagraphButton> */}
-        </WalletButton>
+        </StyledWalletButton>
       ))}
     </>
   );

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
-import { CustomH1, CustomParagraph, ParagraphButton } from '../../../shared/GeneralCard';
+import { StyledCustomParagraph, StyledParagraphButton } from '../../../shared/GeneralCard';
 import { PUBLISHER_FEED_ROUTE } from '../../../routes-config';
 // import axios from "axios";
 // import { ethers } from "ethers";
@@ -39,7 +39,7 @@ const PublisherWizardCampaignOutcome = ({ step, respStatus, values }) => {
         }}
       >
         <div style={{ flex: 1 }}>
-          <CustomParagraph
+          <StyledCustomParagraph
             paragraphColor="#696868"
             paragraphLineHeight="27px"
             style={{ textAlign: 'center' }}
@@ -49,7 +49,7 @@ const PublisherWizardCampaignOutcome = ({ step, respStatus, values }) => {
             Your transaction has been confirmed and your campaign is
             <br />
             now officially part of the Crowdlink Referral Marketplace!
-          </CustomParagraph>
+          </StyledCustomParagraph>
         </div>
         <div
           style={{
@@ -66,47 +66,51 @@ const PublisherWizardCampaignOutcome = ({ step, respStatus, values }) => {
               justifyContent: 'space-between',
             }}
           >
-            <CustomParagraph style={{ width: '200px' }}>Link to campaign:</CustomParagraph>
-            <CustomParagraph
+            <StyledCustomParagraph style={{ width: '200px' }}>
+              Link to campaign:
+            </StyledCustomParagraph>
+            <StyledCustomParagraph
               style={{ minWidth: '120px' }}
               paragraphColor="#696868"
               paragraphMargin="0 0 0 12px"
             >
               (not generated)
-            </CustomParagraph>
+            </StyledCustomParagraph>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-            <CustomParagraph style={{ width: '200px' }}>Budget:</CustomParagraph>
-            <CustomParagraph
+            <StyledCustomParagraph style={{ width: '200px' }}>Budget:</StyledCustomParagraph>
+            <StyledCustomParagraph
               style={{ minWidth: '120px' }}
               paragraphColor="#696868"
               paragraphMargin="0 0 0 12px"
             >
               {`${values.budget}$`}
-            </CustomParagraph>
+            </StyledCustomParagraph>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-            <CustomParagraph style={{ width: '200px' }}>Reward per click:</CustomParagraph>
-            <CustomParagraph
+            <StyledCustomParagraph style={{ width: '200px' }}>
+              Reward per click:
+            </StyledCustomParagraph>
+            <StyledCustomParagraph
               style={{ minWidth: '120px' }}
               paragraphColor="#696868"
               paragraphMargin="0 0 0 12px"
             >
               {`${values.reward}$`}
-            </CustomParagraph>
+            </StyledCustomParagraph>
           </div>
         </div>
       </div>
 
       <div style={{ display: 'flex', justifyContent: 'center', height: '30%' }}>
-        <ParagraphButton
+        <StyledParagraphButton
           buttonColor="#7838D5"
           buttonFontSize={20}
           buttonFontWeight={600}
           onClick={() => history.push(PUBLISHER_FEED_ROUTE)}
         >
           {'Campaign Feed >'}
-        </ParagraphButton>
+        </StyledParagraphButton>
       </div>
     </div>
   );

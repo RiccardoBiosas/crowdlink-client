@@ -2,14 +2,12 @@ import React, { useState, useEffect, useRef, createRef } from 'react';
 import { useLocation, Redirect } from 'react-router-dom';
 import { Web3Consumer } from 'web3-react';
 import OpenConnectorsModal from '../../../connectors/containers/index';
-import { CardContainerLayout, CustomParagraph } from '../../../shared/GeneralCard';
-import { RowContainer } from '../../../shared/PublisherWizard/styles';
+import { StyledCustomParagraph } from '../../../shared/GeneralCard';
+import StyledCardLayout from '../../../shared/styles/StyledCardLayout';
+import StyledGeneralWrapper from '../../../shared/styles/StyledGeneralWrapper';
 import { PUBLISHER_WORKFLOW_ROUTE, MARKETER_FEED_ROUTE } from '../../../routes-config';
 import SignupRedirect from '../screen/SignupRedirect';
 import CardLayout from '../../../shared/layout/CardLayout';
-
-export const CREATOR = 'CREATOR';
-export const MARKETER = 'MARKETER';
 
 const redirectRoutes = {
   CREATOR: PUBLISHER_WORKFLOW_ROUTE,
@@ -61,30 +59,34 @@ const SignUpFallback = () => {
         const { active } = context;
         if (!active) {
           return (
-            <CardContainerLayout>
+            <StyledCardLayout>
               <CardLayout>
-                <CustomParagraph
+                <StyledCustomParagraph
                   paragraphColor="#959090"
                   paragraphFontSize={22}
                   paragraphFontWeight={900}
                 >
                   Sign up if you want to access our dashboards!
-                </CustomParagraph>
+                </StyledCustomParagraph>
                 {location.state ? (
                   <span ref={ref}>
                     <OpenConnectorsModal />
                   </span>
                 ) : (
-                  <RowContainer containerWidth="60%" containerJustify="space-around">
+                  <StyledGeneralWrapper
+                    wrapperWidth="60%"
+                    wrapperFlex
+                    wrapperJustify="space-around"
+                  >
                     {Object.keys(redirectRoutes).map((x, i) => (
                       <span key={`customRedirect-${i}`} ref={refs.current[i]} data-route={x}>
                         <SignupRedirect text={x.toLowerCase()} />
                       </span>
                     ))}
-                  </RowContainer>
+                  </StyledGeneralWrapper>
                 )}
               </CardLayout>
-            </CardContainerLayout>
+            </StyledCardLayout>
           );
         }
         return <Redirect to={redirectedRoute} />;

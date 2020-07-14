@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ToTheLeftFlexContainer } from '../../../shared/feed/styles';
+import StyledGeneralWrapper from '../../../shared/styles/StyledGeneralWrapper';
 
 const MarketerCampaignUrl = ({ url }) => {
   return (
-    <ToTheLeftFlexContainer>
+    <StyledGeneralWrapper wrapperFlex wrapperWidth="80vw">
       <a
         style={{
           color: '#E2E2E2',
@@ -17,7 +17,7 @@ const MarketerCampaignUrl = ({ url }) => {
       >
         {url}
       </a>
-    </ToTheLeftFlexContainer>
+    </StyledGeneralWrapper>
   );
 };
 

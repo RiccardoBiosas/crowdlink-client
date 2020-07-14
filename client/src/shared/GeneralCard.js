@@ -1,38 +1,46 @@
 import styled from 'styled-components';
+import StyledColumnWrapper from './styles/StyledColumnWrapper';
 
-export const CardContainerLayout = styled.div`
-  height: 90vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`;
+// export const StyledCardLayout = styled.div`
+//   height: ${({ cardLayoutHeight }) => cardLayoutHeight || '100vh'};
+//   ${({ cardLayoutPadding }) => cardLayoutPadding && `padding: ${cardLayoutPadding};`}
+//   background-color: ${({ cardLayoutBackgroundColor }) => cardLayoutBackgroundColor || '#23153C'};
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   justify-content: center;
+// `;
 
-export const StyledCardContainerLayout = styled.div`
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`;
+// export const StyledCardWrapper = styled.div`
+//   height: ${({ cardWrapperHeight }) => cardWrapperHeight || '90vh'};
+//   width: ${({ cardWrapperWidth }) => cardWrapperWidth || 'inherit'};
+//   border-radius: ${({ cardDropdownOpen }) => (cardDropdownOpen ? '10px 10px 0px 0px' : '10px')};
+//   ${({ cardWrapperMargin }) => cardWrapperMargin && `margin: ${cardWrapperMargin};`}
+//   ${({ cardWrapperBoxShadow }) => cardWrapperBoxShadow && `box-shadow: ${cardWrapperBoxShadow};`}
+//   ${({ cardWrapperBackground }) => cardWrapperBackground && `background: ${cardWrapperBackground};`}
+//   display: flex;
+//   flex-direction: ${({ cardWrapperFlexDirection }) => cardWrapperFlexDirection || 'column'};
+//   align-items: ${({ cardWrapperAlign }) => cardWrapperAlign || 'center'};
+//   justify-content: ${({ cardWrapperJustify }) => cardWrapperJustify || 'center'};
+// `;
 
-export const ColumnContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: ${(props) => (props.columnContainerHeight ? props.columnContainerHeight : 'inherit')};
-  flex ${(props) => props.containerFlex || ''};
-  width: ${(props) => (props.columnContainerWidth ? props.columnContainerWidth : '30vw')};
-  justify-content: ${(props) => props.containerJustify || ''};
-  margin: ${(props) => props.columnContainerMargin};
-  align-items: ${(props) =>
-    props.horizontalAlign === 'center'
-      ? 'center'
-      : props.horizontalAlign === 'right'
-      ? 'flex-end'
-      : 'flex-start'};
-`;
+// export const StyledColumnWrapper = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   height: ${(props) => (props.columnWrapperHeight ? props.columnWrapperHeight : 'inherit')};
+//   flex ${(props) => props.containerFlex || ''};
+//   width: ${(props) => (props.columnWrapperWidth ? props.columnWrapperWidth : '30vw')};
+//   justify-content: ${(props) => props.containerJustify || 'flex-start'};
+//   margin: ${(props) => props.columnWrapperMargin};
+//   align-items: ${(props) =>
+//     props.horizontalAlign === 'center'
+//       ? 'center'
+//       : props.horizontalAlign === 'right'
+//       ? 'flex-end'
+//       : 'flex-start'};
+// `;
 
-export const CustomH1 = styled.h1`
+export const StyledCustomH1 = styled.h1`
   color: ${(props) => props.h1Color};
   font-size: ${(props) => props.h1FontSize}px;
   width: ${(props) => props.h1Width}vw;
@@ -40,14 +48,14 @@ export const CustomH1 = styled.h1`
   line-height: ${(props) => props.h1LineHeight};
 `;
 
-export const CustomH2 = styled.h2`
+export const StyledCustomH2 = styled.h2`
   color: ${(props) => props.h2Color};
   font-size: ${(props) => props.h2FontSize}px;
   width: ${(props) => props.h2Width}vw;
   font-weight: ${(props) => props.h2FontWeight};
 `;
 
-export const ParagraphButton = styled.button`
+export const StyledParagraphButton = styled.button`
   background: none;
   border: none;
   text-align: left;
@@ -64,7 +72,7 @@ export const ParagraphButton = styled.button`
   }
 `;
 
-export const CustomParagraph = styled.p`
+export const StyledCustomParagraph = styled.p`
   color: ${(props) => props.paragraphColor};
   margin: ${(props) => props.paragraphMargin};
   font-size: ${(props) => props.paragraphFontSize}px;
@@ -77,58 +85,7 @@ export const CustomParagraph = styled.p`
 
 `;
 
-export const ColumnContainerFilledHeight = styled(ColumnContainer)`
+export const StyledColumnWrapperFilledHeight = styled(StyledColumnWrapper)`
   flex: 1;
   justify-content: space-around;
 `;
-
-export const CloseButtonContainer = styled.div`
-  height: ${(props) => props.closeButtonContainerHeight};
-  width: 100%;
-  display: flex;
-  align-self: flex-start;
-  justify-content: flex-end;
-`;
-
-export const CardSubContainer = styled.div`
-  height: ${(props) => props.subContainerHeight};
-  width: ${(props) => props.subContainerWidth};
-  margin: ${(props) => props.subContainerMargin};
-  display: flex;
-  flex-direction: column;
-  justify-content: ${(props) => (props.justify ? props.justify : 'space-around')};
-  align-items: ${(props) => (props.align ? props.align : 'center')};
-`;
-
-export const CardLayoutWithHorizontalContainers = styled.div`
-  display: flex;
-  justify-content: space-around;
-  width: ${(props) => props.cardLayoutWidth};
-  height: ${(props) => props.cardLayoutHeight};
-`;
-
-// export const CardLayout = styled.div`
-//   height: 60vh;
-//   width: 60vw;
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: space-between;
-// `;
-
-// export const CardLayoutWithBorder = styled(CardLayout)`
-//   align-items: center;
-//   background: #ffffff 0% 0% no-repeat padding-box;
-//   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-//   border-radius: 10px;
-// `;
-
-// export const CardLayoutWithBorderSpaceAround = styled(CardLayout)`
-//   align-items: center;
-//   background: #ffffff 0% 0% no-repeat padding-box;
-//   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-//   border-radius: 10px;
-
-//   && {
-//     justify-content: space-around;
-//   }
-// `;

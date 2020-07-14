@@ -1,15 +1,14 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import GlobalButton from '../shared/styles';
+import StyledGeneralButton from '../shared/styles/StyledGeneralButton';
 import {
-  CardContainerLayout,
-  CustomParagraph,
-  CardSubContainer,
-  ColumnContainer,
-  ParagraphButton,
-  CustomH1,
-  CardLayoutWithHorizontalContainers,
+  StyledCustomParagraph,
+  StyledParagraphButton,
+  StyledCustomH1,
 } from '../shared/GeneralCard';
+import StyledCardLayout from '../shared/styles/StyledCardLayout';
+import StyledGeneralWrapper from '../shared/styles/StyledGeneralWrapper';
+import StyledColumnWrapper from '../shared/styles/StyledColumnWrapper';
 import { MARKETER_SIGN_UP_ROUTE } from '../routes-config';
 import { ReactComponent as CrowdLinkHomepageMarketerImage } from '../assets/crowdlink-homepage-marketer.svg';
 
@@ -17,16 +16,16 @@ const MarketerHomepage = () => {
   const history = useHistory();
 
   return (
-    <CardContainerLayout cardContainerBackgroundColor="#23153C">
-      <CardLayoutWithHorizontalContainers cardLayoutHeight="60vh" cardLayoutWidth="90vw">
-        <CardSubContainer justify="space-between" align="flex-start">
+    <StyledCardLayout cardContainerBackgroundColor="#23153C">
+      <div style={{ height: '60vh', width: '90vw' }}>
+        <StyledGeneralWrapper wrapperFlex wrapperJustify="space-between" wrapperAlign="flex-start">
           <div>
-            <CustomH1 h1FontSize={40} h1LineHeight="54px" h1Color="#F8F8F8">
+            <StyledCustomH1 h1FontSize={40} h1LineHeight="54px" h1Color="#F8F8F8">
               Join a referral campaign
               <br />
               today
-            </CustomH1>
-            <CustomParagraph
+            </StyledCustomH1>
+            <StyledCustomParagraph
               paragraphFontSize={26}
               paragraphMargin="32px 0 0 0"
               paragraphColor="#E2E2E2"
@@ -35,10 +34,10 @@ const MarketerHomepage = () => {
               earn commission for every sale
               <br />
               coming from your referral link
-            </CustomParagraph>
+            </StyledCustomParagraph>
           </div>
-          <ColumnContainer>
-            <GlobalButton
+          <StyledColumnWrapper>
+            <StyledGeneralButton
               buttonRadius="50px"
               buttonTextColor="#4C83D4"
               buttonFontWeight={900}
@@ -48,23 +47,23 @@ const MarketerHomepage = () => {
               onClick={() => history.push(MARKETER_SIGN_UP_ROUTE)}
             >
               Get Started
-            </GlobalButton>
+            </StyledGeneralButton>
 
-            <ParagraphButton
+            <StyledParagraphButton
               buttonColor="#F8F8F8"
               paragraphFontSize={26}
               buttonMargin="10px 0 0 6px"
               onClick={() => history.push('/')}
             >
               {'I am a creator >'}
-            </ParagraphButton>
-          </ColumnContainer>
-        </CardSubContainer>
+            </StyledParagraphButton>
+          </StyledColumnWrapper>
+        </StyledGeneralWrapper>
         <div>
           <CrowdLinkHomepageMarketerImage />
         </div>
-      </CardLayoutWithHorizontalContainers>
-    </CardContainerLayout>
+      </div>
+    </StyledCardLayout>
   );
 };
 

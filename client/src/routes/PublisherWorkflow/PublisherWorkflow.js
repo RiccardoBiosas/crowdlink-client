@@ -8,13 +8,14 @@ import {
   PUBLISHER_GA_CONNECT_ROUTE,
 } from '../../routes-config';
 import {
-  CardContainerLayout,
-  ParagraphButton,
-  CustomParagraph,
-  CustomH2,
-  CloseButtonContainer,
-  ColumnContainer,
+  StyledParagraphButton,
+  StyledCustomParagraph,
+  StyledCustomH2,
 } from '../../shared/GeneralCard';
+import StyledGeneralWrapper from '../../shared/styles/StyledGeneralWrapper';
+
+import StyledCardLayout from '../../shared/styles/StyledCardLayout';
+import StyledColumnWrapper from '../../shared/styles/StyledColumnWrapper';
 import CardLayout from '../../shared/layout/CardLayout';
 
 // move to constant.js
@@ -26,10 +27,10 @@ const PublisherWorkflow = () => {
   const { active } = useWeb3Context();
 
   return (
-    <CardContainerLayout>
+    <StyledCardLayout>
       <CardLayout>
-        <CloseButtonContainer>
-          <ParagraphButton
+        <StyledGeneralWrapper wrapperWidth="100%" wrapperFlex wrapperJustify="flex-end">
+          <StyledParagraphButton
             buttonMargin="6px 12px 0 0"
             buttonFontSize={20}
             buttonFontWeight={900}
@@ -37,18 +38,18 @@ const PublisherWorkflow = () => {
             onClick={() => history.push('/')}
           >
             x
-          </ParagraphButton>
-        </CloseButtonContainer>
+          </StyledParagraphButton>
+        </StyledGeneralWrapper>
         {/* <CardSubContainer subContainerHeight="100%" justify="space-around" align="flex-start"> */}
         <div style={{ flex: 1, display: 'flex', alignItems: 'center' }}>
-          <CustomH2 h2FontWeight={600} h2FontSize={26}>
+          <StyledCustomH2 h2FontWeight={600} h2FontSize={26}>
             I want my referral link to:
-          </CustomH2>
+          </StyledCustomH2>
         </div>
 
-        <ColumnContainer containerFlex="2" containerJustify="space-around">
+        <StyledColumnWrapper columnWrapperFlexSize="2" columnWrapperJustify="space-around">
           <div>
-            <ParagraphButton
+            <StyledParagraphButton
               buttonColor="#7838D5"
               buttonFontWeight={900}
               buttonFontSize={24}
@@ -56,17 +57,18 @@ const PublisherWorkflow = () => {
                 history.push({
                   pathname: active ? PUBLISHER_GA_CONNECT_ROUTE : PUBLISHER_SIGN_UP_ROUTE,
                   workflow: REWARD_PER_SALE_WORKFLOW,
-                })}
+                })
+              }
             >
               Create +
-            </ParagraphButton>
-            <CustomParagraph paragraphFontSize={20} paragraphColor="#696868">
+            </StyledParagraphButton>
+            <StyledCustomParagraph paragraphFontSize={20} paragraphColor="#696868">
               reward per sale (commission)
-            </CustomParagraph>
+            </StyledCustomParagraph>
           </div>
 
           <div>
-            <ParagraphButton
+            <StyledParagraphButton
               buttonColor="#4C83D4"
               buttonFontWeight={900}
               buttonFontSize={24}
@@ -76,31 +78,32 @@ const PublisherWorkflow = () => {
                     ? `${PUBLISHER_DASHBOARD_ROUTE_WITH_PARAM}/clicks`
                     : PUBLISHER_SIGN_UP_ROUTE,
                   workflow: PUBLISHER_SIGN_UP_ROUTE,
-                })}
+                })
+              }
             >
               Create +
-            </ParagraphButton>
-            <CustomParagraph paragraphFontSize={20} paragraphColor="#696868">
+            </StyledParagraphButton>
+            <StyledCustomParagraph paragraphFontSize={20} paragraphColor="#696868">
               reward per click (traffic)
-            </CustomParagraph>
+            </StyledCustomParagraph>
           </div>
-        </ColumnContainer>
+        </StyledColumnWrapper>
 
         <div style={{ flex: 1, display: 'flex', alignItems: 'center' }}>
-          <CustomParagraph paragraphColor="#696868" paragraphFontSize={20}>
+          <StyledCustomParagraph paragraphColor="#696868" paragraphFontSize={20}>
             Already created a campaign? Go to
-            <ParagraphButton
+            <StyledParagraphButton
               buttonColor="#4C83D4"
               buttonMargin="0 0 0 6px"
               onClick={() => history.push(PUBLISHER_FEED_ROUTE)}
             >
               dashboard
-            </ParagraphButton>
-          </CustomParagraph>
+            </StyledParagraphButton>
+          </StyledCustomParagraph>
         </div>
         {/* </CardSubContainer> */}
       </CardLayout>
-    </CardContainerLayout>
+    </StyledCardLayout>
   );
 };
 

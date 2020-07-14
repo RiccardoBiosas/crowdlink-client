@@ -2,13 +2,15 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { ethers } from 'ethers';
 import { useHistory } from 'react-router-dom';
-import { ParagraphButton } from '../../../shared/GeneralCard';
-import { CampaignContainerLayout } from '../../../shared/feed/styles';
-import { RowContainer } from '../../../shared/PublisherWizard/styles';
-import MarketerCampaignContainer from './MarketerCampaignContainer';
-import { MARKETER_WITHDRAW_ROUTE, MARKETER_HOMEPAGE } from '../../../routes-config';
-import GlobalButton from '../../../shared/styles';
-import { getClickCampaigns } from '../../../utils/crowdlink/API';
+import { StyledParagraphButton } from '../../../../shared/GeneralCard';
+import StyledCardLayout from '../../../../shared/styles/StyledCardLayout';
+import StyledGeneralWrapper from '../../../../shared/styles/StyledGeneralWrapper';
+
+import { RowContainer } from '../../../../shared/PublisherWizard/styles';
+import MarketerCampaignContainer from '../MarketerCampaignContainer';
+import { MARKETER_WITHDRAW_ROUTE, MARKETER_HOMEPAGE } from '../../../../routes-config';
+import StyledGeneralButton from '../../../../shared/styles/StyledGeneralButton';
+import { getClickCampaigns } from '../../../../utils/crowdlink/API';
 
 const MarketerFeedListContainer = ({ contractInstance, account }) => {
   const [resp, setResp] = useState();
@@ -31,10 +33,15 @@ const MarketerFeedListContainer = ({ contractInstance, account }) => {
     return <h1>waiting</h1>;
   }
   return (
-    <CampaignContainerLayout>
-      <RowContainer containerMargin="0 0 40px 0" containerWidth="80vw">
+    <StyledCardLayout cardLayoutHeight="100%" cardLayoutPadding="4rem">
+      <StyledGeneralWrapper
+        wrapperMargin="0 0 40px 0"
+        wrapperWidth="80vw"
+        wrapperFlex
+        wrapperJustify="space-between"
+      >
         <div>
-          <GlobalButton
+          <StyledGeneralButton
             buttonRadius="50px"
             buttonTextColor="#4C83D4"
             buttonFontWeight={900}
@@ -44,10 +51,10 @@ const MarketerFeedListContainer = ({ contractInstance, account }) => {
             onClick={() => history.push(MARKETER_WITHDRAW_ROUTE)}
           >
             {'Withdraw >'}
-          </GlobalButton>
+          </StyledGeneralButton>
         </div>
         <div>
-          <ParagraphButton
+          <StyledParagraphButton
             buttonMargin="6px 12px 0 0"
             buttonFontSize={20}
             buttonFontWeight={900}
@@ -55,9 +62,9 @@ const MarketerFeedListContainer = ({ contractInstance, account }) => {
             onClick={() => history.push(MARKETER_HOMEPAGE)}
           >
             Home +
-          </ParagraphButton>
+          </StyledParagraphButton>
         </div>
-      </RowContainer>
+      </StyledGeneralWrapper>
       {resp &&
         resp.data.results.length > 0 &&
         resp.data.results.map((x, i) => (
@@ -69,7 +76,7 @@ const MarketerFeedListContainer = ({ contractInstance, account }) => {
             account={account}
           />
         ))}
-    </CampaignContainerLayout>
+    </StyledCardLayout>
   );
 };
 

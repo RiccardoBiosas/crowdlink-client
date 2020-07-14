@@ -3,17 +3,15 @@ import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import { ethers } from 'ethers';
 import {
-  CardContainerLayout,
-  CloseButtonContainer,
-  CustomH1,
-  CustomParagraph,
-  ParagraphButton,
-  CardSubContainer,
+  StyledCustomH1,
+  StyledCustomParagraph,
+  StyledParagraphButton,
+  StyledCardSubContainer,
 } from '../../shared/GeneralCard';
+import StyledCardLayout from '../../shared/styles/StyledCardLayout';
+import StyledGeneralWrapper from '../../shared/styles/StyledGeneralWrapper';
 import { MARKETER_FEED_ROUTE } from '../../routes-config';
-import { RowContainer } from '../../shared/PublisherWizard/styles';
 import copy from '../../assets/clipboard-copy.png';
-import { BasicContainer } from '../../shared/feed/styles';
 import CardLayout from '../../shared/layout/CardLayout';
 
 const MarketerWithdraw = ({ contractInstance, account }) => {
@@ -51,10 +49,15 @@ const MarketerWithdraw = ({ contractInstance, account }) => {
   };
 
   return (
-    <CardContainerLayout>
+    <StyledCardLayout>
       <CardLayout>
-        <CloseButtonContainer closeButtonContainerHeight="6%">
-          <ParagraphButton
+        <StyledGeneralWrapper
+          wrapperWidth="100%"
+          wrapperHeight="6%"
+          wrapperFlex
+          wrapperJustify="flex-end"
+        >
+          <StyledParagraphButton
             buttonMargin="6px 12px 0 0"
             buttonFontSize={20}
             buttonFontWeight={900}
@@ -62,59 +65,59 @@ const MarketerWithdraw = ({ contractInstance, account }) => {
             onClick={() => history.push(MARKETER_FEED_ROUTE)}
           >
             x
-          </ParagraphButton>
-        </CloseButtonContainer>
+          </StyledParagraphButton>
+        </StyledGeneralWrapper>
         {!receipt ? (
-          <CardSubContainer subContainerHeight="100%">
-            <CustomH1 h1Color="#444444" h1FontWeight={500}>
+          <div style={{ height: '100%' }}>
+            <StyledCustomH1 h1Color="#444444" h1FontWeight={500}>
               Are you sure?
-            </CustomH1>
-            <RowContainer containerWidth="100%">
-              <CustomParagraph paragraphColor="#696868" paragraphFontSize={20}>
+            </StyledCustomH1>
+            <StyledGeneralWrapper wrapperWidth="100%" wrapperFlex wrapperJustify="space-between">
+              <StyledCustomParagraph paragraphColor="#696868" paragraphFontSize={20}>
                 Your balance:
-              </CustomParagraph>
-              <CustomParagraph
+              </StyledCustomParagraph>
+              <StyledCustomParagraph
                 paragraphColor="#696868"
                 paragraphFontSize={20}
                 paragraphFontWeight={600}
               >
                 {balance ? `${balance} eth` : ''}
-              </CustomParagraph>
-            </RowContainer>
-            <BasicContainer containerWidth="100%">
-              <CustomParagraph paragraphColor="#696868" paragraphFontSize={20}>
+              </StyledCustomParagraph>
+            </StyledGeneralWrapper>
+            <StyledGeneralWrapper containerWidth="100%">
+              <StyledCustomParagraph paragraphColor="#696868" paragraphFontSize={20}>
                 Money will be sent to:
-              </CustomParagraph>
-            </BasicContainer>
+              </StyledCustomParagraph>
+            </StyledGeneralWrapper>
 
-            <RowContainer containerWidth="100%">
-              <CustomParagraph paragraphColor="#696868" paragraphMargin="0 10px 0 0">
+            <StyledGeneralWrapper wrapperWidth="100%" wrapperFlex wrapperJustify="space-between">
+              <StyledCustomParagraph paragraphColor="#696868" paragraphMargin="0 10px 0 0">
                 {crowdlinkAddress}
-              </CustomParagraph>
+              </StyledCustomParagraph>
 
-              <ParagraphButton onClick={() => copyToClipboard(account)}>
+              <StyledParagraphButton onClick={() => copyToClipboard(account)}>
                 <img src={copy} alt="copy to clipboard" />
-              </ParagraphButton>
-            </RowContainer>
+              </StyledParagraphButton>
+            </StyledGeneralWrapper>
 
-            <ParagraphButton
+            <StyledParagraphButton
               buttonColor="#7838D5"
               buttonFontSize={20}
               buttonFontWeight={600}
               onClick={withdraw}
             >
               {'withdraw >'}
-            </ParagraphButton>
-          </CardSubContainer>
+            </StyledParagraphButton>
+          </div>
         ) : (
           <div>
-            <CustomH1 h1Color="#444444" h1FontWeight={500}>
+            <StyledCustomH1 h1Color="#444444" h1FontWeight={500}>
               withdrawal successful!
-            </CustomH1>
+            </StyledCustomH1>
           </div>
         )}
       </CardLayout>
-    </CardContainerLayout>
+    </StyledCardLayout>
   );
 };
 

@@ -1,12 +1,9 @@
 import React from 'react';
 import { Web3Consumer } from 'web3-react';
 import { useHistory, Redirect } from 'react-router-dom';
-import {
-  CustomParagraph,
-  CardContainerLayout,
-  CloseButtonContainer,
-  ParagraphButton,
-} from '../../shared/GeneralCard';
+import { StyledCustomParagraph, StyledParagraphButton } from '../../shared/GeneralCard';
+import StyledGeneralWrapper from '../../shared/styles/StyledGeneralWrapper';
+import StyledCardLayout from '../../shared/styles/StyledCardLayout';
 import { MARKETER_FEED_ROUTE } from '../../routes-config';
 import ArrowDown from '../../assets/arrow-down.png';
 import CardLayout from '../../shared/layout/CardLayout';
@@ -16,10 +13,10 @@ const MarketerSignUp = () => {
   const history = useHistory();
 
   return (
-    <CardContainerLayout>
+    <StyledCardLayout>
       <CardLayout>
-        <CloseButtonContainer>
-          <ParagraphButton
+        <StyledGeneralWrapper wrapperWidth="100%" wrapperFlex wrapperJustify="flex-end">
+          <StyledParagraphButton
             buttonMargin="6px 12px 0 0"
             buttonFontSize={20}
             buttonFontWeight={900}
@@ -27,8 +24,8 @@ const MarketerSignUp = () => {
             onClick={() => history.push('/')}
           >
             x
-          </ParagraphButton>
-        </CloseButtonContainer>
+          </StyledParagraphButton>
+        </StyledGeneralWrapper>
         <Web3Consumer>
           {(context) => {
             const { active } = context;
@@ -37,37 +34,37 @@ const MarketerSignUp = () => {
             ) : (
               <>
                 <div>
-                  <CustomParagraph
+                  <StyledCustomParagraph
                     paragraphColor="#959090"
                     paragraphFontSize={22}
                     paragraphFontWeight={600}
                   >
                     Sign up with Portis
-                  </CustomParagraph>
+                  </StyledCustomParagraph>
                 </div>
                 <div>
                   <img src={ArrowDown} alt="scroll down" />
                 </div>
                 <div>
-                  <CustomParagraph
+                  <StyledCustomParagraph
                     paragraphColor="#959090"
                     paragraphFontSize={22}
                     paragraphFontWeight={600}
                   >
                     You will receive funds via your selected Web3 wallet
-                  </CustomParagraph>
+                  </StyledCustomParagraph>
                 </div>
                 <div>
                   <img src={ArrowDown} alt="scroll down" />
                 </div>
                 <div>
-                  <CustomParagraph
+                  <StyledCustomParagraph
                     paragraphColor="#959090"
                     paragraphFontSize={22}
                     paragraphFontWeight={600}
                   >
                     Referral links connected instantly to your account
-                  </CustomParagraph>
+                  </StyledCustomParagraph>
                 </div>
                 <div>
                   <img src={ArrowDown} alt="scroll down" />
@@ -80,7 +77,7 @@ const MarketerSignUp = () => {
           }}
         </Web3Consumer>
       </CardLayout>
-    </CardContainerLayout>
+    </StyledCardLayout>
   );
 };
 
