@@ -1,12 +1,13 @@
 import React from 'react';
 import { Web3Consumer } from 'web3-react';
 import { useHistory, Redirect } from 'react-router-dom';
-import { StyledCustomParagraph, StyledParagraphButton } from '../../shared/GeneralCard';
+import StyledCustomParagraph from '../../shared/styles/StyledCustomParagraph';
+import StyledParagraphButton from '../../shared/styles/StyledParagraphButton';
 import StyledGeneralWrapper from '../../shared/styles/StyledGeneralWrapper';
 import StyledCardLayout from '../../shared/styles/StyledCardLayout';
 import { MARKETER_FEED_ROUTE } from '../../routes-config';
 import ArrowDown from '../../assets/arrow-down.png';
-import CardLayout from '../../shared/layout/CardLayout';
+import StyledCardBoilerplateLayout from '../../shared/styles/StyledCardBoilerplateLayout';
 import OpenConnectorsModal from '../../connectors/containers';
 
 const MarketerSignUp = () => {
@@ -14,7 +15,7 @@ const MarketerSignUp = () => {
 
   return (
     <StyledCardLayout>
-      <CardLayout>
+      <StyledCardBoilerplateLayout>
         <StyledGeneralWrapper wrapperWidth="100%" wrapperFlex wrapperJustify="flex-end">
           <StyledParagraphButton
             buttonMargin="6px 12px 0 0"
@@ -76,7 +77,7 @@ const MarketerSignUp = () => {
             );
           }}
         </Web3Consumer>
-      </CardLayout>
+      </StyledCardBoilerplateLayout>
     </StyledCardLayout>
   );
 };

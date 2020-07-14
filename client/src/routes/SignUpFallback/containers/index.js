@@ -2,12 +2,12 @@ import React, { useState, useEffect, useRef, createRef } from 'react';
 import { useLocation, Redirect } from 'react-router-dom';
 import { Web3Consumer } from 'web3-react';
 import OpenConnectorsModal from '../../../connectors/containers/index';
-import { StyledCustomParagraph } from '../../../shared/GeneralCard';
+import StyledCustomParagraph from '../../../shared/styles/StyledCustomParagraph';
 import StyledCardLayout from '../../../shared/styles/StyledCardLayout';
 import StyledGeneralWrapper from '../../../shared/styles/StyledGeneralWrapper';
 import { PUBLISHER_WORKFLOW_ROUTE, MARKETER_FEED_ROUTE } from '../../../routes-config';
 import SignupRedirect from '../screen/SignupRedirect';
-import CardLayout from '../../../shared/layout/CardLayout';
+import StyledCardBoilerplateLayout from '../../../shared/styles/StyledCardBoilerplateLayout';
 
 const redirectRoutes = {
   CREATOR: PUBLISHER_WORKFLOW_ROUTE,
@@ -60,7 +60,7 @@ const SignUpFallback = () => {
         if (!active) {
           return (
             <StyledCardLayout>
-              <CardLayout>
+              <StyledCardBoilerplateLayout>
                 <StyledCustomParagraph
                   paragraphColor="#959090"
                   paragraphFontSize={22}
@@ -85,7 +85,7 @@ const SignUpFallback = () => {
                     ))}
                   </StyledGeneralWrapper>
                 )}
-              </CardLayout>
+              </StyledCardBoilerplateLayout>
             </StyledCardLayout>
           );
         }

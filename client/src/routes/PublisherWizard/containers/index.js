@@ -11,11 +11,12 @@ import PublisherWizardCampaignBudget from '../screen/PublisherWizardCampaignBudg
 import PublisherWizardCampaignOutcome from '../screen/PublisherWizardCampaignOutcome';
 import PublisherWizardPreview from '../screen/PublisherWizardPreview';
 import host, { COINGECKO_API, CAMPAIGNS_CLICK_ENDPOINT } from '../../../api-config';
-import { StyledCustomForm } from '../../../shared/PublisherWizard/styles';
+import { StyledCustomForm } from '../styles/styles';
 import StyledGeneralWrapper from '../../../shared/styles/StyledGeneralWrapper';
-import { StyledParagraphButton, StyledCustomH1 } from '../../../shared/GeneralCard';
+import StyledParagraphButton from '../../../shared/styles/StyledParagraphButton';
+import { StyledCustomH1 } from '../../../shared/styles/StyledCustomHeadings';
 import StyledCardLayout from '../../../shared/styles/StyledCardLayout';
-import CardLayout from '../../../shared/layout/CardLayout';
+import StyledCardBoilerplateLayout from '../../../shared/styles/StyledCardBoilerplateLayout';
 import StyledGeneralButton from '../../../shared/styles/StyledGeneralButton';
 import WizardFormValidationSchema from '../validationSchema/schema';
 import payPerClickStepHeadings from '../contants/payPerClickStepHeadings';
@@ -158,7 +159,7 @@ const PublisherWizardContainer = ({
                   alignItems: 'center',
                 }}
               >
-                <CardLayout>
+                <StyledCardBoilerplateLayout>
                   <StyledGeneralWrapper
                     wrapperWidth="100%"
                     wrapperHeight="10%"
@@ -241,7 +242,7 @@ const PublisherWizardContainer = ({
                       </StyledGeneralButton>
                     </StyledGeneralWrapper>
                   )}
-                </CardLayout>
+                </StyledCardBoilerplateLayout>
               </div>
             );
           }}

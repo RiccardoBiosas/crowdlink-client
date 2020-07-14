@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { ethers } from 'ethers';
 import { useTransition, animated } from 'react-spring';
 import { useHistory } from 'react-router-dom';
-import { StyledParagraphButton, StyledCustomParagraph } from '../../../shared/GeneralCard';
+import StyledCustomParagraph from '../../../shared/styles/StyledCustomParagraph';
+import StyledParagraphButton from '../../../shared/styles/StyledParagraphButton';
 import StyledColumnWrapper from '../../../shared/styles/StyledColumnWrapper';
 import StyledGeneralWrapper from '../../../shared/styles/StyledGeneralWrapper';
-import { RowContainer } from '../../../shared/PublisherWizard/styles';
 import StyledCardWrapper from '../../../shared/styles/StyledCardWrapper';
 
 import { PUBLISHER_WITHDRAW_ROUTE_WITH_PARAM } from '../../../routes-config';

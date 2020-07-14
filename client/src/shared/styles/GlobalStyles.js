@@ -1,3 +1,6 @@
+import { createGlobalStyle } from 'styled-components';
+
+const GlobalStyles = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap');
 
 html {
@@ -27,3 +30,8 @@ h1 {
 button {
   padding: 0;
 }
+
+
+`;
+
+export default GlobalStyles;

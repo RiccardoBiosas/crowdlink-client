@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const CardLayout = styled.div`
+const StyledCardBoilerplateLayout = styled.div`
   height: 70vh;
   width: 60vw;
   display: flex;
@@ -25,4 +25,4 @@ const CardLayout = styled.div`
   }
 `;
 
-export default CardLayout;
+export default StyledCardBoilerplateLayout;

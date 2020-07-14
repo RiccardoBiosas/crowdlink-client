@@ -2,17 +2,14 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import { ethers } from 'ethers';
-import {
-  StyledCustomH1,
-  StyledCustomParagraph,
-  StyledParagraphButton,
-  StyledCardSubContainer,
-} from '../../shared/GeneralCard';
+import StyledParagraphButton from '../../shared/styles/StyledParagraphButton';
+import { StyledCustomH1 } from '../../shared/styles/StyledCustomHeadings';
+import StyledCustomParagraph from '../../shared/styles/StyledCustomParagraph';
 import StyledCardLayout from '../../shared/styles/StyledCardLayout';
 import StyledGeneralWrapper from '../../shared/styles/StyledGeneralWrapper';
 import { MARKETER_FEED_ROUTE } from '../../routes-config';
 import copy from '../../assets/clipboard-copy.png';
-import CardLayout from '../../shared/layout/CardLayout';
+import StyledCardBoilerplateLayout from '../../shared/styles/StyledCardBoilerplateLayout';
 
 const MarketerWithdraw = ({ contractInstance, account }) => {
   const [balance, setBalance] = useState();
@@ -50,7 +47,7 @@ const MarketerWithdraw = ({ contractInstance, account }) => {
 
   return (
     <StyledCardLayout>
-      <CardLayout>
+      <StyledCardBoilerplateLayout>
         <StyledGeneralWrapper
           wrapperWidth="100%"
           wrapperHeight="6%"
@@ -116,7 +113,7 @@ const MarketerWithdraw = ({ contractInstance, account }) => {
             </StyledCustomH1>
           </div>
         )}
-      </CardLayout>
+      </StyledCardBoilerplateLayout>
     </StyledCardLayout>
   );
 };

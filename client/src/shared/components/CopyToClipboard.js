@@ -1,6 +1,6 @@
 import React from 'react';
 import { toast, ToastContainer, Slide } from 'react-toastify';
-import { StyledParagraphButton } from '../GeneralCard';
+import StyledParagraphButton from '../styles/StyledParagraphButton';
 import copy from '../../assets/clipboard-copy.png';
 
 const CopyToClipboard = ({ condition, contentToCopy, successTxt, failureTxt }) => {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import { StyledCustomParagraph } from '../../../shared/GeneralCard';
+import StyledCustomParagraph from '../../../shared/styles/StyledCustomParagraph';
 import { COINGECKO_API } from '../../../api-config';
 
 const PublisherWizardPreview = ({ step, values }) => {

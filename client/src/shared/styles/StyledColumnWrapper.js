@@ -12,13 +12,3 @@ const StyledColumnWrapper = styled.div`
 `;
 
 export default StyledColumnWrapper;
-
-// export const StyledCampaignLayoutComponent = styled.div`
-//   height: 100%;
-//   flex: ${(props) => componentFlex};
-//   height: ${(props) => containerHeight};
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   margin: ${(props) => containerMargin};
-// `;

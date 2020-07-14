@@ -4,7 +4,7 @@ import { ethers } from 'ethers';
 import { useHistory } from 'react-router-dom';
 import StyledCardLayout from '../../../shared/styles/StyledCardLayout';
 import StyledGeneralWrapper from '../../../shared/styles/StyledGeneralWrapper';
-import { StyledParagraphButton } from '../../../shared/GeneralCard';
+import StyledParagraphButton from '../../../shared/styles/StyledParagraphButton';
 import { PUBLISHER_HOMEPAGE, PUBLISHER_DASHBOARD_ROUTE_WITH_PARAM } from '../../../routes-config';
 import StyledGeneralButton from '../../../shared/styles/StyledGeneralButton';
 import PublisherFeedCampaign from '../screen/PublisherFeedCampaign';

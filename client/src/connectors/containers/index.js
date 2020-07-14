@@ -1,7 +1,7 @@
 import React, { useState, useLayoutEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import ConnectorsModal from '../screen/ConnectorsModal';
-import { StyledParagraphButton } from '../../shared/GeneralCard';
+import StyledParagraphButton from '../../shared/styles/StyledParagraphButton';
 
 const OpenConnectorsModal = ({ text }) => {
   const [modalState, setModalState] = useState(false);

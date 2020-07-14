@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
-import { StyledCustomParagraph, StyledParagraphButton } from '../../../shared/GeneralCard';
+import StyledCustomParagraph from '../../../shared/styles/StyledCustomParagraph';
+import StyledParagraphButton from '../../../shared/styles/StyledParagraphButton';
 import { PUBLISHER_FEED_ROUTE } from '../../../routes-config';
 // import axios from "axios";
 // import { ethers } from "ethers";

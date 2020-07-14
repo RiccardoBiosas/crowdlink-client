@@ -7,20 +7,14 @@ import {
   PUBLISHER_DASHBOARD_ROUTE_WITH_PARAM,
   PUBLISHER_GA_CONNECT_ROUTE,
 } from '../../routes-config';
-import {
-  StyledParagraphButton,
-  StyledCustomParagraph,
-  StyledCustomH2,
-} from '../../shared/GeneralCard';
+import { StyledCustomH2 } from '../../shared/styles/StyledCustomHeadings';
+import StyledCustomParagraph from '../../shared/styles/StyledCustomParagraph';
+import StyledParagraphButton from '../../shared/styles/StyledParagraphButton';
 import StyledGeneralWrapper from '../../shared/styles/StyledGeneralWrapper';
-
 import StyledCardLayout from '../../shared/styles/StyledCardLayout';
 import StyledColumnWrapper from '../../shared/styles/StyledColumnWrapper';
-import CardLayout from '../../shared/layout/CardLayout';
-
-// move to constant.js
-export const REWARD_PER_SALE_WORKFLOW = 'PAY_PER_SALE';
-export const REWARD_PER_CLICK_WORKFLOW = 'PAY_PER_CLICK';
+import StyledCardBoilerplateLayout from '../../shared/styles/StyledCardBoilerplateLayout';
+import { REWARD_PER_SALE_WORKFLOW, REWARD_PER_CLICK_WORKFLOW } from './constants/workflows';
 
 const PublisherWorkflow = () => {
   const history = useHistory();
@@ -28,7 +22,7 @@ const PublisherWorkflow = () => {
 
   return (
     <StyledCardLayout>
-      <CardLayout>
+      <StyledCardBoilerplateLayout>
         <StyledGeneralWrapper wrapperWidth="100%" wrapperFlex wrapperJustify="flex-end">
           <StyledParagraphButton
             buttonMargin="6px 12px 0 0"
@@ -102,7 +96,7 @@ const PublisherWorkflow = () => {
           </StyledCustomParagraph>
         </div>
         {/* </CardSubContainer> */}
-      </CardLayout>
+      </StyledCardBoilerplateLayout>
     </StyledCardLayout>
   );
 };

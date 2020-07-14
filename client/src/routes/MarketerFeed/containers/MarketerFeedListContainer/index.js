@@ -2,11 +2,9 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { ethers } from 'ethers';
 import { useHistory } from 'react-router-dom';
-import { StyledParagraphButton } from '../../../../shared/GeneralCard';
+import StyledParagraphButton from '../../../../shared/styles/StyledParagraphButton';
 import StyledCardLayout from '../../../../shared/styles/StyledCardLayout';
 import StyledGeneralWrapper from '../../../../shared/styles/StyledGeneralWrapper';
-
-import { RowContainer } from '../../../../shared/PublisherWizard/styles';
 import MarketerCampaignContainer from '../MarketerCampaignContainer';
 import { MARKETER_WITHDRAW_ROUTE, MARKETER_HOMEPAGE } from '../../../../routes-config';
 import StyledGeneralButton from '../../../../shared/styles/StyledGeneralButton';

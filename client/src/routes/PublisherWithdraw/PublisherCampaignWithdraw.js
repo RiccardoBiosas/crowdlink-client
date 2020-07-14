@@ -2,18 +2,14 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { ethers } from 'ethers';
 import { useHistory, useLocation } from 'react-router-dom';
-import {
-  StyledCustomH1,
-  StyledCustomParagraph,
-  StyledParagraphButton,
-  StyledCardSubContainer,
-} from '../../shared/GeneralCard';
+import StyledParagraphButton from '../../shared/styles/StyledParagraphButton';
+import StyledCustomParagraph from '../../shared/styles/StyledCustomParagraph';
+import { StyledCustomH1 } from '../../shared/styles/StyledCustomHeadings';
 import StyledCardLayout from '../../shared/styles/StyledCardLayout';
 import StyledGeneralWrapper from '../../shared/styles/StyledGeneralWrapper';
 import { PUBLISHER_FEED_ROUTE } from '../../routes-config';
-import { RowContainer } from '../../shared/PublisherWizard/styles';
 import copy from '../../assets/clipboard-copy.png';
-import CardLayout from '../../shared/layout/CardLayout';
+import StyledCardBoilerplateLayout from '../../shared/styles/StyledCardBoilerplateLayout';
 
 const PublisherCampaignWithdraw = ({ contractInstance, account }) => {
   const history = useHistory();
@@ -47,7 +43,7 @@ const PublisherCampaignWithdraw = ({ contractInstance, account }) => {
 
   return (
     <StyledCardLayout>
-      <CardLayout>
+      <StyledCardBoilerplateLayout>
         <StyledGeneralWrapper
           wrapperWidth="100%"
           wrapperHeight="6%"
@@ -124,7 +120,7 @@ const PublisherCampaignWithdraw = ({ contractInstance, account }) => {
             {'withdraw >'}
           </StyledParagraphButton>
         </div>
-      </CardLayout>
+      </StyledCardBoilerplateLayout>
     </StyledCardLayout>
   );
 };

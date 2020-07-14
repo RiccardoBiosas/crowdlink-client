@@ -3,7 +3,7 @@ import { ethers } from 'ethers';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
-import { StyledParagraphButton } from '../../../../shared/GeneralCard';
+import StyledParagraphButton from '../../../../shared/styles/StyledParagraphButton';
 import StyledCardWrapper from '../../../../shared/styles/StyledCardWrapper';
 import StyledColumnWrapper from '../../../../shared/styles/StyledColumnWrapper';
 import MarketerCampaign from '../../screen/MarketerCampaign';

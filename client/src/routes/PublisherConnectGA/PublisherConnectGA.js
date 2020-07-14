@@ -3,19 +3,14 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import StyledGeneralButton from '../../shared/styles/StyledGeneralButton';
 import { ReactComponent as GoogleAnalyticsSVG } from '../../assets/google-analytics.svg';
-import {
-  StyledCustomParagraph,
-  StyledParagraphButton,
-  StyledCustomH1,
-  StyledCustomH2,
-} from '../../shared/GeneralCard';
+import StyledParagraphButton from '../../shared/styles/StyledParagraphButton';
+import StyledCustomParagraph from '../../shared/styles/StyledCustomParagraph';
+import { StyledCustomH1, StyledCustomH2 } from '../../shared/styles/StyledCustomHeadings';
 import StyledGeneralWrapper from '../../shared/styles/StyledGeneralWrapper';
-
 import StyledCardLayout from '../../shared/styles/StyledCardLayout';
-
 import { StyledImageContainer, StyledBottomContainer } from './styles';
 import host, { GA_OAUTH_ENDPOINT } from '../../api-config';
-import CardLayout from '../../shared/layout/CardLayout';
+import StyledCardBoilerplateLayout from '../../shared/styles/StyledCardBoilerplateLayout';
 
 // import { PUBLISHER_DASHBOARD_ROUTE_WITH_PARAM } from "../../routes-config";
 
@@ -28,7 +23,7 @@ const PublisherConnectGA = () => {
   };
   return (
     <StyledCardLayout>
-      <CardLayout>
+      <StyledCardBoilerplateLayout>
         <StyledGeneralWrapper wrapperWidth="100%" wrapperFlex wrapperJustify="flex-end">
           <StyledParagraphButton
             buttonMargin="6px 12px 0 0"
@@ -89,7 +84,7 @@ const PublisherConnectGA = () => {
             Connect
           </StyledGeneralButton> */}
         </StyledBottomContainer>
-      </CardLayout>
+      </StyledCardBoilerplateLayout>
     </StyledCardLayout>
   );
 };

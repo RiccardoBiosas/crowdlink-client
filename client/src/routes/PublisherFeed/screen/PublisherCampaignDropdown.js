@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { ethers } from 'ethers';
-import { StyledParagraphButton, StyledCustomParagraph } from '../../../shared/GeneralCard';
-import StyledDropdownCampaignLayout from '../../../shared/styles/styles';
+import StyledCustomParagraph from '../../../shared/styles/StyledCustomParagraph';
+import StyledParagraphButton from '../../../shared/styles/StyledParagraphButton';
+import StyledDropdownCampaignLayout from '../../../shared/styles/StyledDropdownCampaignLayout';
 
 const PublisherCampaignDropdown = ({ contractInstance, account, website }) => {
   const [campaignData, setCampaignData] = useState({});

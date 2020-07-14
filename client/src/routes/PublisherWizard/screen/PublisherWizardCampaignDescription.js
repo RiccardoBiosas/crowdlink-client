@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { StyledCustomField, StyledCustomLabel } from '../../../shared/PublisherWizard/styles';
+import { StyledCustomField, StyledCustomLabel } from '../styles/styles';
 
 const PublisherWizardCampaignDescription = ({ step, errors }) => {
   console.log(errors);

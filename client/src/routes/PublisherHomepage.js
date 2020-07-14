@@ -1,11 +1,10 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { PUBLISHER_WORKFLOW_ROUTE } from '../routes-config';
-import {
-  StyledParagraphButton,
-  StyledCustomParagraph,
-  StyledCustomH1,
-} from '../shared/GeneralCard';
+import { StyledCustomH1 } from '../shared/styles/StyledCustomHeadings';
+import StyledCustomParagraph from '../shared/styles/StyledCustomParagraph';
+import StyledParagraphButton from '../shared/styles/StyledParagraphButton';
+
 import StyledCardLayout from '../shared/styles/StyledCardLayout';
 import StyledGeneralWrapper from '../shared/styles/StyledGeneralWrapper';
 import StyledColumnWrapper from '../shared/styles/StyledColumnWrapper';
@@ -16,9 +15,18 @@ const PublisherHomepage = () => {
   const history = useHistory();
 
   return (
-    <StyledCardLayout cardContainerBackgroundColor="#23153C">
-      <div style={{ height: '60vh', width: '90vw' }}>
-        <StyledGeneralWrapper wrapperFlex wrapperJustify="space-between" wrapperAlign="flex-start">
+    <StyledCardLayout
+      cardContainerBackgroundColor="#23153C"
+      cardLayoutHeight="100%"
+      cardLayoutPadding="6rem 0 0 0"
+    >
+      <div style={{ display: 'flex' }}>
+        <StyledGeneralWrapper
+          wrapperFlex
+          wrapperFlexDirection="column"
+          wrapperJustify="space-between"
+          wrapperAlign="flex-start"
+        >
           <div>
             <StyledCustomH1 h1FontSize={40} h1LineHeight="54px" h1Color="#F8F8F8">
               Create a referral campaign

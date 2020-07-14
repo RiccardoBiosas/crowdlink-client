@@ -2,23 +2,17 @@ import React from 'react';
 import { Web3Consumer } from 'web3-react';
 import { useHistory, useLocation } from 'react-router-dom';
 import StyledGeneralButton from '../../shared/styles/StyledGeneralButton';
-import { StyledCustomParagraph, StyledParagraphButton } from '../../shared/GeneralCard';
+import StyledCustomParagraph from '../../shared/styles/StyledCustomParagraph';
+import StyledParagraphButton from '../../shared/styles/StyledParagraphButton';
 import StyledGeneralWrapper from '../../shared/styles/StyledGeneralWrapper';
-
 import StyledCardLayout from '../../shared/styles/StyledCardLayout';
-
-// import {
-//   PUBLISHER_DASHBOARD_PAY_PER_SALE_ROUTE,
-//   PUBLISHER_DASHBOARD_PER_PER_CLICK_ROUTE,
-//   PUBLISHER_GA_CONNECT_ROUTE,
-// } from "../../routes-config";
 import {
   PUBLISHER_GA_CONNECT_ROUTE,
   PUBLISHER_DASHBOARD_ROUTE_WITH_PARAM,
 } from '../../routes-config';
-import { REWARD_PER_SALE_WORKFLOW } from '../PublisherWorkflow/PublisherWorkflow';
+import { REWARD_PER_SALE_WORKFLOW } from '../PublisherWorkflow/constants/workflows';
 import ArrowDown from '../../assets/arrow-down.png';
-import CardLayout from '../../shared/layout/CardLayout';
+import StyledCardBoilerplateLayout from '../../shared/styles/StyledCardBoilerplateLayout';
 import OpenConnectorsModal from '../../connectors/containers/index';
 
 const PublisherSignUp = () => {
@@ -30,7 +24,7 @@ const PublisherSignUp = () => {
 
   return (
     <StyledCardLayout>
-      <CardLayout>
+      <StyledCardBoilerplateLayout>
         <StyledGeneralWrapper wrapperWidth="100%" wrapperFlex wrapperJustify="flex-end">
           <StyledParagraphButton
             buttonMargin="6px 12px 0 0"
@@ -173,7 +167,7 @@ const PublisherSignUp = () => {
             );
           }}
         </Web3Consumer>
-      </CardLayout>
+      </StyledCardBoilerplateLayout>
     </StyledCardLayout>
   );
 };
